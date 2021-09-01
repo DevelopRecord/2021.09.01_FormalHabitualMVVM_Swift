@@ -13,6 +13,16 @@
 		FB7DEF3F26DF5CD20042DA0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB7DEF3D26DF5CD20042DA0F /* Main.storyboard */; };
 		FB7DEF4126DF5CD30042DA0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB7DEF4026DF5CD30042DA0F /* Assets.xcassets */; };
 		FB7DEF4426DF5CD30042DA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB7DEF4226DF5CD30042DA0F /* LaunchScreen.storyboard */; };
+		FB7DEF5826DF5E9B0042DA0F /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */; };
+		FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */; };
+		FB7DEF5C26DF5ED10042DA0F /* ChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */; };
+		FB7DEF5E26DF5EDC0042DA0F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */; };
+		FB7DEF6126DF69FB0042DA0F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6026DF69FB0042DA0F /* LoginController.swift */; };
+		FB7DEF6326DF6A050042DA0F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6226DF6A050042DA0F /* RegistrationController.swift */; };
+		FB7DEF6526DF6BDE0042DA0F /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6426DF6BDE0042DA0F /* TableCell.swift */; };
+		FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6626DF6E410042DA0F /* Extensions.swift */; };
+		FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */; };
+		FB7DEF6B26DF8DFE0042DA0F /* AddHabitualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +34,16 @@
 		FB7DEF4026DF5CD30042DA0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FB7DEF4326DF5CD30042DA0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB7DEF4526DF5CD30042DA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartController.swift; sourceTree = "<group>"; };
+		FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
+		FB7DEF6026DF69FB0042DA0F /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		FB7DEF6226DF6A050042DA0F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
+		FB7DEF6426DF6BDE0042DA0F /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		FB7DEF6626DF6E410042DA0F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitualController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +76,12 @@
 		FB7DEF3626DF5CD10042DA0F /* FormalHabitualMVVM */ = {
 			isa = PBXGroup;
 			children = (
+				FB7DEF5626DF5DF40042DA0F /* ViewModel */,
+				FB7DEF5526DF5DEA0042DA0F /* View */,
+				FB7DEF5426DF5DE10042DA0F /* Model */,
+				FB7DEF5326DF5DDD0042DA0F /* API */,
+				FB7DEF5226DF5DC90042DA0F /* Utils */,
+				FB7DEF5126DF5DC20042DA0F /* Controller */,
 				FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */,
 				FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */,
 				FB7DEF3B26DF5CD20042DA0F /* ViewController.swift */,
@@ -65,6 +91,66 @@
 				FB7DEF4526DF5CD30042DA0F /* Info.plist */,
 			);
 			path = FormalHabitualMVVM;
+			sourceTree = "<group>";
+		};
+		FB7DEF5126DF5DC20042DA0F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FB7DEF5F26DF69F00042DA0F /* Authentification */,
+				FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */,
+				FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */,
+				FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */,
+				FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */,
+				FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FB7DEF5226DF5DC90042DA0F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FB7DEF6626DF6E410042DA0F /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FB7DEF5326DF5DDD0042DA0F /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		FB7DEF5426DF5DE10042DA0F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FB7DEF5526DF5DEA0042DA0F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB7DEF6426DF6BDE0042DA0F /* TableCell.swift */,
+				FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB7DEF5626DF5DF40042DA0F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB7DEF5F26DF69F00042DA0F /* Authentification */ = {
+			isa = PBXGroup;
+			children = (
+				FB7DEF6026DF69FB0042DA0F /* LoginController.swift */,
+				FB7DEF6226DF6A050042DA0F /* RegistrationController.swift */,
+			);
+			path = Authentification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +223,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB7DEF5C26DF5ED10042DA0F /* ChartController.swift in Sources */,
+				FB7DEF6326DF6A050042DA0F /* RegistrationController.swift in Sources */,
 				FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */,
 				FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */,
+				FB7DEF5826DF5E9B0042DA0F /* MainTabController.swift in Sources */,
+				FB7DEF6526DF6BDE0042DA0F /* TableCell.swift in Sources */,
+				FB7DEF6B26DF8DFE0042DA0F /* AddHabitualController.swift in Sources */,
 				FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */,
+				FB7DEF6126DF69FB0042DA0F /* LoginController.swift in Sources */,
+				FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */,
+				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,
+				FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */,
+				FB7DEF5E26DF5EDC0042DA0F /* SettingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
