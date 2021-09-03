@@ -52,3 +52,17 @@ class CustomActionSheetButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+class CustomLoginButton: UIButton {
+    init() {
+        super.init(frame: .zero)
+        
+        titleLabel?.font = .boldSystemFont(ofSize: 15)
+        layer.cornerRadius = 10
+        setHeight(50)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}

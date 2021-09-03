@@ -49,10 +49,10 @@ class LoginController: UIViewController {
     }()
     
     private let loginButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = CustomLoginButton()
         button.setTitle("LOGIN", for: UIControl.State.normal)
-        button.layer.cornerRadius = 10
-        button.setHeight(50)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         button.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
@@ -65,24 +65,18 @@ class LoginController: UIViewController {
     }()
     
     private let naverLoginButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = CustomLoginButton()
         button.setTitle("NAVER로 로그인", for: UIControl.State.normal)
         button.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(named: "naverColor")
-        button.setHeight(50)
         return button
     }()
     
     private let kakaoLoginButton: UIButton = {
-        let button = UIButton(type: .custom)
+        let button = CustomLoginButton()
         button.setTitle("KAKAO로 로그인", for: UIControl.State.normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.setTitleColor(UIColor.black, for: UIControl.State.normal)
-        button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(named: "kakaoColor")
-        button.setHeight(50)
         return button
     }()
     
@@ -93,19 +87,7 @@ class LoginController: UIViewController {
         return button
     }()
     
-    
-    
-    // MARK: Helper
-    func configureColors() {
-        if self.traitCollection.userInterfaceStyle == .dark { //유저 인터페이스가 다크 테마일 때
-            loginButton.backgroundColor = .white
-            loginButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-        } else { //일반 라이트 모드일 때
-            loginButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-            loginButton.backgroundColor = .black
-        }
-    }
-    
+    // MARK: Helpers
     func configureUI() {
         view.backgroundColor = .systemBackground
         
@@ -122,7 +104,7 @@ class LoginController: UIViewController {
         
         view.addSubview(stack)
         stack.centerX(inView: view)
-        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
         
         view.addSubview(joinButton)
         joinButton.centerX(inView: view)
@@ -131,7 +113,6 @@ class LoginController: UIViewController {
     }
     
     // MARK: Actions
-    
     @objc func loginButtonTapped() {
         print("DEBUG: Log In Button did tap")
     }
@@ -144,12 +125,6 @@ class LoginController: UIViewController {
     
     @objc func handleShowForgotButton() {
         print("DEBUG: Forgot button did tap")
-    }
-    
-    // MARK: Override
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // 디바이스의 테마가 변경될 때 마다 이 함수가 발동되어집니다
-        configureColors()
     }
 }
 
