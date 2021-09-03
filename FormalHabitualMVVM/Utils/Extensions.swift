@@ -37,6 +37,13 @@ extension UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    func alert(title: String = "", message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension UIViewController {
@@ -148,7 +155,11 @@ extension UIView {
         anchor(top: view.topAnchor, left: view.leftAnchor,
                bottom: view.bottomAnchor, right: view.rightAnchor)
     }
+    
+    
 }
+
+    
 
 /*
  extension UIViewController {
