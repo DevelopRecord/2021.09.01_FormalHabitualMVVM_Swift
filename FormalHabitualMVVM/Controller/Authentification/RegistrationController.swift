@@ -112,7 +112,6 @@ class RegistrationController: UIViewController {
         
         view.addSubview(signUpLabel)
         signUpLabel.centerX(inView: view)
-        
         signUpLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
         let stack = UIStackView(arrangedSubviews: [idTextField, pwTextField, pwConfirmTextField, nameTextField, ageTextField, infoLabel, registerButton, orLabel, naverJoinButton, kakaoJoinButton])

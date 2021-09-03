@@ -18,163 +18,97 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }()
     
     lazy var titleTextField: UITextField = {
-        let tf = CustomTextField(placeholder: "새로운 습관의 이름을 작성해 보세요")
+        let tf = UITextField()
+        tf.placeholder = "새로운 습관의 이름을 작성해 보세요"
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
         tf.textAlignment = .center
-        tf.setHeight(150)
+        tf.setHeight(90)
         tf.setWidth(view.frame.width - 50)
         return tf
     }()
     
-    lazy var notificationLabel: UILabel = {
+    private let sundayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("SUN", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(sunBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let mondayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("MON", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(monBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let thuesdayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("TUE", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(tueBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let wednesdayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("WED", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(wedBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let thursdayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("THR", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(thrBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let fridayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("FRI", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(friBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let saturdayButton: UIButton = {
+        let button = CustomButton()
+        button.setTitle("SAT", for: .normal)
+        button.layer.cornerRadius = 0.5 * button.bounds.size.width
+        button.addTarget(self, action: #selector(satBtnTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let notificationLabel: UILabel = {
         let label = UILabel()
         label.text = "Notifications"
         label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
         return label
     }()
     
-    lazy var sundayButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("SUN", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 0
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.setHeight(48)
-        button.setWidth(48)
-        button.addTarget(self, action: #selector(sunBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var mondayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("MON", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 1
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.setHeight(48)
-        button.setWidth(48)
-        button.addTarget(self, action: #selector(monBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var thuesdayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("TUE", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 2
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.setHeight(48)
-        button.setWidth(48)
-        button.addTarget(self, action: #selector(tueBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var wednesdayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("WED", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 3
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.setHeight(48)
-        button.setWidth(48)
-        button.addTarget(self, action: #selector(wedBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var thursdayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("THR", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 4
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(48)
-        button.setWidth(48)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(thrBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var fridayButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("FRI", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 5
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(48)
-        button.setWidth(48)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(friBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    private let saturdayButton: UIButton = {
-        let button = UIButton(type: .custom)
-        button.setTitle("SAT", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 11)
-        button.tag = 6
-        button.frame = CGRect(x: 160, y: 100, width: 45, height: 45)
-        button.layer.cornerRadius = 0.5 * button.bounds.size.width
-        button.clipsToBounds = true
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(48)
-        button.setWidth(48)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(satBtnTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
     lazy var onOffButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
+        let button = CustomActionSheetButton()
         button.setTitle("ON", for: UIControl.State.normal)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(50)
         button.setWidth(view.frame.width - 50)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
         button.addTarget(self, action: #selector(onOffButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
     
-    lazy var notiSoundLabel: UILabel = {
+    lazy var timeButton: UIButton = {
+        let button = CustomActionSheetButton()
+        button.setTitle("시간", for: UIControl.State.normal)
+        button.setWidth(view.frame.width - 50)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
+        button.addTarget(self, action: #selector(timeButtonTapped), for: UIControl.Event.touchUpInside)
+        return button
+    }()
+    
+    private let notiSoundLabel: UILabel = {
         let label = UILabel()
         label.text = "Notification Sound"
         label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
@@ -182,32 +116,11 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }()
     
     lazy var notiSoundButton: UIButton = {
-        let button = UIButton()
+        let button = CustomActionSheetButton()
         button.setTitle("알림음", for: UIControl.State.normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(60)
         button.setWidth(view.frame.width - 50)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(frequencyButtonTapped), for: UIControl.Event.touchUpInside)
-        return button
-    }()
-    
-    lazy var timeButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("시간", for: UIControl.State.normal)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
-        button.layer.cornerRadius = 10
-        button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        button.setHeight(50)
-        button.setWidth(view.frame.width - 50)
-        button.backgroundColor = .systemGray5
-        button.setTitleColor(.black, for: .normal)
-        button.addTarget(self, action: #selector(timeButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
     
@@ -218,7 +131,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.systemGray.cgColor
         button.setTitleColor(.black, for: .normal)
-        button.setHeight(60)
+        button.setHeight(50)
         button.setWidth(180)
         button.addTarget(self, action: #selector(cancelButtonTapped), for: UIControl.Event.touchUpInside)
         return button
@@ -250,17 +163,14 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     func configureUI() {
         view.backgroundColor = .systemBackground
         
-//        configureColors()
-        
-        
         let topStack = UIStackView(arrangedSubviews: [newHabitual, titleTextField])
         topStack.axis = .vertical
-        topStack.spacing = 20
+        topStack.spacing = 10
         
         let dayStack = UIStackView(arrangedSubviews: [sundayButton, mondayButton, thuesdayButton,
                                                     wednesdayButton, thursdayButton,fridayButton, saturdayButton])
         dayStack.axis = .horizontal
-        dayStack.spacing = 7.5
+        dayStack.spacing = 11.2
         
         let notificationStack = UIStackView(arrangedSubviews: [notificationLabel, dayStack, onOffButton, timeButton])
         notificationStack.axis = .vertical
@@ -276,13 +186,11 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         
         let wholeStack = UIStackView(arrangedSubviews: [topStack, dayStack, notificationStack, notiSoundStack])
         wholeStack.axis = .vertical
-        wholeStack.spacing = 10
+        wholeStack.spacing = 20
         
         view.addSubview(wholeStack)
         wholeStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                          right: view.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16)
-//        wholeStack.setHeight(view.frame.height)
-        wholeStack.setWidth(view.frame.width)
+                          right: view.rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
         
         view.addSubview(btnStack)
         btnStack.centerX(inView: view)
@@ -300,7 +208,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
             alert(message: "습관 이름을 입력해주세요.")
             return
         }
-        print("DEUBG: 저장 완료! (테스트)")
+        print("DEBUG: 저장 완료! (테스트)")
         dismiss(animated: true, completion: nil)
     }
     
@@ -443,60 +351,4 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
             self.saturdayButton.alpha = 0.3
         }
     }
-    
-    /*
-    //MARK: Configures
-    func configureColors() {
-        if self.traitCollection.userInterfaceStyle == .dark { //유저 인터페이스가 다크 테마일 때
-            sundayButton.backgroundColor = .lightGray
-            sundayButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-            mondayButton.backgroundColor = .white
-            mondayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            thuesdayButton.backgroundColor = .white
-            thuesdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            wednesdayButton.backgroundColor = .white
-            wednesdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            thursdayButton.backgroundColor = .white
-            thursdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            fridayButton.backgroundColor = .white
-            fridayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            saturdayButton.backgroundColor = .white
-            saturdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            onOffButton.backgroundColor = .white
-            onOffButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            cancelButton.backgroundColor = .white
-            cancelButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            confirmButton.backgroundColor = .white
-            confirmButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            notiSoundButton.backgroundColor = .white
-            notiSoundButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            timeButton.backgroundColor = .white
-            timeButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            
-        } else { //일반 라이트 모드일 때
-            sundayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            sundayButton.backgroundColor = .systemGray5
-            mondayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            mondayButton.backgroundColor = .systemGray5
-            thuesdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            thuesdayButton.backgroundColor = .systemGray5
-            wednesdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            wednesdayButton.backgroundColor = .systemGray5
-            thursdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            thursdayButton.backgroundColor = .systemGray5
-            fridayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            fridayButton.backgroundColor = .systemGray5
-            saturdayButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            saturdayButton.backgroundColor = .systemGray5
-            onOffButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            onOffButton.backgroundColor = .systemGray5
-            cancelButton.setTitleColor(UIColor.systemGray, for: UIControl.State.normal)
-            confirmButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            notiSoundButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            notiSoundButton.backgroundColor = .systemGray5
-            timeButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-            timeButton.backgroundColor = .systemGray5
-        }
-    }
-     */
 }
