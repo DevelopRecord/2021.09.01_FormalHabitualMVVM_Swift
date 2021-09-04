@@ -17,7 +17,9 @@ class CustomTextField: UITextField {
         leftView = spacer
         leftViewMode = .always
         
-        borderStyle = .none
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
+        layer.cornerRadius = 10
         textColor = .black
         keyboardAppearance = .dark
         keyboardType = .emailAddress

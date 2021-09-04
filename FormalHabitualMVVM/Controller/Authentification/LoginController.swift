@@ -42,13 +42,15 @@ class LoginController: UIViewController {
     }()
     
     private let loginButton: UIButton = {
-        let button = CustomLoginButton()
+        let button = UIButton(type: .system)
         button.setTitle("LOGIN", for: UIControl.State.normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
+        button.layer.cornerRadius = 10
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
+        button.setHeight(50)
         button.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
@@ -76,10 +78,10 @@ class LoginController: UIViewController {
         return button
     }()
     
-    private let joinButton: UIButton = {
+    private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.attributedTitle(firstPart: "Don't have an account?", secondPart: "Sign Up.")
-        button.addTarget(self, action: #selector(joinButtonTapped), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleShowSignUp), for: UIControl.Event.touchUpInside)
         return button
     }()
     
@@ -98,9 +100,10 @@ class LoginController: UIViewController {
         print("DEBUG: Log In Button did tap")
     }
     
-    @objc func joinButtonTapped() {
-         let RegistrationVC = RegistrationController()
-         self.present(RegistrationVC, animated: true, completion: nil)
+    @objc func handleShowSignUp() {
+        let RegistrationVC = RegistrationController()
+        navigationController?.pushViewController(RegistrationVC, animated: true)
+//        self.present(RegistrationVC, animated: true, completion: nil)
     }
     
     @objc func handleShowForgotButton() {
@@ -113,10 +116,7 @@ class LoginController: UIViewController {
         } else {
             viewModel.password = sender.text
         }
-        
-        loginButton.backgroundColor = viewModel.buttonBackgroundColor
-        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
-        loginButton.isEnabled = viewModel.formValid
+        updateForm()
     }
     
     // MARK: Helpers
@@ -137,9 +137,9 @@ class LoginController: UIViewController {
         stack.centerX(inView: view)
         stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
         
-        view.addSubview(joinButton)
-        joinButton.centerX(inView: view)
-        joinButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.centerX(inView: view)
+        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
     }
     
     func configureNotificationObserver() {
@@ -150,3 +150,10 @@ class LoginController: UIViewController {
     
 }
 
+extension LoginController: FormViewModel {
+    func updateForm() {
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.formValid
+    }
+}

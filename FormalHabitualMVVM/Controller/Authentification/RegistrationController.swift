@@ -9,43 +9,38 @@ import UIKit
 
 class RegistrationController: UIViewController {
     
-    // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureUI()
-        self.hideKeyboardWhenTappedAround()
-        moveViewWithKeyboard()
-        self.moveViewWithKeyboard()
-    }
-    
     // MARK: Properties
-    private let signUpLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sign Up"
-        label.font = UIFont.systemFont(ofSize: 38, weight: UIFont.Weight.semibold)
-        return label
+    
+    private var viewModel = RegistrationViewModel()
+    
+    private let plusPhotoButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "plus_photo"), for: .normal)
+        button.tintColor = .black
+        button.setHeight(110)
+        button.setWidth(110)
+        return button
     }()
     
-    private let idTextField: UITextField = {
+    private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
         tf.keyboardType = .emailAddress
         return tf
     }()
     
-    private let pwTextField: UITextField = {
+    private let passwordTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Password")
         tf.isSecureTextEntry = true
         return tf
     }()
     
-    private let pwConfirmTextField: UITextField = {
+    private let passwordConfirmTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Confirm password")
         tf.isSecureTextEntry = true
         return tf
     }()
     
-    private let nameTextField: UITextField = {
+    private let fullnameTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Fullname")
         return tf
     }()
@@ -65,11 +60,14 @@ class RegistrationController: UIViewController {
         return label
     }()
     
-    private let registerButton: UIButton = {
+    private let SignUpButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("REGISTER", for: .normal)
+        button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 10
+        button.isEnabled = false
         button.setHeight(50)
         button.addTarget(self, action: #selector(registerButtonTapped), for: UIControl.Event.touchUpInside)
         return button
@@ -106,24 +104,15 @@ class RegistrationController: UIViewController {
         return button
     }()
     
-    // MARK: Helper
-    func configureUI() {
-        view.backgroundColor = .systemBackground
-        navigationController?.navigationBar.isHidden = true
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        view.addSubview(signUpLabel)
-        signUpLabel.centerX(inView: view)
-        signUpLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
-        
-        let stack = UIStackView(arrangedSubviews: [idTextField, pwTextField, pwConfirmTextField, nameTextField, ageTextField, infoLabel, registerButton, orLabel, naverJoinButton, kakaoJoinButton])
-        stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
-        stack.spacing = 20
-        stack.setHeight(660)
-        
-        view.addSubview(stack)
-        stack.centerX(inView: view)
-        stack.anchor(top: signUpLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
-        
+        configureUI()
+        self.hideKeyboardWhenTappedAround()
+        moveViewWithKeyboard()
+        self.moveViewWithKeyboard()
+        configureNotificationObserver()
     }
     
     // MARK: Actions
@@ -131,20 +120,54 @@ class RegistrationController: UIViewController {
         print("DEBUG: Registration Button did tap")
     }
     
-    // MARK: Configures
-    func configureColors() {
-        if self.traitCollection.userInterfaceStyle == .dark { // 유저 인터페이스가 다크 테마일 때
-            registerButton.backgroundColor = .white
-            registerButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-        } else { // 일반 라이트 모드일 때
-            registerButton.setTitleColor(UIColor.white, for: UIControl.State.normal)
-            registerButton.backgroundColor = .black
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else if sender == passwordTextField {
+            viewModel.password = sender.text
+        } else if sender == passwordConfirmTextField {
+            viewModel.confirmPassword = sender.text
+        } else if sender == fullnameTextField {
+            viewModel.fullname = sender.text
+        } else {
+            viewModel.age = sender.text
         }
+        updateForm()
     }
     
-    // MARK: Override
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        // 디바이스의 테마가 변경될 때 마다 이 함수가 발동되어집니다
-        configureColors()
+    // MARK: Helper
+    func configureUI() {
+        view.backgroundColor = .systemBackground
+        navigationController?.navigationBar.isHidden = true
+        
+        view.addSubview(plusPhotoButton)
+        plusPhotoButton.centerX(inView: view)
+        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, passwordConfirmTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton, orLabel, naverJoinButton, kakaoJoinButton])
+        stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
+        stack.spacing = 16
+        stack.setHeight(660)
+        
+        view.addSubview(stack)
+        stack.centerX(inView: view)
+        stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 6, paddingLeft: 32, paddingRight: 32)
+    }
+    
+    func configureNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordConfirmTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        ageTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+    }
+    
+}
+
+extension RegistrationController: FormViewModel {
+    func updateForm() {
+        SignUpButton.backgroundColor = viewModel.buttonBackgroundColor
+        SignUpButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        SignUpButton.isEnabled = viewModel.formValid
     }
 }
