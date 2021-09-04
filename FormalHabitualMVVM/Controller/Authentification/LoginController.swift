@@ -9,17 +9,10 @@ import UIKit
 
 class LoginController: UIViewController {
     
-    // MARK: Lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        configureUI()
-        self.hideKeyboardWhenTappedAround()
-        moveViewWithKeyboard()
-        self.moveViewWithKeyboard()
-    }
-    
     //MARK: Properties
+    
+    private var viewModel = LoginViewModel()
+    
     private let habitualLabel: UILabel = {
         let label = UILabel()
         label.text = "Habitual"
@@ -52,7 +45,10 @@ class LoginController: UIViewController {
         let button = CustomLoginButton()
         button.setTitle("LOGIN", for: UIControl.State.normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 15)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
+        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
+        button.isEnabled = false
         button.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
@@ -87,10 +83,45 @@ class LoginController: UIViewController {
         return button
     }()
     
+    // MARK: Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        self.hideKeyboardWhenTappedAround()
+        moveViewWithKeyboard()
+        self.moveViewWithKeyboard()
+        configureNotificationObserver()
+    }
+    
+    // MARK: Actions
+    @objc func loginButtonTapped() {
+        print("DEBUG: Log In Button did tap")
+    }
+    
+    @objc func joinButtonTapped() {
+         let RegistrationVC = RegistrationController()
+         self.present(RegistrationVC, animated: true, completion: nil)
+    }
+    
+    @objc func handleShowForgotButton() {
+        print("DEBUG: Forgot button did tap")
+    }
+    
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        } else {
+            viewModel.password = sender.text
+        }
+        
+        loginButton.backgroundColor = viewModel.buttonBackgroundColor
+        loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        loginButton.isEnabled = viewModel.formValid
+    }
+    
     // MARK: Helpers
     func configureUI() {
         view.backgroundColor = .systemBackground
-        
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(habitualLabel)
@@ -109,22 +140,13 @@ class LoginController: UIViewController {
         view.addSubview(joinButton)
         joinButton.centerX(inView: view)
         joinButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
-        
     }
     
-    // MARK: Actions
-    @objc func loginButtonTapped() {
-        print("DEBUG: Log In Button did tap")
+    func configureNotificationObserver() {
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
     
-    @objc func joinButtonTapped() {
-         let RegistrationVC = RegistrationController()
-         self.present(RegistrationVC, animated: true, completion: nil)
-         print("DEBUG: Registration button tapped")
-    }
     
-    @objc func handleShowForgotButton() {
-        print("DEBUG: Forgot button did tap")
-    }
 }
 

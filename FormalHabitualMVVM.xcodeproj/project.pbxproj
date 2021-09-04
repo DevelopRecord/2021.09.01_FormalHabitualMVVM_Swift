@@ -24,6 +24,7 @@
 		FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */; };
 		FB7DEF6B26DF8DFE0042DA0F /* AddHabitualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */; };
 		FB7DEF6D26E217050042DA0F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6C26E217050042DA0F /* CustomButton.swift */; };
+		FB7DEF7126E366C00042DA0F /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitualController.swift; sourceTree = "<group>"; };
 		FB7DEF6C26E217050042DA0F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		FB7DEF5626DF5DF40042DA0F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */,
 				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,
 				FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */,
+				FB7DEF7126E366C00042DA0F /* AuthentificationViewModel.swift in Sources */,
 				FB7DEF5E26DF5EDC0042DA0F /* SettingController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

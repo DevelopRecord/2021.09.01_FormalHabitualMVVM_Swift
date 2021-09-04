@@ -125,8 +125,8 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }()
     
     lazy var cancelButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("CANCEL", for: UIControl.State.normal)
+        let button = UIButton(type: .system)
+        button.setTitle("CANCEL", for: .normal)
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.systemGray.cgColor
@@ -138,8 +138,8 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }()
     
     lazy var confirmButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("CONFIRM", for: UIControl.State.normal)
+        let button = UIButton(type: .system)
+        button.setTitle("CONFIRM", for: .normal)
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.systemGray.cgColor

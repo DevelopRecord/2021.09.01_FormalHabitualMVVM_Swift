@@ -66,8 +66,9 @@ class RegistrationController: UIViewController {
     }()
     
     private let registerButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("REGISTER", for: UIControl.State.normal)
+        let button = UIButton(type: .system)
+        button.setTitle("REGISTER", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.layer.cornerRadius = 10
         button.setHeight(50)
         button.addTarget(self, action: #selector(registerButtonTapped), for: UIControl.Event.touchUpInside)
@@ -84,10 +85,10 @@ class RegistrationController: UIViewController {
     }()
     
     private let naverJoinButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("NAVER로 회원가입", for: UIControl.State.normal)
+        let button = UIButton(type: .system)
+        button.setTitle("NAVER로 회원가입", for: .normal)
         button.layer.cornerRadius = 10
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.backgroundColor = UIColor(named: "naverColor")
         button.setHeight(50)
