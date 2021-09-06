@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BFE8594DC535CCE28348D73F /* Pods_FormalHabitualMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */; };
 		FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */; };
 		FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */; };
 		FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3B26DF5CD20042DA0F /* ViewController.swift */; };
@@ -25,9 +26,15 @@
 		FB7DEF6B26DF8DFE0042DA0F /* AddHabitualController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */; };
 		FB7DEF6D26E217050042DA0F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6C26E217050042DA0F /* CustomButton.swift */; };
 		FB7DEF7126E366C00042DA0F /* AuthentificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */; };
+		FB7DEF7926E4CEF00042DA0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FB7DEF7826E4CEF00042DA0F /* GoogleService-Info.plist */; };
+		FB7DEF7B26E633710042DA0F /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF7A26E633710042DA0F /* ImageUploader.swift */; };
+		FB7DEF7D26E6337A0042DA0F /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF7C26E6337A0042DA0F /* AuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3EBB5D550D4AE3461EDDCF43 /* Pods-FormalHabitualMVVM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.release.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.release.xcconfig"; sourceTree = "<group>"; };
+		DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.debug.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.debug.xcconfig"; sourceTree = "<group>"; };
+		EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormalHabitualMVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7DEF3426DF5CD10042DA0F /* FormalHabitualMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormalHabitualMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +55,9 @@
 		FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabitualController.swift; sourceTree = "<group>"; };
 		FB7DEF6C26E217050042DA0F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthentificationViewModel.swift; sourceTree = "<group>"; };
+		FB7DEF7826E4CEF00042DA0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FB7DEF7A26E633710042DA0F /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		FB7DEF7C26E6337A0042DA0F /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,17 +65,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFE8594DC535CCE28348D73F /* Pods_FormalHabitualMVVM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A2F5071E82C71E922216DB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDB3F923E548326B03C5FACF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */,
+				3EBB5D550D4AE3461EDDCF43 /* Pods-FormalHabitualMVVM.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		FB7DEF2B26DF5CD10042DA0F = {
 			isa = PBXGroup;
 			children = (
 				FB7DEF3626DF5CD10042DA0F /* FormalHabitualMVVM */,
 				FB7DEF3526DF5CD10042DA0F /* Products */,
+				CDB3F923E548326B03C5FACF /* Pods */,
+				5A2F5071E82C71E922216DB8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +123,7 @@
 				FB7DEF4026DF5CD30042DA0F /* Assets.xcassets */,
 				FB7DEF4226DF5CD30042DA0F /* LaunchScreen.storyboard */,
 				FB7DEF4526DF5CD30042DA0F /* Info.plist */,
+				FB7DEF7826E4CEF00042DA0F /* GoogleService-Info.plist */,
 			);
 			path = FormalHabitualMVVM;
 			sourceTree = "<group>";
@@ -121,6 +152,8 @@
 		FB7DEF5326DF5DDD0042DA0F /* API */ = {
 			isa = PBXGroup;
 			children = (
+				FB7DEF7A26E633710042DA0F /* ImageUploader.swift */,
+				FB7DEF7C26E6337A0042DA0F /* AuthService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -166,9 +199,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FB7DEF4826DF5CD30042DA0F /* Build configuration list for PBXNativeTarget "FormalHabitualMVVM" */;
 			buildPhases = (
+				916FC384F58A7F0AC3EA0AC1 /* [CP] Check Pods Manifest.lock */,
 				FB7DEF3026DF5CD10042DA0F /* Sources */,
 				FB7DEF3126DF5CD10042DA0F /* Frameworks */,
 				FB7DEF3226DF5CD10042DA0F /* Resources */,
+				879E5B85F3431BA3552AB7F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -217,12 +252,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB7DEF4426DF5CD30042DA0F /* LaunchScreen.storyboard in Resources */,
+				FB7DEF7926E4CEF00042DA0F /* GoogleService-Info.plist in Resources */,
 				FB7DEF4126DF5CD30042DA0F /* Assets.xcassets in Resources */,
 				FB7DEF3F26DF5CD20042DA0F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		879E5B85F3431BA3552AB7F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		916FC384F58A7F0AC3EA0AC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FormalHabitualMVVM-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FB7DEF3026DF5CD10042DA0F /* Sources */ = {
@@ -242,6 +320,8 @@
 				FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */,
 				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,
 				FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */,
+				FB7DEF7B26E633710042DA0F /* ImageUploader.swift in Sources */,
+				FB7DEF7D26E6337A0042DA0F /* AuthService.swift in Sources */,
 				FB7DEF7126E366C00042DA0F /* AuthentificationViewModel.swift in Sources */,
 				FB7DEF5E26DF5EDC0042DA0F /* SettingController.swift in Sources */,
 			);
@@ -387,6 +467,7 @@
 		};
 		FB7DEF4926DF5CD30042DA0F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -406,6 +487,7 @@
 		};
 		FB7DEF4A26DF5CD30042DA0F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3EBB5D550D4AE3461EDDCF43 /* Pods-FormalHabitualMVVM.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

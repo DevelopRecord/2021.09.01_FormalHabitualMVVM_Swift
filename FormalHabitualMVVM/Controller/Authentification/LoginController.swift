@@ -97,6 +97,8 @@ class LoginController: UIViewController {
     
     // MARK: Actions
     @objc func loginButtonTapped() {
+        
+        
         print("DEBUG: Log In Button did tap")
     }
     
@@ -126,7 +128,7 @@ class LoginController: UIViewController {
         
         view.addSubview(habitualLabel)
         habitualLabel.translatesAutoresizingMaskIntoConstraints = false
-        habitualLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 180).isActive = true
+        habitualLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150).isActive = true
         habitualLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton,  forgotPasswordButton, naverLoginButton, kakaoLoginButton])

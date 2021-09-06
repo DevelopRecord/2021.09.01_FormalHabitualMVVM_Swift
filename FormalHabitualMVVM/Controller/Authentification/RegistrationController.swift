@@ -12,6 +12,7 @@ class RegistrationController: UIViewController {
     // MARK: Properties
     
     private var viewModel = RegistrationViewModel()
+    private var profileImage: UIImage?
     
     private let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -33,7 +34,7 @@ class RegistrationController: UIViewController {
         return tf
     }()
     
-    private let passwordConfirmTextField: UITextField = {
+    private let confirmPasswordTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Confirm password")
         tf.isSecureTextEntry = true
         return tf
@@ -68,7 +69,7 @@ class RegistrationController: UIViewController {
         button.layer.cornerRadius = 10
         button.isEnabled = false
         button.setHeight(50)
-        button.addTarget(self, action: #selector(registerButtonTapped), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -93,11 +94,11 @@ class RegistrationController: UIViewController {
     }()
     
     private let kakaoJoinButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system)
-        button.setTitle("KAKAO로 회원가입", for: UIControl.State.normal)
+        let button = UIButton(type: .system)
+        button.setTitle("KAKAO로 회원가입", for: .normal)
         button.layer.cornerRadius = 10
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor(named: "kakaoColor")
         button.setHeight(50)
         return button
@@ -115,8 +116,17 @@ class RegistrationController: UIViewController {
     }
     
     // MARK: Actions
-    @objc func registerButtonTapped() {
-        print("DEBUG: Registration Button did tap")
+    @objc func handleSignUp() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let confirmPassword = confirmPasswordTextField.text else { return }
+        guard let fullname = fullnameTextField.text else { return }
+        guard let age = ageTextField.text else { return }
+        guard let profileImage = self.profileImage else { return }
+        
+        let credentials = AuthCredentials(email: email, password: password, confirmPassword: confirmPassword, fullname: fullname, age: age, profileImage: profileImage)
+        
+        AuthService.RegisterUser(withCredential: credentials)
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -124,7 +134,7 @@ class RegistrationController: UIViewController {
             viewModel.email = sender.text
         } else if sender == passwordTextField {
             viewModel.password = sender.text
-        } else if sender == passwordConfirmTextField {
+        } else if sender == confirmPasswordTextField {
             viewModel.confirmPassword = sender.text
         } else if sender == fullnameTextField {
             viewModel.fullname = sender.text
@@ -152,7 +162,7 @@ class RegistrationController: UIViewController {
         plusPhotoButton.setDimensions(height: 120, width: 120)
         plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, passwordConfirmTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton, orLabel, naverJoinButton, kakaoJoinButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, confirmPasswordTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton, orLabel, naverJoinButton, kakaoJoinButton])
         stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
         stack.spacing = 16
         stack.setHeight(660)
@@ -165,7 +175,7 @@ class RegistrationController: UIViewController {
     func configureNotificationObserver() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        passwordConfirmTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        confirmPasswordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         fullnameTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         ageTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
@@ -185,6 +195,7 @@ extension RegistrationController: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         guard let selectedImage = info[.editedImage] as? UIImage else { return }
+        profileImage = selectedImage
         
         plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width / 2
         plusPhotoButton.layer.masksToBounds = true
