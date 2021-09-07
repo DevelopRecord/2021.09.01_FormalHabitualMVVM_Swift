@@ -126,7 +126,14 @@ class RegistrationController: UIViewController {
         
         let credentials = AuthCredentials(email: email, password: password, confirmPassword: confirmPassword, fullname: fullname, age: age, profileImage: profileImage)
         
-        AuthService.RegisterUser(withCredential: credentials)
+        AuthService.RegisterUser(withCredential: credentials) { error in
+            if let error = error {
+                print("Failed to register user \(error.localizedDescription)")
+                return
+            }
+            
+            print("Successfully regisered user with firestore..")
+        }
     }
     
     @objc func textDidChange(sender: UITextField) {
