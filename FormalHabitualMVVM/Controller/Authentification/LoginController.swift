@@ -51,7 +51,7 @@ class LoginController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
         button.setHeight(50)
-        button.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: UIControl.Event.touchUpInside)
         return button
     }()
     
@@ -96,10 +96,18 @@ class LoginController: UIViewController {
     }
     
     // MARK: Actions
-    @objc func loginButtonTapped() {
+    @objc func handleLogin() {
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
         
-        
-        print("DEBUG: Log In Button did tap")
+        AuthService.logUserIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                print("Failed to log user in \(error.localizedDescription)")
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @objc func handleShowSignUp() {

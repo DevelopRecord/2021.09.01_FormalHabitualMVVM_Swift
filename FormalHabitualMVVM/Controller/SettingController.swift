@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Firebase
 
 private let reusableIdentifier = "cell"
 
@@ -28,19 +29,20 @@ class SettingController: UITableViewController {
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 110))
+        
         header.backgroundColor = .systemBackground
         footer.backgroundColor = .systemBackground
         
-        let loginButton = UIButton(type: .system)
-        loginButton.setTitle("로그인 해주세요", for: .normal)
-        loginButton.titleLabel?.font = .systemFont(ofSize: 22)
-        loginButton.backgroundColor = .systemBackground
-        loginButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-        header.addSubview(loginButton)
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20).isActive = true
-        loginButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
-        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: UIControl.Event.touchUpInside)
+        let myPageButton = UIButton(type: .system)
+        myPageButton.setTitle("로그아웃", for: .normal)
+        myPageButton.titleLabel?.font = .systemFont(ofSize: 22)
+        myPageButton.backgroundColor = .systemBackground
+        myPageButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        header.addSubview(myPageButton)
+        myPageButton.translatesAutoresizingMaskIntoConstraints = false
+        myPageButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20).isActive = true
+        myPageButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+        myPageButton.addTarget(self, action: #selector(handleMyPage), for: UIControl.Event.touchUpInside)
         
         let tistoryButton = UIButton()
         tistoryButton.setTitle("티스토리", for: UIControl.State.normal)
@@ -93,9 +95,20 @@ class SettingController: UITableViewController {
     }
     
     // MARK: Selectors
-    @objc func loginButtonTapped() {
-         let loginVC = LoginController()
-         self.present(loginVC, animated: true, completion: nil)
+    @objc func handleMyPage() {
+        let profileLayout = UICollectionViewFlowLayout()
+        let controller = ProfileController(collectionViewLayout: profileLayout)
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true, completion: nil)
+//        do {
+//            try Auth.auth().signOut()
+//            let controller = LoginController()
+//            let nav = UINavigationController(rootViewController: controller)
+//            nav.modalPresentationStyle = .fullScreen
+//            self.present(nav, animated: true, completion: nil)
+//        } catch {
+//            print("DEBUG: Failed to sign out")
+//        }
      }
     
     @objc func tistoryOnSafari() {
