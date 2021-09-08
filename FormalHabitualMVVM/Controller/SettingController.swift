@@ -98,8 +98,9 @@ class SettingController: UITableViewController {
     @objc func handleMyPage() {
         let profileLayout = UICollectionViewFlowLayout()
         let controller = ProfileController(collectionViewLayout: profileLayout)
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: true, completion: nil)
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
 //        do {
 //            try Auth.auth().signOut()
 //            let controller = LoginController()
