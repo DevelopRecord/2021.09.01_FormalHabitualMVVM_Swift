@@ -34,7 +34,7 @@ class SettingController: UITableViewController {
         footer.backgroundColor = .systemBackground
         
         let myPageButton = UIButton(type: .system)
-        myPageButton.setTitle("로그아웃", for: .normal)
+        myPageButton.setTitle("Jong Won Baek", for: .normal)
         myPageButton.titleLabel?.font = .systemFont(ofSize: 22)
         myPageButton.backgroundColor = .systemBackground
         myPageButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
@@ -87,8 +87,7 @@ class SettingController: UITableViewController {
     // MARK: Helper
     func configureUI() {
         view.backgroundColor = .white
-        
-        navigationController?.navigationBar.isHidden = true
+        self.title = "환경설정"
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.separatorInset.right = 16

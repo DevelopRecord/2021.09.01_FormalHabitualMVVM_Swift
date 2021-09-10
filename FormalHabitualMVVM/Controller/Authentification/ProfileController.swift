@@ -14,10 +14,22 @@ class ProfileController: UICollectionViewController {
     
     // MARK: Properties
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        
+        navigationController?.navigationBar.isHidden = false
+        self.title = "프로필"
+        navigationController?.title = "프로필"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+                                                           target: self,
+                                                           action: #selector(handleDoneButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
+                                                            target: self,
+                                                            action: #selector(handleEditButton))
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.rightBarButtonItem?.tintColor = .black
+        
     }
     
     func configureCollectionView() {
@@ -25,10 +37,28 @@ class ProfileController: UICollectionViewController {
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        
+    }
+    
+    
+    // MARK: Actions
+    
+    @objc func handleDoneButton() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleEditButton() {
+        let controller = ProfileSettingController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
     }
 }
 
+
 // MARK: UICollectionViewDataSource
+
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
@@ -46,11 +76,13 @@ extension ProfileController {
 }
 
 // MARK: UICollectionViewDelegate
+
 extension ProfileController {
     
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
+
 extension ProfileController: UICollectionViewDelegateFlowLayout {
     
     
@@ -60,6 +92,7 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 100)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
