@@ -8,7 +8,9 @@
 import UIKit
 
 class TableCell: UITableViewCell {
+    
     // MARK: Properties
+    
     var item: String? { // 값을 전달을 받으면 label에 전달받은 값을 넣는 작업을 수행합니다
         didSet {
             self.label.text = item
@@ -21,10 +23,11 @@ class TableCell: UITableViewCell {
     }()
     
     // MARK: Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        configure()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -32,8 +35,9 @@ class TableCell: UITableViewCell {
     }
     
     // MARK: Configures
-    func configure() {
-        backgroundColor = .systemBackground
+    
+    func configureUI() {
+        backgroundColor = .white
         
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false

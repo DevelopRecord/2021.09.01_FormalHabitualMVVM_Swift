@@ -14,15 +14,39 @@ private let reusableIdentifier = "cell"
 class SettingController: UITableViewController {
     
     // MARK: Properties
+    
+    var user: User? {
+        didSet { tableView.reloadData() }
+    }
+    
     private let settingItems: [String] = [ "푸시 알림 설정", "계정 설정", "앱 버전"]
     private let addItems: [String] = ["이용약관", "개인정보처리방침", "FAQ", "고객센터"]
     private let sections: [String] = ["설정", "더보기"]
     
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
+        fetchUser()
+    }
+    
+    // MARK: API
+    
+    func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
+            self.navigationItem.title = user.fullname
+        }
+    }
+    
+    // MARK: Helper
+    func configureUI() {
+        view.backgroundColor = .white
+//        navigationItem.title = "환경설정"
+        
+        tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
+        tableView.separatorInset.right = 16
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -30,33 +54,43 @@ class SettingController: UITableViewController {
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 110))
         
-        header.backgroundColor = .systemBackground
-        footer.backgroundColor = .systemBackground
+        header.backgroundColor = .white
+        footer.backgroundColor = .white
         
-        let myPageButton = UIButton(type: .system)
-        myPageButton.setTitle("Jong Won Baek", for: .normal)
-        myPageButton.titleLabel?.font = .systemFont(ofSize: 22)
-        myPageButton.backgroundColor = .systemBackground
-        myPageButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
-        header.addSubview(myPageButton)
-        myPageButton.translatesAutoresizingMaskIntoConstraints = false
-        myPageButton.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20).isActive = true
-        myPageButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
-        myPageButton.addTarget(self, action: #selector(handleMyPage), for: UIControl.Event.touchUpInside)
+        let profileImageView = UIImageView()
+        profileImageView.image = #imageLiteral(resourceName: "plus_photo")
+        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.clipsToBounds = true
+        header.addSubview(profileImageView)
+        profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 20).isActive = true
+        profileImageView.centerY(inView: header)
+        profileImageView.setDimensions(height: 50, width: 50)
+        
+        let profileButton = UIButton(type: .system)
+        profileButton.setTitle("Jong Won Baek", for: .normal)
+        profileButton.titleLabel?.font = .systemFont(ofSize: 22)
+        profileButton.backgroundColor = .systemBackground
+        profileButton.setTitleColor(.black, for: .normal)
+        header.addSubview(profileButton)
+        profileButton.translatesAutoresizingMaskIntoConstraints = false
+        profileButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 10).isActive = true
+        profileButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+        profileButton.addTarget(self, action: #selector(handleProfile), for: .touchUpInside)
         
         let tistoryButton = UIButton()
-        tistoryButton.setTitle("티스토리", for: UIControl.State.normal)
-        tistoryButton.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        tistoryButton.setTitle("티스토리", for: .normal)
+        tistoryButton.setTitleColor(.black, for: .normal)
         footer.addSubview(tistoryButton)
         tistoryButton.translatesAutoresizingMaskIntoConstraints = false
-        tistoryButton.addTarget(self, action: #selector(tistoryOnSafari), for: UIControl.Event.touchUpInside)
+        tistoryButton.addTarget(self, action: #selector(tistoryOnSafari), for: .touchUpInside)
         
         let githubLabel = UIButton()
-        githubLabel.setTitle("깃허브", for: UIControl.State.normal)
-        githubLabel.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        githubLabel.setTitle("깃허브", for: .normal)
+        githubLabel.setTitleColor(.black, for: .normal)
         footer.addSubview(githubLabel)
         githubLabel.translatesAutoresizingMaskIntoConstraints = false
-        githubLabel.addTarget(self, action: #selector(githubOnSafari), for: UIControl.Event.touchUpInside)
+        githubLabel.addTarget(self, action: #selector(githubOnSafari), for: .touchUpInside)
         
         let imageView1: UIImageView = {
             let imageView = UIImageView()
@@ -84,31 +118,24 @@ class SettingController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    // MARK: Helper
-    func configureUI() {
-        view.backgroundColor = .white
-        self.title = "환경설정"
-        
-        tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
-        tableView.separatorInset.right = 16
-    }
-    
     // MARK: Selectors
-    @objc func handleMyPage() {
+    @objc func handleProfile() {
         let profileLayout = UICollectionViewFlowLayout()
         let controller = ProfileController(collectionViewLayout: profileLayout)
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
-//        do {
-//            try Auth.auth().signOut()
-//            let controller = LoginController()
-//            let nav = UINavigationController(rootViewController: controller)
-//            nav.modalPresentationStyle = .fullScreen
-//            self.present(nav, animated: true, completion: nil)
-//        } catch {
-//            print("DEBUG: Failed to sign out")
-//        }
+        /*
+        do {
+            try Auth.auth().signOut()
+            let controller = LoginController()
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        } catch {
+            print("DEBUG: Failed to sign out")
+        }
+         */
      }
     
     @objc func tistoryOnSafari() {

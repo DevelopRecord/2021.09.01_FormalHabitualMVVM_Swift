@@ -14,13 +14,16 @@ class ProfileController: UICollectionViewController {
     
     // MARK: Properties
     
+    var user: User? {
+        didSet { collectionView.reloadData() }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        fetchUser()
         
         navigationController?.navigationBar.isHidden = false
-        self.title = "프로필"
-        navigationController?.title = "프로필"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
                                                            target: self,
                                                            action: #selector(handleDoneButton))
@@ -32,13 +35,20 @@ class ProfileController: UICollectionViewController {
         
     }
     
+    // MARK: Helpers
+    
+    func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
+            self.navigationItem.title = user.fullname
+        }
+    }
+    
     func configureCollectionView() {
         collectionView.backgroundColor = .white
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
-        
-        
     }
     
     
@@ -71,6 +81,10 @@ extension ProfileController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ProfileHeader
+        
+        if let user = user {
+            header.viewModel = ProfileHeaderViewModel(user: user)
+        }
         return header
     }
 }

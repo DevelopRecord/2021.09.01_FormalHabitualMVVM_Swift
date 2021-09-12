@@ -6,22 +6,26 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProfileHeader: UICollectionReusableView {
     
     // MARK: Properties
     
+    var viewModel: ProfileHeaderViewModel? {
+        didSet { configure() }
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = #imageLiteral(resourceName: "Baek")
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
+        iv.backgroundColor = .lightGray
         return iv
     }()
     
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jong Won Baek"
         label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
@@ -49,6 +53,7 @@ class ProfileHeader: UICollectionReusableView {
     
     
     // MARK: Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -57,8 +62,8 @@ class ProfileHeader: UICollectionReusableView {
         addSubview(profileImageView)
         profileImageView.anchor(top: topAnchor, paddingTop: 16)
         profileImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        profileImageView.setDimensions(height: 80, width: 80)
-        profileImageView.layer.cornerRadius = 80 / 2
+        profileImageView.setDimensions(height: 100, width: 100)
+        profileImageView.layer.cornerRadius = 100 / 2
         
         addSubview(nameLabel)
         nameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 12)
@@ -90,5 +95,12 @@ class ProfileHeader: UICollectionReusableView {
     }
     
     // MARK: Helpers
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        nameLabel.text = viewModel.fullname
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    }
     
 }
