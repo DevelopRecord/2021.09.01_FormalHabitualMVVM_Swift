@@ -41,6 +41,7 @@ class SettingController: UITableViewController {
     }
     
     // MARK: Helper
+    
     func configureUI() {
         view.backgroundColor = .white
 //        navigationItem.title = "환경설정"
@@ -119,6 +120,7 @@ class SettingController: UITableViewController {
     }
     
     // MARK: Selectors
+    
     @objc func handleProfile() {
         let profileLayout = UICollectionViewFlowLayout()
         let controller = ProfileController(collectionViewLayout: profileLayout)

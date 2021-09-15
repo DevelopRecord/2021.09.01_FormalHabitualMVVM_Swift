@@ -60,13 +60,13 @@ class ProfileHeader: UICollectionReusableView {
         backgroundColor = .white
         
         addSubview(profileImageView)
-        profileImageView.anchor(top: topAnchor, paddingTop: 16)
+        profileImageView.anchor(top: topAnchor, paddingTop: 35)
         profileImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         profileImageView.setDimensions(height: 100, width: 100)
         profileImageView.layer.cornerRadius = 100 / 2
         
         addSubview(nameLabel)
-        nameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 12)
+        nameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 12, paddingBottom: 35)
         nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         let topDivider = UIView()

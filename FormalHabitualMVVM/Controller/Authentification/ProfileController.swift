@@ -18,6 +18,8 @@ class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
@@ -40,7 +42,7 @@ class ProfileController: UICollectionViewController {
     func fetchUser() {
         UserService.fetchUser { user in
             self.user = user
-            self.navigationItem.title = user.fullname
+            self.navigationItem.title = "프로필"
         }
     }
     
@@ -110,6 +112,6 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 250)
     }
 }
