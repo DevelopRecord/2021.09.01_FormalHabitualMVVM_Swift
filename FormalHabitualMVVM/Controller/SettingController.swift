@@ -6,14 +6,19 @@
 //
 
 import UIKit
-import SafariServices
 import Firebase
+import SafariServices
+import SDWebImage
 
 private let reusableIdentifier = "cell"
 
 class SettingController: UITableViewController {
     
     // MARK: Properties
+    
+    var viewModel: SettingHeaderViewModel? {
+        didSet { configure() }
+    }
     
     var user: User? {
         didSet { tableView.reloadData() }
@@ -22,6 +27,24 @@ class SettingController: UITableViewController {
     private let settingItems: [String] = [ "푸시 알림 설정", "계정 설정", "앱 버전"]
     private let addItems: [String] = ["이용약관", "개인정보처리방침", "FAQ", "고객센터"]
     private let sections: [String] = ["설정", "더보기"]
+    
+    let profileButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = .systemFont(ofSize: 22)
+        button.backgroundColor = .systemBackground
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleProfile), for: .touchUpInside)
+        return button
+    }()
+    
+    private let profileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        iv.backgroundColor = .lightGray
+        return iv
+    }()
     
     // MARK: Lifecycle
     
@@ -36,7 +59,8 @@ class SettingController: UITableViewController {
     func fetchUser() {
         UserService.fetchUser { user in
             self.user = user
-            self.navigationItem.title = user.fullname
+//            self.navigationItem.title = user.fullname
+            self.profileButton.setTitle(user.fullname, for: .normal)
         }
     }
     
@@ -44,40 +68,24 @@ class SettingController: UITableViewController {
     
     func configureUI() {
         view.backgroundColor = .white
-//        navigationItem.title = "환경설정"
+        navigationItem.title = "환경설정"
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.separatorInset.right = 16
-        
         tableView.delegate = self
         tableView.dataSource = self
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 110))
-        
         header.backgroundColor = .white
         footer.backgroundColor = .white
         
-        let profileImageView = UIImageView()
-        profileImageView.image = #imageLiteral(resourceName: "plus_photo")
-        profileImageView.contentMode = .scaleAspectFit
-        profileImageView.clipsToBounds = true
         header.addSubview(profileImageView)
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
         profileImageView.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 20).isActive = true
+        profileImageView.setDimensions(height: 60, width: 60)
+        profileImageView.layer.cornerRadius = 60 / 2
         profileImageView.centerY(inView: header)
-        profileImageView.setDimensions(height: 50, width: 50)
-        
-        let profileButton = UIButton(type: .system)
-        profileButton.setTitle("Jong Won Baek", for: .normal)
-        profileButton.titleLabel?.font = .systemFont(ofSize: 22)
-        profileButton.backgroundColor = .systemBackground
-        profileButton.setTitleColor(.black, for: .normal)
-        header.addSubview(profileButton)
-        profileButton.translatesAutoresizingMaskIntoConstraints = false
-        profileButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 10).isActive = true
-        profileButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
-        profileButton.addTarget(self, action: #selector(handleProfile), for: .touchUpInside)
         
         let tistoryButton = UIButton()
         tistoryButton.setTitle("티스토리", for: .normal)
@@ -99,6 +107,7 @@ class SettingController: UITableViewController {
             imageView.image = UIImage(named: "tistory")
             return imageView
         }()
+        
         imageView1.frame = CGRect(x: 20, y: 0, width: 30, height: 30)
         footer.addSubview(imageView1)
         tistoryButton.leadingAnchor.constraint(equalTo: imageView1.leadingAnchor, constant: 40).isActive = true
@@ -115,12 +124,22 @@ class SettingController: UITableViewController {
         githubLabel.leadingAnchor.constraint(equalTo: imageView2.leadingAnchor, constant: 40).isActive = true
         githubLabel.centerYAnchor.constraint(equalTo: imageView2.centerYAnchor).isActive = true
         
+        header.addSubview(profileButton)
+        profileButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 10).isActive = true
+        profileButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+        
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
     }
     
-    // MARK: Selectors
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    }
     
+    // MARK: Selectors
+        
     @objc func handleProfile() {
         let profileLayout = UICollectionViewFlowLayout()
         let controller = ProfileController(collectionViewLayout: profileLayout)
@@ -152,6 +171,8 @@ class SettingController: UITableViewController {
         present(safariViewController, animated: true, completion: nil)
     }
 }
+
+// MARK: UITableViewDataSource
 
 extension SettingController {
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -212,4 +233,6 @@ extension SettingController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
+    
+    
 }
