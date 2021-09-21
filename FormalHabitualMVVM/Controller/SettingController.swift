@@ -59,8 +59,8 @@ class SettingController: UITableViewController {
     func fetchUser() {
         UserService.fetchUser { user in
             self.user = user
-//            self.navigationItem.title = user.fullname
             self.profileButton.setTitle(user.fullname, for: .normal)
+            self.profileImageView.sd_setImage(with: self.viewModel?.profileImageUrl)
         }
     }
     
@@ -68,7 +68,7 @@ class SettingController: UITableViewController {
     
     func configureUI() {
         view.backgroundColor = .white
-        navigationItem.title = "환경설정"
+        self.navigationItem.title = "환경설정"
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.separatorInset.right = 16
@@ -135,6 +135,7 @@ class SettingController: UITableViewController {
     func configure() {
         guard let viewModel = viewModel else { return }
         
+        profileButton.setTitle(viewModel.fullname, for: .normal)
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
     }
     
@@ -146,6 +147,7 @@ class SettingController: UITableViewController {
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
+        
         /*
         do {
             try Auth.auth().signOut()
@@ -233,6 +235,11 @@ extension SettingController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-    
-    
+}
+
+extension SettingController: AuthentificationDelegate {
+    func authentificationDidComplete() {
+        print("DEBUG: Setting controller auth did complete. Fetch user and update here..")
+        self.dismiss(animated: true, completion: nil)
+    }
 }

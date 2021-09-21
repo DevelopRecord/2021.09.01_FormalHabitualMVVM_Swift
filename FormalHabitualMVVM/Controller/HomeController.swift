@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeController: UIViewController {
     let timeSelector : Selector = #selector(HomeController.updateTime)
@@ -52,7 +53,11 @@ class HomeController: UIViewController {
     // MARK: Helper
     func configureUI() {
         view.backgroundColor = .white
-        navigationController?.navigationBar.isHidden = true
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "로그아웃",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(handleLogout))
         
         configureColors()
         
@@ -77,13 +82,27 @@ class HomeController: UIViewController {
     }
     
     // MARK: Actions
+    
+    @objc func handleLogout() {
+        do {
+            try Auth.auth().signOut()
+            let controller = LoginController()
+            controller.delegate = self.tabBarController as? MainTabController
+            let nav = UINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        } catch {
+            print("DEBUG: Failed to sign out")
+        }
+    }
+    
     @objc func addButtonTapped() {
         let uvc = AddHabitualController()
         uvc.modalPresentationStyle = .fullScreen
         self.present(uvc, animated: true)
     }
     
-    @objc func updateTime(){
+    @objc func updateTime() {
         let date = NSDate() // 현재 시간을 가져옴
         let formatter = DateFormatter() // DateFormatter라는 클래스의 상수 formatter를 선언
         formatter.dateFormat = "M.dd (E) h:mm a"

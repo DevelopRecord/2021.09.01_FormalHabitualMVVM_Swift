@@ -7,11 +7,16 @@
 
 import UIKit
 
+protocol AuthentificationDelegate: AnyObject {
+    func authentificationDidComplete()
+}
+
 class LoginController: UIViewController {
     
     //MARK: Properties
     
     private var viewModel = LoginViewModel()
+    weak var delegate: AuthentificationDelegate?
     
     private let habitualLabel: UILabel = {
         let label = UILabel()
@@ -86,6 +91,7 @@ class LoginController: UIViewController {
     }()
     
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -96,24 +102,25 @@ class LoginController: UIViewController {
     }
     
     // MARK: Actions
+    
     @objc func handleLogin() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        AuthService.logUserIn(withEmail: email, password: password) { result, error in
+        AuthService.logUserIn(withEmail: email, password: password) { (result, error) in
             if let error = error {
-                print("Failed to log user in \(error.localizedDescription)")
+                print("DEBUG: Failed to log user in \(error.localizedDescription)")
                 return
             }
+            self.delegate?.authentificationDidComplete()
             
-            self.dismiss(animated: true, completion: nil)
         }
     }
     
     @objc func handleShowSignUp() {
         let RegistrationVC = RegistrationController()
+        RegistrationVC.delegate = delegate
         navigationController?.pushViewController(RegistrationVC, animated: true)
-//        self.present(RegistrationVC, animated: true, completion: nil)
     }
     
     @objc func handleShowForgotButton() {
@@ -130,6 +137,7 @@ class LoginController: UIViewController {
     }
     
     // MARK: Helpers
+    
     func configureUI() {
         view.backgroundColor = .systemBackground
         navigationController?.navigationBar.isHidden = true
