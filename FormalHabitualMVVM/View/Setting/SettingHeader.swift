@@ -12,6 +12,14 @@ class SettingHeader: UITableViewHeaderFooterView {
     
     // MARK: Properties
     
+    var viewModel: SettingHeaderViewModel? {
+        didSet { configure() }
+    }
+    
+    var user: User? {
+        didSet { fetchUser() }
+    }
+    
     private let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.image = #imageLiteral(resourceName: "plus_photo")
@@ -27,51 +35,38 @@ class SettingHeader: UITableViewHeaderFooterView {
         button.addTarget(self, action: #selector(handleProfile), for: .touchUpInside)
         return button
     }()
+
     
-    private let tistoryImage: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.image = UIImage(named: "tistory")
-        iv.setDimensions(height: 30, width: 30)
-        return iv
-    }()
+    // MARK: API
     
-    private let githubImage: UIImageView = {
-        let iv = UIImageView()
-        iv.contentMode = .scaleAspectFit
-        iv.image = UIImage(named: "github")
-        iv.setDimensions(height: 30, width: 30)
-        return iv
-    }()
+    func fetchUser() {
+        UserService.fetchUser { user in
+            self.user = user
+            self.profileButton.setTitle(user.fullname, for: .normal)
+            self.profileImageView.sd_setImage(with: self.viewModel?.profileImageUrl)
+        }
+    }
     
-    // Actions
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        profileButton.setTitle(viewModel.fullname, for: .normal)
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+    }
+    
+    // MARK: Actions
     
     @objc func handleProfile() {
         let profileLayout = UICollectionViewFlowLayout()
         let controller = ProfileController(collectionViewLayout: profileLayout)
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-
-//        self.present(nav, animated: true, completion: nil)
-        
-        /*
-        do {
-            try Auth.auth().signOut()
-            let controller = LoginController()
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
-        } catch {
-            print("DEBUG: Failed to sign out")
-        }
-         */
      }
     
     // MARK: Lifecycle
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        
         backgroundColor = .white
         
         addSubview(profileImageView)
@@ -87,8 +82,4 @@ class SettingHeader: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: Helpers
-    
-    
 }

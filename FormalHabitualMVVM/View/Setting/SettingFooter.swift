@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SettingFooter: UITableViewHeaderFooterView {
     
@@ -29,20 +30,22 @@ class SettingFooter: UITableViewHeaderFooterView {
     
     @objc func tistoryOnSafari() {
         print("DEBUG: Tistory button did tap..")
-        /*
+        
         guard let url = URL(string: "https://ondevelop.tistory.com") else { return }
         let safariViewController = SFSafariViewController(url: url)
-        present(safariViewController, animated: true, completion: nil)
-        */
+        safariViewController.modalPresentationStyle = .fullScreen
+//        present(safariViewController, animated: true, completion: nil)
+        
     }
     
     @objc func githubOnSafari() {
         print("DEBUG: Github button did tap..")
-        /*
+        
         guard let url = URL(string: "https://github.com/DevelopRecord") else { return }
         let safariViewController = SFSafariViewController(url: url)
-        present(safariViewController, animated: true, completion: nil)
-        */
+        safariViewController.modalPresentationStyle = .fullScreen
+//        present(safariViewController, animated: true, completion: nil)
+        
     }
     
     // MARK: Lifecycle

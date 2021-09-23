@@ -71,6 +71,7 @@ class SettingController: UITableViewController {
         self.navigationItem.title = "환경설정"
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
+        
         tableView.separatorInset.right = 16
         tableView.delegate = self
         tableView.dataSource = self
@@ -210,7 +211,7 @@ extension SettingController {
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
         view.backgroundColor = .systemBackground
-        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 15, height: 40))
+        let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 100, height: 40))
         lbl.text = sections[section]
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
         view.addSubview(lbl)
