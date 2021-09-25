@@ -43,7 +43,7 @@
 		FB819AD426EDDF35002CFFB4 /* ProfileSettingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD326EDDF35002CFFB4 /* ProfileSettingHeader.swift */; };
 		FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */; };
 		FB819ADA26F093F0002CFFB4 /* SettingController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD926F093F0002CFFB4 /* SettingController2.swift */; };
-		FB819ADC26F5D587002CFFB4 /* SettingHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819ADB26F5D587002CFFB4 /* SettingHeaderViewModel.swift */; };
+		FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +87,7 @@
 		FB819AD326EDDF35002CFFB4 /* ProfileSettingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingHeader.swift; sourceTree = "<group>"; };
 		FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		FB819AD926F093F0002CFFB4 /* SettingController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController2.swift; sourceTree = "<group>"; };
-		FB819ADB26F5D587002CFFB4 /* SettingHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderViewModel.swift; sourceTree = "<group>"; };
+		FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +217,7 @@
 			children = (
 				FB7DEF7026E366C00042DA0F /* AuthentificationViewModel.swift */,
 				FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */,
-				FB819ADB26F5D587002CFFB4 /* SettingHeaderViewModel.swift */,
+				FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				FB819ACF26ECA856002CFFB4 /* User.swift in Sources */,
 				FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */,
 				FB819ABF26EB4B08002CFFB4 /* SettingCell.swift in Sources */,
-				FB819ADC26F5D587002CFFB4 /* SettingHeaderViewModel.swift in Sources */,
+				FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */,
 				FB819ACD26ECA806002CFFB4 /* Constants.swift in Sources */,
 				FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */,
 				FB7DEF6D26E217050042DA0F /* CustomButton.swift in Sources */,

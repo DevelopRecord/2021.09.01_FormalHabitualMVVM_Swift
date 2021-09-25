@@ -16,7 +16,9 @@ class SettingController: UITableViewController {
     
     // MARK: Properties
     
-    var viewModel: SettingHeaderViewModel? {
+    private var users = [User]()
+    
+    var viewModel: SettingViewModel? {
         didSet { configure() }
     }
     
@@ -50,8 +52,10 @@ class SettingController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureUI()
+        configureTableView()
+        
         fetchUser()
+        fetchUsers()
     }
     
     // MARK: API
@@ -64,9 +68,16 @@ class SettingController: UITableViewController {
         }
     }
     
+    func fetchUsers() {
+        UserService.fetchUsers { users in
+            self.users = users
+            self.tableView.reloadData()
+        }
+    }
+    
     // MARK: Helper
     
-    func configureUI() {
+    func configureTableView() {
         view.backgroundColor = .white
         self.navigationItem.title = "환경설정"
         
@@ -136,8 +147,8 @@ class SettingController: UITableViewController {
     func configure() {
         guard let viewModel = viewModel else { return }
         
-        profileButton.setTitle(viewModel.fullname, for: .normal)
         profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        profileButton.setTitle(viewModel.fullname, for: .normal)
     }
     
     // MARK: Selectors

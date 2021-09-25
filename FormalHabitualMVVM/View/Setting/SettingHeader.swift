@@ -12,7 +12,7 @@ class SettingHeader: UITableViewHeaderFooterView {
     
     // MARK: Properties
     
-    var viewModel: SettingHeaderViewModel? {
+    var viewModel: SettingViewModel? {
         didSet { configure() }
     }
     
@@ -40,10 +40,11 @@ class SettingHeader: UITableViewHeaderFooterView {
     // MARK: API
     
     func fetchUser() {
+        guard let viewModel = viewModel else { return }
         UserService.fetchUser { user in
             self.user = user
             self.profileButton.setTitle(user.fullname, for: .normal)
-            self.profileImageView.sd_setImage(with: self.viewModel?.profileImageUrl)
+            self.profileImageView.sd_setImage(with: viewModel.profileImageUrl)
         }
     }
     

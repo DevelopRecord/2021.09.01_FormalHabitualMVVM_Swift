@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct SettingHeaderViewModel {
-    let user: User
+struct SettingViewModel {
+    private let user: User
     
     var fullname: String {
         return user.fullname
