@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BFE8594DC535CCE28348D73F /* Pods_FormalHabitualMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */; };
+		FB7779D02703007600246111 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7779CF2703007600246111 /* HomeCell.swift */; };
 		FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */; };
 		FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */; };
 		FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3B26DF5CD20042DA0F /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		3EBB5D550D4AE3461EDDCF43 /* Pods-FormalHabitualMVVM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.release.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.release.xcconfig"; sourceTree = "<group>"; };
 		DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.debug.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormalHabitualMVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB7779CF2703007600246111 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		FB7DEF3426DF5CD10042DA0F /* FormalHabitualMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormalHabitualMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				FB7DEF6426DF6BDE0042DA0F /* TableCell.swift */,
 				FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */,
 				FB7DEF6C26E217050042DA0F /* CustomButton.swift */,
+				FB7779CF2703007600246111 /* HomeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */,
 				FB819AC126EB4B0E002CFFB4 /* SettingHeader.swift in Sources */,
 				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,
+				FB7779D02703007600246111 /* HomeCell.swift in Sources */,
 				FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */,
 				FB819AD226EDDF2E002CFFB4 /* ProfileSettingCell.swift in Sources */,
 				FB7DEF7B26E633710042DA0F /* ImageUploader.swift in Sources */,

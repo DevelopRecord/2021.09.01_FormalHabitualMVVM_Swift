@@ -51,7 +51,8 @@ class MainTabController: UITabBarController {
     func configureViewControllers() {
         view.backgroundColor = .white
         
-        let home = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedHome"), selectedImage: #imageLiteral(resourceName: "selectedHome"), rootViewController: HomeController())
+        let layout = UICollectionViewFlowLayout()
+        let home = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedHome"), selectedImage: #imageLiteral(resourceName: "selectedHome"), rootViewController: HomeController(collectionViewLayout: layout))
         
         let chart = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedChart"), selectedImage: #imageLiteral(resourceName: "selectedChart"), rootViewController: ChartController())
         
