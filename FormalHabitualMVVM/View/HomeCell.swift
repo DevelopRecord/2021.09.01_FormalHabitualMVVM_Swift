@@ -10,9 +10,7 @@ import Firebase
 
 class HomeCell: UICollectionViewCell {
     
-    
     // MARK: Properties
-    
     
     private let listBtn: UIButton = {
         let button = UIButton(type: .system)
@@ -27,8 +25,6 @@ class HomeCell: UICollectionViewCell {
     
     // MARK: Actions
     
-    
-    
     @objc func handleListButton() {
         print("DEBUG: Handled list button..")
     }
@@ -39,7 +35,7 @@ class HomeCell: UICollectionViewCell {
         super.init(frame: frame)
         
         addSubview(listBtn)
-        listBtn.anchor(top: topAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20)
+        listBtn.anchor(top: topAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
         listBtn.centerX(inView: contentView)
         listBtn.setDimensions(height: 75, width: frame.width - 40)
 

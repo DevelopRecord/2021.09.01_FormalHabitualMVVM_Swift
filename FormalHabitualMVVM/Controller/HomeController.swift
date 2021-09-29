@@ -23,6 +23,15 @@ class HomeController: UICollectionViewController {
         return timeLabel
     }()
     
+    private let addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "plus_routine"), for: .normal)
+        button.tintColor = .lightGray
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -78,8 +87,15 @@ class HomeController: UICollectionViewController {
         
         
         collectionView.addSubview(currentTimeLabel)
-        currentTimeLabel.anchor(left: collectionView.safeAreaLayoutGuide.leftAnchor, paddingTop: 12, paddingLeft: 12)
-        currentTimeLabel.centerX(inView: collectionView)
+        currentTimeLabel.anchor(top: collectionView.topAnchor, left: collectionView.leftAnchor,
+                                paddingTop: 12, paddingLeft: 12)
+        
+        collectionView.addSubview(addButton)
+        addButton.setDimensions(height: 55, width: 55)
+        addButton.anchor(bottom: collectionView.safeAreaLayoutGuide.bottomAnchor,
+                         right: collectionView.safeAreaLayoutGuide.rightAnchor,
+                         paddingBottom: 20, paddingRight: 20)
+        
     }
 }
 
