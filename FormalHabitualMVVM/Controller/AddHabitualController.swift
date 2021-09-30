@@ -10,22 +10,33 @@ import UIKit
 class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     // MARK: Properties
+    
     private let newHabitual: UILabel = {
         let label = UILabel()
         label.text = "New Habitual"
-        label.font = UIFont.systemFont(ofSize: 28, weight: UIFont.Weight.bold)
+        label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
     }()
     
-    lazy var titleTextField: UITextField = {
-        let tf = UITextField()
-        tf.placeholder = "새로운 습관의 이름을 작성해 보세요"
-        tf.layer.borderWidth = 1
-        tf.layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
-        tf.textAlignment = .center
-        tf.setHeight(90)
-        tf.setWidth(view.frame.width - 50)
-        return tf
+    private lazy var titleTextView: InputTextView = {
+        let tv = InputTextView()
+        tv.placeholderText = "새로운 습관의 이름을 작성해 보세요"
+        tv.font = UIFont.systemFont(ofSize: 16)
+        tv.textAlignment = .center
+        tv.layer.borderWidth = 1
+        tv.layer.borderColor = UIColor.lightGray.cgColor
+        tv.layer.cornerRadius = 20
+        tv.setDimensions(height: 90, width: view.frame.width - 50)
+        tv.delegate = self
+        return tv
+    }()
+    
+    private let characterCountLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightGray
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.text = "0/50"
+        return label
     }()
     
     private let sundayButton: UIButton = {
@@ -87,13 +98,13 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     private let notificationLabel: UILabel = {
         let label = UILabel()
         label.text = "Notifications"
-        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
     lazy var onOffButton: UIButton = {
         let button = CustomActionSheetButton()
-        button.setTitle("ON", for: UIControl.State.normal)
+        button.setTitle("ON", for: .normal)
         button.setWidth(view.frame.width - 50)
         button.addTarget(self, action: #selector(onOffButtonTapped), for: UIControl.Event.touchUpInside)
         return button
@@ -101,7 +112,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     lazy var timeButton: UIButton = {
         let button = CustomActionSheetButton()
-        button.setTitle("시간", for: UIControl.State.normal)
+        button.setTitle("시간", for: .normal)
         button.setWidth(view.frame.width - 50)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(timeButtonTapped), for: UIControl.Event.touchUpInside)
@@ -111,7 +122,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     private let notiSoundLabel: UILabel = {
         let label = UILabel()
         label.text = "Notification Sound"
-        label.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -120,20 +131,19 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.setTitle("알림음", for: UIControl.State.normal)
         button.setWidth(view.frame.width - 50)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
-        button.addTarget(self, action: #selector(frequencyButtonTapped), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(frequencyButtonTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("CANCEL", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.borderColor = UIColor.systemGray.cgColor
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.systemGray.cgColor
-        button.setTitleColor(.black, for: .normal)
-        button.setHeight(50)
-        button.setWidth(180)
-        button.addTarget(self, action: #selector(cancelButtonTapped), for: UIControl.Event.touchUpInside)
+        button.setDimensions(height: 50, width: 180)
+        button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -146,11 +156,12 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.setTitleColor(.black, for: .normal)
         button.setHeight(50)
         button.setWidth(180)
-        button.addTarget(self, action: #selector(confirmButtonTapped), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
     
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -160,12 +171,22 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
     
     // MARK: Helper
+    
+    func checkMaxLength(_ textView: UITextView) {
+        if textView.text.count > 50 {
+            textView.deleteBackward()
+        }
+    }
+    
     func configureUI() {
         view.backgroundColor = .systemBackground
         
-        let topStack = UIStackView(arrangedSubviews: [newHabitual, titleTextField])
+        let topStack = UIStackView(arrangedSubviews: [newHabitual, titleTextView, characterCountLabel])
         topStack.axis = .vertical
         topStack.spacing = 10
+        
+        let countStack = UIStackView(arrangedSubviews: [characterCountLabel])
+        countStack.axis = .horizontal
         
         let dayStack = UIStackView(arrangedSubviews: [sundayButton, mondayButton, thuesdayButton,
                                                     wednesdayButton, thursdayButton,fridayButton, saturdayButton])
@@ -184,7 +205,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         btnStack.axis = .horizontal
         btnStack.spacing = 7
         
-        let wholeStack = UIStackView(arrangedSubviews: [topStack, dayStack, notificationStack, notiSoundStack])
+        let wholeStack = UIStackView(arrangedSubviews: [topStack, countStack, dayStack, notificationStack, notiSoundStack])
         wholeStack.axis = .vertical
         wholeStack.spacing = 20
         
@@ -198,12 +219,13 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
     
     // MARK: Actions
+    
     @objc func cancelButtonTapped() {
         self.dismiss(animated: true, completion: nil)
     }
     
     @objc func confirmButtonTapped() {
-        guard let memo = titleTextField.text,
+        guard let memo = titleTextView.text,
             memo.count > 0 else {
             alert(message: "습관 이름을 입력해주세요.")
             return
@@ -353,4 +375,12 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
 }
 
+// MARK: UITextViewDelegate
 
+extension AddHabitualController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        checkMaxLength(textView)
+        let count = textView.text.count
+        characterCountLabel.text = "\(count)/50"
+    }
+}
