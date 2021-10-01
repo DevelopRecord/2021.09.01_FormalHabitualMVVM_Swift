@@ -36,10 +36,9 @@ class HomeController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
-        
-        configureUI()
     }
     
     // MARK: Actions

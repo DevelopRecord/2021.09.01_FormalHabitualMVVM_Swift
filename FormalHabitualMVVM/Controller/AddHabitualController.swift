@@ -5,6 +5,8 @@
 //  Created by LeeJaeHyeok on 2021/09/01.
 //
 
+// Habituals - title, timestamp, dayOfTheWeek, time, alertMusic, ownUid
+
 import UIKit
 
 class AddHabitualController: UIViewController, UIActionSheetDelegate {
@@ -20,7 +22,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     private lazy var titleTextView: InputTextView = {
         let tv = InputTextView()
-        tv.placeholderText = "새로운 습관의 이름을 작성해 보세요"
+        tv.placeholderText = "새로운 습관의 이름을 작성해 보세요\n ex) 운동, 공부, 물 마시기"
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.textAlignment = .center
         tv.layer.borderWidth = 1
@@ -225,13 +227,14 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
     
     @objc func confirmButtonTapped() {
-        guard let memo = titleTextView.text,
-            memo.count > 0 else {
+        guard let title = titleTextView.text,
+            title.count > 0 else {
             alert(message: "습관 이름을 입력해주세요.")
             return
         }
         print("DEBUG: 저장 완료! (테스트)")
         dismiss(animated: true, completion: nil)
+        
     }
     
     @objc func frequencyButtonTapped() {

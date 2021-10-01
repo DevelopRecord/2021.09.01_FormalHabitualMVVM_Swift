@@ -18,6 +18,8 @@ class InputTextView: UITextView {
     private let placeholderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
+        label.numberOfLines = 2
+        label.textAlignment = .center
         return label
     }()
     

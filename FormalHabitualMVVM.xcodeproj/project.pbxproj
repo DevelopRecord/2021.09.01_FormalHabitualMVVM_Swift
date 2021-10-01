@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BFE8594DC535CCE28348D73F /* Pods_FormalHabitualMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */; };
 		FB7779D02703007600246111 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7779CF2703007600246111 /* HomeCell.swift */; };
+		FB7DDCFB2705A47400D95AEA /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDCFA2705A47400D95AEA /* InputTextView.swift */; };
+		FB7DDCFF2706F4D400D95AEA /* HabitualService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */; };
 		FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */; };
 		FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */; };
 		FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF3B26DF5CD20042DA0F /* ViewController.swift */; };
@@ -52,6 +54,8 @@
 		DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.debug.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormalHabitualMVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7779CF2703007600246111 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		FB7DDCFA2705A47400D95AEA /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
+		FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitualService.swift; sourceTree = "<group>"; };
 		FB7DEF3426DF5CD10042DA0F /* FormalHabitualMVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FormalHabitualMVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB7DEF3726DF5CD10042DA0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FB7DEF3926DF5CD20042DA0F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				FB7DEF6626DF6E410042DA0F /* Extensions.swift */,
 				FB819ACC26ECA806002CFFB4 /* Constants.swift */,
+				FB7DDCFA2705A47400D95AEA /* InputTextView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 				FB7DEF7A26E633710042DA0F /* ImageUploader.swift */,
 				FB7DEF7C26E6337A0042DA0F /* AuthService.swift */,
 				FB819ACA26ECA7BE002CFFB4 /* UserService.swift */,
+				FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -385,6 +391,8 @@
 				FB7DEF6326DF6A050042DA0F /* RegistrationController.swift in Sources */,
 				FB819AC326EB4B13002CFFB4 /* SettingFooter.swift in Sources */,
 				FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */,
+				FB7DDCFF2706F4D400D95AEA /* HabitualService.swift in Sources */,
+				FB7DDCFB2705A47400D95AEA /* InputTextView.swift in Sources */,
 				FB819ADA26F093F0002CFFB4 /* SettingController2.swift in Sources */,
 				FB819ACF26ECA856002CFFB4 /* User.swift in Sources */,
 				FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */,
