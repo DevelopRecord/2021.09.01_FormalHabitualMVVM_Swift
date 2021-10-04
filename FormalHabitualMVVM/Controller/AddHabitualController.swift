@@ -13,6 +13,17 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     // MARK: Properties
     
+    var selectedImage: UIImage? {
+        didSet { photoImageView.image = selectedImage }
+    }
+    
+    private let photoImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
+        return iv
+    }()
+    
     private let newHabitual: UILabel = {
         let label = UILabel()
         label.text = "New Habitual"
@@ -116,7 +127,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let button = CustomActionSheetButton()
         button.setTitle("시간", for: .normal)
         button.setWidth(view.frame.width - 50)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
+//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(timeButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
@@ -132,7 +143,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let button = CustomActionSheetButton()
         button.setTitle("알림음", for: UIControl.State.normal)
         button.setWidth(view.frame.width - 50)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
+//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(frequencyButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -227,6 +238,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
     
     @objc func confirmButtonTapped() {
+        /*
         guard let title = titleTextView.text,
             title.count > 0 else {
             alert(message: "습관 이름을 입력해주세요.")
@@ -234,6 +246,19 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         }
         print("DEBUG: 저장 완료! (테스트)")
         dismiss(animated: true, completion: nil)
+        */
+        
+        
+        guard let title = titleTextView.text else { return }
+        
+        HabitualService.uploadHabitual(title: title) { error in
+            if let error = error {
+                print("DEBUG: Failed to upload Habitual with error..\(error.localizedDescription)")
+                return
+            }
+            
+            self.dismiss(animated: true, completion: nil)
+        }
         
     }
     
@@ -284,7 +309,9 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         datePicker.centerXAnchor.constraint(equalTo: alert.view.centerXAnchor).isActive = true
         datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40).isActive = true
         datePicker.widthAnchor.constraint(equalToConstant: alert.view.frame.width - 10).isActive = true
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {alertAction in
+                                      self.timeButton.setTitle(datestr, for: .normal)}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         // actionSheet Constraint
