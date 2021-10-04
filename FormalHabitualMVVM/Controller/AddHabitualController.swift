@@ -248,10 +248,12 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         dismiss(animated: true, completion: nil)
         */
         
-        
         guard let title = titleTextView.text else { return }
+        showLoader(true)
         
         HabitualService.uploadHabitual(title: title) { error in
+            self.showLoader(false)
+            
             if let error = error {
                 print("DEBUG: Failed to upload Habitual with error..\(error.localizedDescription)")
                 return
