@@ -123,11 +123,10 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         return button
     }()
     
-    lazy var timeButton: UIButton = {
+    private lazy var timeButton: UIButton = {
         let button = CustomActionSheetButton()
         button.setTitle("시간", for: .normal)
         button.setWidth(view.frame.width - 50)
-//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(timeButtonTapped), for: UIControl.Event.touchUpInside)
         return button
     }()
@@ -143,7 +142,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let button = CustomActionSheetButton()
         button.setTitle("알림음", for: UIControl.State.normal)
         button.setWidth(view.frame.width - 50)
-//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -280, bottom: 0, right: 0)
         button.addTarget(self, action: #selector(frequencyButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -300,10 +298,12 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let datestr = "00:00"
         let dateform = DateFormatter()
         dateform.dateFormat = "HH:mm"
+        
         let datetime = dateform.date(from: datestr)
         if let unwrappedDate = datetime {
             datePicker.setDate(unwrappedDate, animated: true)
         }
+        
         
         let alert = UIAlertController(title: "Pick a time", message: nil, preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
@@ -312,8 +312,8 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40).isActive = true
         datePicker.widthAnchor.constraint(equalToConstant: alert.view.frame.width - 10).isActive = true
         
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: {alertAction in
-                                      self.timeButton.setTitle(datestr, for: .normal)}))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { alertAction in
+                                        self.timeButton.setTitle(dateform.string(from: datePicker.date), for: .normal)}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         // actionSheet Constraint
