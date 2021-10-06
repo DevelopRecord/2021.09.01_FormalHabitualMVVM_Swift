@@ -12,13 +12,13 @@ import Firebase
 
 struct HabitualService {
     
-    static func uploadHabitual(title: String, completion: @escaping(FirestoreCompletion)) {
+    static func uploadHabitual(title: String, selectedTime: String, completion: @escaping(FirestoreCompletion)) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
 //        ImageUploader.uploadImage(image: image) { imageUrl in
             let data = ["title": title,
                         "timestamp": Timestamp(date: Date()),
-                        
+                        "selectedTime": selectedTime,
                         "OwnerUid": uid]
                         as [String : Any]
             

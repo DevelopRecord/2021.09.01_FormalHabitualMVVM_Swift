@@ -235,7 +235,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func confirmButtonTapped() {
+    @objc func confirmButtonTapped(_ sender: UIButton) {
         /*
         guard let title = titleTextView.text,
             title.count > 0 else {
@@ -247,9 +247,10 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         */
         
         guard let title = titleTextView.text else { return }
+        guard let selectedTime = timeButton.titleLabel?.text else { return }
         showLoader(true)
         
-        HabitualService.uploadHabitual(title: title) { error in
+        HabitualService.uploadHabitual(title: title, selectedTime: selectedTime) { error in
             self.showLoader(false)
             
             if let error = error {
@@ -304,7 +305,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
             datePicker.setDate(unwrappedDate, animated: true)
         }
         
-        
         let alert = UIAlertController(title: "Pick a time", message: nil, preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -312,8 +312,10 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         datePicker.topAnchor.constraint(equalTo: alert.view.topAnchor, constant: 40).isActive = true
         datePicker.widthAnchor.constraint(equalToConstant: alert.view.frame.width - 10).isActive = true
         
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { alertAction in
-                                        self.timeButton.setTitle(dateform.string(from: datePicker.date), for: .normal)}))
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default,
+                                      handler: { alertAction in
+                                        self.timeButton.setTitle("\(dateform.string(from: datePicker.date))",
+                                                                 for: .normal)}))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         // actionSheet Constraint
