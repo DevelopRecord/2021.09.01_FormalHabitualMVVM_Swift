@@ -8,10 +8,16 @@
 // Habituals - title, timestamp, dayOfTheWeek, time, alertMusic, ownUid
 
 import UIKit
-
+/*
+protocol AddHabitualControllerDelegate: AnyObject {
+    func controllerDidFinishUploadingHabitual(_ controller: AddHabitualController)
+}
+*/
 class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     // MARK: Properties
+    
+//    weak var delegate: AddHabitualControllerDelegate?
     
     var selectedImage: UIImage? {
         didSet { photoImageView.image = selectedImage }

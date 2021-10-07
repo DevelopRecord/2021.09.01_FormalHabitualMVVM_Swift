@@ -25,4 +25,14 @@ struct HabitualService {
             COLLECTION_HABITUAL.addDocument(data: data, completion: completion)
 //        }
     }
+    
+    static func fetchHabituals() {
+        COLLECTION_HABITUAL.getDocuments { snapshot, error in
+            guard let documents = snapshot?.documents else { return }
+            
+            documents.forEach { doc in
+                print("DEBUG: Doc data is \(doc.data())")
+            }
+        }
+    }
 }

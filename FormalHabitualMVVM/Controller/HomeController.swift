@@ -37,8 +37,15 @@ class HomeController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        fetchHabituals()
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
+    }
+    
+    // MARK: API
+    
+    func fetchHabituals() {
+        HabitualService.fetchHabituals()
     }
     
     // MARK: Actions
