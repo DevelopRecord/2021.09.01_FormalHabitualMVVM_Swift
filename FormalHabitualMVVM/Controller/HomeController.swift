@@ -18,6 +18,8 @@ class HomeController: UICollectionViewController {
     
     // MARK: Properties
     
+    private var habituals = [Habitual]()
+    
     private let currentTimeLabel: UILabel = {
         let timeLabel = UILabel()
         return timeLabel
@@ -45,7 +47,10 @@ class HomeController: UICollectionViewController {
     // MARK: API
     
     func fetchHabituals() {
-        HabitualService.fetchHabituals()
+        HabitualService.fetchHabituals { habituals in
+            self.habituals = habituals
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: Actions
@@ -109,7 +114,7 @@ class HomeController: UICollectionViewController {
 
 extension HomeController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return habituals.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

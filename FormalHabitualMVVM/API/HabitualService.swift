@@ -26,13 +26,12 @@ struct HabitualService {
 //        }
     }
     
-    static func fetchHabituals() {
+    static func fetchHabituals(completion: @escaping([Habitual]) -> Void) {
         COLLECTION_HABITUAL.getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else { return }
             
-            documents.forEach { doc in
-                print("DEBUG: Doc data is \(doc.data())")
-            }
+            let habitual = documents.map({ Habitual(habitualId: $0.documentID, dictionary: $0.data()) })
+            completion(habitual)
         }
     }
 }
