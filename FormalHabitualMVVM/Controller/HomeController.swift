@@ -119,6 +119,7 @@ extension HomeController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! HomeCell
+        cell.viewModel = HabitualViewModel(habitual: habituals[indexPath.row])
         return cell
     }
     

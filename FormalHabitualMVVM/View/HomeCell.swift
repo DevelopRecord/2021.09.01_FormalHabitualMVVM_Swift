@@ -12,11 +12,16 @@ class HomeCell: UICollectionViewCell {
     
     // MARK: Properties
     
+    var viewModel: HabitualViewModel? {
+        didSet{ configure() }
+    }
+    
     private let listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray3
-        button.setTitle("제목입니다\n시간입니다", for: .normal)
+        button.setImage(#imageLiteral(resourceName: "selectedTime"), for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.tintColor = .white
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 20
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -45,5 +50,12 @@ class HomeCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Helpers
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        listBtn.setTitle("\(viewModel.title)\n\(viewModel.selectedTime)", for: .normal)
     }
 }
