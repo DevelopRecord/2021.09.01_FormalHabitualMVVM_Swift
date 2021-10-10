@@ -41,7 +41,8 @@ class HomeController: UICollectionViewController {
         configureUI()
         fetchHabituals()
         
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector,
+                             userInfo: nil, repeats: true)
     }
     
     // MARK: API
@@ -49,11 +50,17 @@ class HomeController: UICollectionViewController {
     func fetchHabituals() {
         HabitualService.fetchHabituals { habituals in
             self.habituals = habituals
+            self.collectionView.refreshControl?.endRefreshing()
             self.collectionView.reloadData()
         }
     }
     
     // MARK: Actions
+    
+    @objc func handleRefresh() {
+        habituals.removeAll()
+        fetchHabituals()
+    }
     
     @objc func handleLogout() {
         do {
@@ -95,7 +102,9 @@ class HomeController: UICollectionViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleLogout))
-        
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refresher
         
         collectionView.addSubview(currentTimeLabel)
         currentTimeLabel.anchor(top: collectionView.topAnchor, left: collectionView.leftAnchor,
@@ -106,7 +115,6 @@ class HomeController: UICollectionViewController {
         addButton.anchor(bottom: collectionView.safeAreaLayoutGuide.bottomAnchor,
                          right: collectionView.safeAreaLayoutGuide.rightAnchor,
                          paddingBottom: 20, paddingRight: 20)
-        
     }
 }
 

@@ -16,7 +16,14 @@ class HomeCell: UICollectionViewCell {
         didSet{ configure() }
     }
     
-    private let listBtn: UIButton = {
+    private let notExistLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .lightGray
+        return label
+    }()
+    
+    private lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray3
         button.setImage(#imageLiteral(resourceName: "selectedTime"), for: .normal)
@@ -25,16 +32,11 @@ class HomeCell: UICollectionViewCell {
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 20
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
         button.layer.borderColor = UIColor.systemGray5.cgColor
-        button.addTarget(self, action: #selector(handleListButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapRoutineButton), for: .touchUpInside)
         return button
     }()
-    
-    // MARK: Actions
-    
-    @objc func handleListButton() {
-        print("DEBUG: Handled list button..")
-    }
     
     // MARK: Lifecycle
     
@@ -45,11 +47,16 @@ class HomeCell: UICollectionViewCell {
         listBtn.anchor(top: topAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
         listBtn.centerX(inView: contentView)
         listBtn.setDimensions(height: 75, width: frame.width - 40)
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: Actions
+    
+    @objc func didTapRoutineButton() {
+        print("DEBUG: Did tap RoutineButton..")
     }
     
     // MARK: Helpers
