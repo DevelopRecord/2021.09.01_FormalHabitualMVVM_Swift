@@ -8,20 +8,20 @@
 // Habituals - title, timestamp, dayOfTheWeek, time, alertMusic, ownUid
 
 import UIKit
-/*
+
 protocol AddHabitualControllerDelegate: AnyObject {
     func controllerDidFinishUploadingHabitual(_ controller: AddHabitualController)
 }
-*/
+
 class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
-    // MARK: Properties
-    
-//    weak var delegate: AddHabitualControllerDelegate?
+    weak var delegate: AddHabitualControllerDelegate?
     
     var selectedImage: UIImage? {
         didSet { photoImageView.image = selectedImage }
     }
+    
+    // MARK: Properties
     
     private let photoImageView: UIImageView = {
         let iv = UIImageView()
@@ -242,16 +242,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     }
     
     @objc func confirmButtonTapped(_ sender: UIButton) {
-        /*
-        guard let title = titleTextView.text,
-            title.count > 0 else {
-            alert(message: "습관 이름을 입력해주세요.")
-            return
-        }
-        print("DEBUG: 저장 완료! (테스트)")
-        dismiss(animated: true, completion: nil)
-        */
-        
         guard let title = titleTextView.text else { return }
         guard let selectedTime = timeButton.titleLabel?.text else { return }
         showLoader(true)
@@ -265,8 +255,20 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
             }
             
             self.dismiss(animated: true, completion: nil)
+            self.delegate?.controllerDidFinishUploadingHabitual(self)
+            
+            
         }
         
+        /*
+        guard let title = titleTextView.text,
+            title.count > 0 else {
+            alert(message: "습관 이름을 입력해주세요.")
+            return
+        }
+        print("DEBUG: 저장 완료! (테스트)")
+        dismiss(animated: true, completion: nil)
+        */
     }
     
     @objc func frequencyButtonTapped() {

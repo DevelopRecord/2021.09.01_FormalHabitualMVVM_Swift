@@ -26,13 +26,13 @@ class HomeCell: UICollectionViewCell {
     private lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray3
-        button.setImage(#imageLiteral(resourceName: "selectedTime"), for: .normal)
+//        button.setImage(#imageLiteral(resourceName: "selectedTime"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.tintColor = .white
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 20
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         button.layer.borderColor = UIColor.systemGray5.cgColor
         button.addTarget(self, action: #selector(didTapRoutineButton), for: .touchUpInside)
         return button

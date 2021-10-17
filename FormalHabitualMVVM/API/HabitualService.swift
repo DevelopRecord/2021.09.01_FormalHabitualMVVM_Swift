@@ -12,7 +12,8 @@ import Firebase
 
 struct HabitualService {
     
-    static func uploadHabitual(title: String, selectedTime: String, completion: @escaping(FirestoreCompletion)) {
+    static func uploadHabitual(title: String, selectedTime: String,
+                               completion: @escaping(FirestoreCompletion)) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
 //        ImageUploader.uploadImage(image: image) { imageUrl in
@@ -27,7 +28,7 @@ struct HabitualService {
     }
     
     static func fetchHabituals(completion: @escaping([Habitual]) -> Void) {
-        COLLECTION_HABITUAL.getDocuments { snapshot, error in
+        COLLECTION_HABITUAL.order(by: "timestamp", descending: true).getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else { return }
             
             let habitual = documents.map({ Habitual(habitualId: $0.documentID, dictionary: $0.data()) })

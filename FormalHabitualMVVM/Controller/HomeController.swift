@@ -45,16 +45,6 @@ class HomeController: UICollectionViewController {
                              userInfo: nil, repeats: true)
     }
     
-    // MARK: API
-    
-    func fetchHabituals() {
-        HabitualService.fetchHabituals { habituals in
-            self.habituals = habituals
-            self.collectionView.refreshControl?.endRefreshing()
-            self.collectionView.reloadData()
-        }
-    }
-    
     // MARK: Actions
     
     @objc func handleRefresh() {
@@ -89,6 +79,16 @@ class HomeController: UICollectionViewController {
         formatter.pmSymbol = "pm"
         formatter.locale = Locale(identifier: "ko_kr")
         currentTimeLabel.text = formatter.string(from: date as Date)
+    }
+    
+    // MARK: API
+    
+    func fetchHabituals() {
+        HabitualService.fetchHabituals { habituals in
+            self.habituals = habituals
+            self.collectionView.refreshControl?.endRefreshing()
+            self.collectionView.reloadData()
+        }
     }
     
     // MARK: Helpers
