@@ -15,7 +15,9 @@ class ProfileController: UICollectionViewController {
     
     // MARK: Properties
     
-    var user: User? {
+    private var habituals = [Habitual]()
+    
+    private var user: User? {
         didSet { collectionView.reloadData() }
     }
     
@@ -38,7 +40,7 @@ class ProfileController: UICollectionViewController {
         
     }
     
-    // MARK: Helpers
+    // MARK: API
     
     func fetchUser() {
         UserService.fetchUser { user in
@@ -46,6 +48,8 @@ class ProfileController: UICollectionViewController {
             self.navigationItem.title = "프로필"
         }
     }
+    
+    // MARK: Helpers
     
     func configureCollectionView() {
         collectionView.backgroundColor = .white
@@ -87,7 +91,7 @@ class ProfileController: UICollectionViewController {
 
 extension ProfileController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return habituals.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

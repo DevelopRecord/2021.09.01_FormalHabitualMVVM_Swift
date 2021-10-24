@@ -47,7 +47,6 @@
 		FB819AD226EDDF2E002CFFB4 /* ProfileSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD126EDDF2E002CFFB4 /* ProfileSettingCell.swift */; };
 		FB819AD426EDDF35002CFFB4 /* ProfileSettingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD326EDDF35002CFFB4 /* ProfileSettingHeader.swift */; };
 		FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */; };
-		FB819ADA26F093F0002CFFB4 /* SettingController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD926F093F0002CFFB4 /* SettingController2.swift */; };
 		FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,7 +95,6 @@
 		FB819AD126EDDF2E002CFFB4 /* ProfileSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingCell.swift; sourceTree = "<group>"; };
 		FB819AD326EDDF35002CFFB4 /* ProfileSettingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingHeader.swift; sourceTree = "<group>"; };
 		FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
-		FB819AD926F093F0002CFFB4 /* SettingController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController2.swift; sourceTree = "<group>"; };
 		FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,7 +175,6 @@
 				FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */,
 				FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */,
 				FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */,
-				FB819AD926F093F0002CFFB4 /* SettingController2.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -399,7 +396,6 @@
 				FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */,
 				FB7DDCFF2706F4D400D95AEA /* HabitualService.swift in Sources */,
 				FB7DDCFB2705A47400D95AEA /* InputTextView.swift in Sources */,
-				FB819ADA26F093F0002CFFB4 /* SettingController2.swift in Sources */,
 				FB819ACF26ECA856002CFFB4 /* User.swift in Sources */,
 				FB7DEF3C26DF5CD20042DA0F /* ViewController.swift in Sources */,
 				FB819ABF26EB4B08002CFFB4 /* SettingCell.swift in Sources */,

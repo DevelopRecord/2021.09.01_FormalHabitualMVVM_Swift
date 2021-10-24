@@ -237,13 +237,10 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     // MARK: Actions
     
-    @objc func cancelButtonTapped() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @objc func confirmButtonTapped(_ sender: UIButton) {
         guard let title = titleTextView.text else { return }
         guard let selectedTime = timeButton.titleLabel?.text else { return }
+        
         showLoader(true)
         
         HabitualService.uploadHabitual(title: title, selectedTime: selectedTime) { error in
@@ -253,11 +250,8 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
                 print("DEBUG: Failed to upload Habitual with error..\(error.localizedDescription)")
                 return
             }
-            
-            self.dismiss(animated: true, completion: nil)
             self.delegate?.controllerDidFinishUploadingHabitual(self)
-            
-            
+            self.dismiss(animated: true, completion: nil)
         }
         
         /*
@@ -269,6 +263,10 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         print("DEBUG: 저장 완료! (테스트)")
         dismiss(animated: true, completion: nil)
         */
+    }
+    
+    @objc func cancelButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func frequencyButtonTapped() {

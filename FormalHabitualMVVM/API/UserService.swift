@@ -27,4 +27,11 @@ struct UserService {
             completion(users)
         }
     }
+    
+    static func fetchUserStats(uid: String, completion: @escaping(UserStats) -> Void) {
+        COLLECTION_HABITUAL.whereField("ownerUid", isEqualTo: uid).getDocuments { snapshot, _ in
+            let habituals = snapshot?.documents.count ?? 0
+            completion(UserStats(habituals: habituals))
+        }
+    }
 }

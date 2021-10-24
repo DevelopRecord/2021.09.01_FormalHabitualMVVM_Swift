@@ -35,4 +35,15 @@ struct HabitualService {
             completion(habitual)
         }
     }
+    
+    static func fetchHabituals(forUser uid: String, completion: @escaping([Habitual]) -> Void) {
+        let query = COLLECTION_HABITUAL.whereField("ownerUid", isEqualTo: uid)
+        
+        query.getDocuments { (snapshot, error) in
+            guard let documents = snapshot?.documents else { return }
+            
+            let habitual = documents.map({ Habitual(habitualId: $0.documentID, dictionary: $0.data()) })
+            completion(habitual)
+        }
+    }
 }

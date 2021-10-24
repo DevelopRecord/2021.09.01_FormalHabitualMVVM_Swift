@@ -24,6 +24,7 @@ class MainTabController: UITabBarController {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
         configureViewControllers()
+        
     }
     
     // MARK: API
@@ -71,7 +72,7 @@ class MainTabController: UITabBarController {
         return nav
     }
     
-    
+    /*
     func didFinishPickingMedia(_ picker: YPImagePicker) {
         picker.didFinishPicking { items, _ in
             picker.dismiss(animated: true) {
@@ -86,29 +87,27 @@ class MainTabController: UITabBarController {
             }
         }
     }
-    
+    */
 }
 
 // MARK: AuthentificationDelegate
 
 extension MainTabController: AuthentificationDelegate {
     func authentificationDidComplete() {
-        print("DEBUG: Auth did complete. Fetch user and update here..")
         fetchUser()
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: AddHabitualControllerDelegate
+
 extension MainTabController: AddHabitualControllerDelegate {
     func controllerDidFinishUploadingHabitual(_ controller: AddHabitualController) {
         selectedIndex = 0
         controller.dismiss(animated: true, completion: nil)
-        let layout = UICollectionViewFlowLayout()
-        let controller = HomeController(collectionViewLayout: layout)
         
         guard let homeNav = viewControllers?.first as? UINavigationController else { return }
         guard let home = homeNav.viewControllers.first as? HomeController else { return }
         home.handleRefresh()
-        controller.collectionView.reloadData()
     }
 }
