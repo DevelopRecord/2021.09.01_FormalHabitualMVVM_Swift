@@ -16,7 +16,7 @@ class ProfileController: UICollectionViewController {
     // MARK: Properties
     
     private var habituals = [Habitual]()
-    
+    private var users: User?
     private var user: User? {
         didSet { collectionView.reloadData() }
     }
@@ -27,6 +27,7 @@ class ProfileController: UICollectionViewController {
         super.viewDidLoad()
         configureCollectionView()
         fetchUser()
+        fetchHabituals()
         
         navigationController?.navigationBar.isHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
@@ -46,6 +47,14 @@ class ProfileController: UICollectionViewController {
         UserService.fetchUser { user in
             self.user = user
             self.navigationItem.title = "프로필"
+        }
+    }
+    
+    func fetchHabituals() {
+        guard let user = users else { return }
+        HabitualService.fetchHabituals(forUser: user.uid) { habituals in
+            self.habituals = habituals
+            self.collectionView.reloadData()
         }
     }
     
@@ -96,6 +105,7 @@ extension ProfileController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ProfileCell
+        
         return cell
     }
     

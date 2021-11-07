@@ -11,6 +11,10 @@ class ProfileCell: UICollectionViewCell {
     
     // MARK: Properties
     
+    var viewModel: HabitualViewModel? {
+        didSet { configure() }
+    }
+    
     private let myRoutineButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("My Routine 1", for: .normal)
@@ -37,5 +41,11 @@ class ProfileCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        myRoutineButton.setTitle(viewModel.title, for: .normal)
     }
 }

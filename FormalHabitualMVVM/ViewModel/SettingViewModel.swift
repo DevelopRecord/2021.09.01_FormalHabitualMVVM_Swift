@@ -8,15 +8,12 @@
 import Foundation
 
 struct SettingViewModel {
-    private let user: User
     
-    var fullname: String {
-        return user.fullname
-    }
+    let user: User
     
-    var profileImageUrl: URL? {
-        return URL(string: user.profileImageUrl)
-    }
+    var fullname: String { return user.fullname }
+    
+    var profileImageUrl: URL? { return URL(string: user.profileImageUrl) }
     
     init(user: User) {
         self.user = user

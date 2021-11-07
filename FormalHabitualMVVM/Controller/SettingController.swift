@@ -56,6 +56,7 @@ class SettingController: UITableViewController {
         
         fetchUser()
         fetchUsers()
+        
     }
     
     // MARK: API
@@ -154,12 +155,10 @@ class SettingController: UITableViewController {
     // MARK: Selectors
         
     @objc func handleProfile() {
-        let profileLayout = UICollectionViewFlowLayout()
-        let controller = ProfileController(collectionViewLayout: profileLayout)
+        let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
         self.present(nav, animated: true, completion: nil)
-        
         /*
         do {
             try Auth.auth().signOut()
