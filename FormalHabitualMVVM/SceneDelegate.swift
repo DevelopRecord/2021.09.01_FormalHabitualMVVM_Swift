@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    var viewModel: HabitualViewModel?
     
+    var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
@@ -34,8 +36,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                if settings.authorizationStatus == UNAuthorizationStatus.authorized {
+                    let nContents = UNMutableNotificationContent()
+                    nContents.title = "테스트"
+                    nContents.body = "테스트"
+                    nContents.sound = .default
+                    nContents.userInfo = ["name":"notiTest"]
+                    
+                    var date = DateComponents()
+                    date.hour = 18
+                    date.minute = 33
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+                    
+                    let request = UNNotificationRequest(identifier: "notiTest", content: nContents, trigger: trigger)
+                    UNUserNotificationCenter.current().add(request)
+                }
+            }
+        }
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
