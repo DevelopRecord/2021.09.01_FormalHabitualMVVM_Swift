@@ -20,13 +20,15 @@ class HomeCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .lightGray
+        
+        
+        
         return label
     }()
     
     private lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray3
-//        button.setImage(#imageLiteral(resourceName: "selectedTime"), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.tintColor = .white
         button.layer.borderWidth = 1
@@ -42,6 +44,7 @@ class HomeCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         
         addSubview(listBtn)
         listBtn.anchor(top: topAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)

@@ -18,7 +18,7 @@ class HomeController: UICollectionViewController {
     
     // MARK: Properties
     
-    private var habituals = [Habitual]()
+    var habituals = [Habitual]()
     
     private let currentTimeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -130,7 +130,16 @@ extension HomeController {
         cell.viewModel = HabitualViewModel(habitual: habituals[indexPath.row])
         return cell
     }
-    
+}
+
+// MARK: UICollectionViewDelegate
+
+extension HomeController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let controller = AddHabitualController()
+        controller.habitual = habituals[indexPath.row]
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }
 
 // MARK: UICollectionViewDelegateFlowLayout

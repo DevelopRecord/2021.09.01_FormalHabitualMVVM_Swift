@@ -63,7 +63,7 @@ class LoginController: UIViewController {
     private let forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.attributedTitle(firstPart: "Forgot your password?", secondPart: "Get help signing in.")
-        button.addTarget(self, action: #selector(handleShowForgotButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleShowResetPassword), for: .touchUpInside)
         return button
     }()
     
@@ -123,8 +123,9 @@ class LoginController: UIViewController {
         navigationController?.pushViewController(RegistrationVC, animated: true)
     }
     
-    @objc func handleShowForgotButton() {
-        print("DEBUG: Forgot button did tap")
+    @objc func handleShowResetPassword() {
+        let controller = ResetPasswordController()
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -143,9 +144,8 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(habitualLabel)
-        habitualLabel.translatesAutoresizingMaskIntoConstraints = false
-        habitualLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150).isActive = true
-        habitualLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        habitualLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 75)
+        habitualLabel.centerX(inView: view)
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton,  forgotPasswordButton, naverLoginButton, kakaoLoginButton])
         stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
@@ -153,7 +153,7 @@ class LoginController: UIViewController {
         
         view.addSubview(stack)
         stack.centerX(inView: view)
-        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
         view.addSubview(dontHaveAccountButton)
         dontHaveAccountButton.centerX(inView: view)

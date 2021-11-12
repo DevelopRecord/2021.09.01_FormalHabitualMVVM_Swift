@@ -42,8 +42,6 @@ struct HabitualService {
         query.getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else { return }
             
-            print("DEBUG: 도큐먼트 \(documents)")
-            
             let habitual = documents.map({ Habitual(habitualId: $0.documentID, dictionary: $0.data()) })
             completion(habitual)
         }

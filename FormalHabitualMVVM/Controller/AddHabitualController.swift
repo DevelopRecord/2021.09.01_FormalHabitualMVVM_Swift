@@ -15,6 +15,8 @@ protocol AddHabitualControllerDelegate: AnyObject {
 
 class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
+    var habitual: Habitual?
+    
     weak var delegate: AddHabitualControllerDelegate?
     
     var selectedImage: UIImage? {
