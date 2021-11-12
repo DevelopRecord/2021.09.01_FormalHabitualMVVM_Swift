@@ -13,6 +13,8 @@ class ResetPasswordController: UIViewController {
     
     private let emailTextField = CustomTextField(placeholder: "Email")
     
+    private var viewModel = ResetPasswordViewModel()
+    
     private let habitualLabel: UILabel = {
         let label = UILabel()
         label.text = "Habitual"
@@ -56,6 +58,13 @@ class ResetPasswordController: UIViewController {
         
     }
     
+    @objc func textDidChange(sender: UITextField) {
+        if sender == emailTextField {
+            viewModel.email = sender.text
+        }
+        updateForm()
+    }
+    
     @objc func handleDismissal() {
         navigationController?.popViewController(animated: true)
     }
@@ -64,6 +73,8 @@ class ResetPasswordController: UIViewController {
     
     func configureUI() {
         view.backgroundColor = .white
+        
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
         view.addSubview(backButton)
         backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
@@ -79,5 +90,13 @@ class ResetPasswordController: UIViewController {
         view.addSubview(stack)
         stack.centerX(inView: view)
         stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+    }
+}
+
+extension ResetPasswordController: FormViewModel {
+    func updateForm() {
+        resetPasswordButton.backgroundColor = viewModel.buttonBackgroundColor
+        resetPasswordButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
+        resetPasswordButton.isEnabled = viewModel.formValid
     }
 }
