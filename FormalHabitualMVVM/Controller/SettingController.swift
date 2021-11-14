@@ -53,10 +53,8 @@ class SettingController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
         fetchUser()
         fetchUsers()
-        
     }
     
     // MARK: API
@@ -65,7 +63,7 @@ class SettingController: UITableViewController {
         UserService.fetchUser { user in
             self.user = user
             self.profileButton.setTitle(user.fullname, for: .normal)
-            self.profileImageView.sd_setImage(with: self.viewModel?.profileImageUrl)
+            self.profileImageView.sd_setImage(with: URL(string: user.profileImageUrl))
         }
     }
     

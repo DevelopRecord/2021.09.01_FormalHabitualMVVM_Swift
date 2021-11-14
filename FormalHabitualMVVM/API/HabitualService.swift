@@ -16,7 +16,6 @@ struct HabitualService {
                                completion: @escaping(FirestoreCompletion)) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-//        ImageUploader.uploadImage(image: image) { imageUrl in
             let data = ["title": title,
                         "timestamp": Timestamp(date: Date()),
                         "selectedTime": selectedTime,
@@ -24,7 +23,6 @@ struct HabitualService {
                         as [String : Any]
             
             COLLECTION_HABITUAL.addDocument(data: data, completion: completion)
-//        }
     }
     
     static func fetchHabituals(completion: @escaping([Habitual]) -> Void) {
