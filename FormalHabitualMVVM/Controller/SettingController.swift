@@ -53,11 +53,26 @@ class SettingController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        
         fetchUser()
         fetchUsers()
+        
+    }
+    
+    // MARK: ViewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        fetchUser()
     }
     
     // MARK: API
+    
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
+        profileButton.setTitle(viewModel.fullname, for: .normal)
+    }
     
     func fetchUser() {
         UserService.fetchUser { user in
@@ -141,13 +156,6 @@ class SettingController: UITableViewController {
         
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
-    }
-    
-    func configure() {
-        guard let viewModel = viewModel else { return }
-        
-        profileImageView.sd_setImage(with: viewModel.profileImageUrl)
-        profileButton.setTitle(viewModel.fullname, for: .normal)
     }
     
     // MARK: Selectors
