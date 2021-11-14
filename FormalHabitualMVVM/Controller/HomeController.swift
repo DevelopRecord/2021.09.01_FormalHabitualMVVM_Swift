@@ -45,6 +45,13 @@ class HomeController: UICollectionViewController {
                              userInfo: nil, repeats: true)
     }
     
+    // MARK: ViewWillAppear
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+        fetchHabituals()
+    }
+    
     // MARK: Actions
     
     @objc func handleRefresh() {
@@ -115,6 +122,7 @@ class HomeController: UICollectionViewController {
         addButton.anchor(bottom: collectionView.safeAreaLayoutGuide.bottomAnchor,
                          right: collectionView.safeAreaLayoutGuide.rightAnchor,
                          paddingBottom: 20, paddingRight: 20)
+        
     }
 }
 

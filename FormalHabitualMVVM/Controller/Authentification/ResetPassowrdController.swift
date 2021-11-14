@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol ResetPasswordControllerDelegate: AnyObject {
+    func controllerDidSendPasswordResetLink(_ controller: ResetPasswordController)
+}
+
 class ResetPasswordController: UIViewController {
     
     // MARK: Properties
     
     private let emailTextField = CustomTextField(placeholder: "Email")
-    
     private var viewModel = ResetPasswordViewModel()
+    weak var delegate: ResetPasswordControllerDelegate?
+    var email: String?
     
     private let habitualLabel: UILabel = {
         let label = UILabel()
@@ -55,7 +60,18 @@ class ResetPasswordController: UIViewController {
     // MARK: Actions
     
     @objc func handleResetPassword() {
+        guard let email = emailTextField.text else { return }
         
+        self.showLoader(true)
+        AuthService.resetPassword(withEmail: email) { error in
+            if let error = error {
+                self.showMessage(withTitle: "Error", message: error.localizedDescription)
+                self.showLoader(false)
+                return
+            }
+            
+            self.delegate?.controllerDidSendPasswordResetLink(self)
+        }
     }
     
     @objc func textDidChange(sender: UITextField) {
@@ -70,10 +86,13 @@ class ResetPasswordController: UIViewController {
     }
     
     // MARK: Helpers
-    
+
     func configureUI() {
         view.backgroundColor = .white
         
+        emailTextField.text = email
+        viewModel.email = email
+        updateForm()
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
         view.addSubview(backButton)

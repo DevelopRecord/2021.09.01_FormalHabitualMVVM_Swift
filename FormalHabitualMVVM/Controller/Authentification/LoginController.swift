@@ -118,13 +118,15 @@ class LoginController: UIViewController {
     }
     
     @objc func handleShowSignUp() {
-        let RegistrationVC = RegistrationController()
-        RegistrationVC.delegate = delegate
-        navigationController?.pushViewController(RegistrationVC, animated: true)
+        let controller = RegistrationController()
+        controller.delegate = delegate
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func handleShowResetPassword() {
         let controller = ResetPasswordController()
+        controller.delegate = self
+        controller.email = emailTextField.text
         navigationController?.pushViewController(controller, animated: true)
     }
     
@@ -175,5 +177,14 @@ extension LoginController: FormViewModel {
         loginButton.backgroundColor = viewModel.buttonBackgroundColor
         loginButton.setTitleColor(viewModel.buttonTitleColor, for: .normal)
         loginButton.isEnabled = viewModel.formValid
+    }
+}
+
+// MARK: ResetPasswordControllerDelegate
+
+extension LoginController: ResetPasswordControllerDelegate {
+    func controllerDidSendPasswordResetLink(_ controller: ResetPasswordController) {
+        navigationController?.popViewController(animated: true)
+        showMessage(withTitle: "Success", message: "회원님의 이메일로 링크를 보냈습니다. 확인해 주세요.")
     }
 }
