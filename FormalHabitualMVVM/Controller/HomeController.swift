@@ -138,6 +138,8 @@ extension HomeController {
         cell.viewModel = HabitualViewModel(habitual: habituals[indexPath.row])
         return cell
     }
+    
+    
 }
 
 // MARK: UICollectionViewDelegate

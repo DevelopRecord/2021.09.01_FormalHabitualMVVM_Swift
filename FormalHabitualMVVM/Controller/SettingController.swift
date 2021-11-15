@@ -11,6 +11,7 @@ import SafariServices
 import SDWebImage
 
 private let reusableIdentifier = "cell"
+private let settingHeader = "settingHeader"
 
 class SettingController: UITableViewController {
     
@@ -53,10 +54,8 @@ class SettingController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        
         fetchUser()
         fetchUsers()
-        
     }
     
     // MARK: ViewWillAppear
@@ -96,6 +95,7 @@ class SettingController: UITableViewController {
         self.navigationItem.title = "환경설정"
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
+        tableView.register(SettingHeader.self, forHeaderFooterViewReuseIdentifier: settingHeader)
         
         tableView.separatorInset.right = 16
         tableView.delegate = self
@@ -209,7 +209,7 @@ extension SettingController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -234,11 +234,13 @@ extension SettingController {
         return view
     }
     
+    
+
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reusableIdentifier, for: indexPath) as! TableCell // 타입 변환을 TableCell이라고 명시해야 합니다.
-        
         cell.accessoryType = .disclosureIndicator
-        
+
         if indexPath.section == 0 {
             cell.textLabel?.text = "\(settingItems[indexPath.row])"
         } else if indexPath.section == 1 {

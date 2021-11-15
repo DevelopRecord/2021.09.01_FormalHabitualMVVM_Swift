@@ -42,7 +42,6 @@ class HomeCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
         addSubview(listBtn)
         listBtn.anchor(top: topAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
         listBtn.centerX(inView: contentView)
