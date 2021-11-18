@@ -49,6 +49,7 @@
 		FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */; };
 		FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */; };
 		FB82D19B273E6CF0004AA1BD /* ResetPassowrdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82D19A273E6CF0004AA1BD /* ResetPassowrdController.swift */; };
+		FB82D19D27465435004AA1BD /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82D19C27465435004AA1BD /* ChartCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		FB82D19A273E6CF0004AA1BD /* ResetPassowrdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassowrdController.swift; sourceTree = "<group>"; };
+		FB82D19C27465435004AA1BD /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,6 +223,7 @@
 				FB7DEF6826DF7AC90042DA0F /* CustomTextField.swift */,
 				FB7DEF6C26E217050042DA0F /* CustomButton.swift */,
 				FB7779CF2703007600246111 /* HomeCell.swift */,
+				FB82D19C27465435004AA1BD /* ChartCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */,
 				FB819ACD26ECA806002CFFB4 /* Constants.swift in Sources */,
 				FB7DEF3826DF5CD10042DA0F /* AppDelegate.swift in Sources */,
+				FB82D19D27465435004AA1BD /* ChartCell.swift in Sources */,
 				FB7DDD01270ED57000D95AEA /* Habitual.swift in Sources */,
 				FB7DEF6D26E217050042DA0F /* CustomButton.swift in Sources */,
 				FB7DDD07271025EB00D95AEA /* HabitualViewModel.swift in Sources */,

@@ -88,6 +88,31 @@ class HomeController: UICollectionViewController {
         currentTimeLabel.text = formatter.string(from: date as Date)
     }
     
+    @objc func handleEditButton() {
+        print("DEBUG: 에딧버튼 터치")
+    }
+    
+    @objc func handleSelectOrCancelButton(_ sender: UIBarButtonItem) {
+        if self.collectionView.allowsMultipleSelection == false {
+            self.collectionView.allowsMultipleSelection = true
+            let cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(self.handleSelectOrCancelButton(_:)))
+            
+            let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(handleTrashButton(_:)))
+            trashButton.tintColor = .red
+            
+            self.navigationItem.rightBarButtonItems = [cancelButton, trashButton]
+        } else {
+            self.collectionView.allowsMultipleSelection = false
+            
+            let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(self.handleSelectOrCancelButton(_:)))
+            self.navigationItem.rightBarButtonItems = [selectButton]
+        }
+    }
+    
+    @objc func handleTrashButton(_ sender: UIBarButtonItem) {
+        
+    }
+    
     // MARK: API
     
     func fetchHabituals() {
@@ -109,6 +134,10 @@ class HomeController: UICollectionViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleLogout))
+        
+        let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(handleSelectOrCancelButton(_:)))
+        navigationItem.rightBarButtonItems = [selectButton]
+        
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refresher
@@ -138,7 +167,6 @@ extension HomeController {
         cell.viewModel = HabitualViewModel(habitual: habituals[indexPath.row])
         return cell
     }
-    
     
 }
 

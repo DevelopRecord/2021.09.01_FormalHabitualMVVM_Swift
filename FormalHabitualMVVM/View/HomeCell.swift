@@ -23,7 +23,7 @@ class HomeCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var listBtn: UIButton = {
+    lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray3
         button.setTitleColor(.white, for: .normal)
@@ -33,6 +33,7 @@ class HomeCell: UICollectionViewCell {
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
         button.layer.borderColor = UIColor.systemGray5.cgColor
+        button.tag = 10
         button.addTarget(self, action: #selector(didTapRoutineButton), for: .touchUpInside)
         return button
     }()
