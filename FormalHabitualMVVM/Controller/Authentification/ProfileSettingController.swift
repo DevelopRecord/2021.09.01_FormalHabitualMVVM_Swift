@@ -6,10 +6,15 @@
 //
 
 import UIKit
+import Firebase
 
 class ProfileSettingController: UIViewController {
     
     // MARK: Properties
+    
+    var viewModel: ProfileHeaderViewModel? {
+        didSet { configure() }
+    }
     
     private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
@@ -23,17 +28,26 @@ class ProfileSettingController: UIViewController {
         return tf
     }()
     
+    private let saveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("저장하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         
-        let backButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(handleBackButton))
-        let doneButton = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(handleDoneButton))
+        navigationItem.title = "계정설정"
+        
+        let backButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleBackButton))
         
         navigationItem.leftBarButtonItem = backButton
-        navigationItem.rightBarButtonItem = doneButton
         
     }
     
@@ -43,8 +57,8 @@ class ProfileSettingController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func handleDoneButton() {
-        print("DEBUG: Handle Done button..")
+    @objc func handleSaveButton() {
+        
     }
     
     // MARK: helpers
@@ -59,6 +73,14 @@ class ProfileSettingController: UIViewController {
         view.addSubview(passwordTextField)
         passwordTextField.anchor(top: emailTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 20, paddingLeft: 10, paddingRight: 10)
         passwordTextField.centerX(inView: view)
+        
+        view.addSubview(saveButton)
+        saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
+        saveButton.setDimensions(height: 65, width: view.frame.width)
     }
     
+    func configure() {
+        guard let viewModel = viewModel else { return }
+        
+    }
 }

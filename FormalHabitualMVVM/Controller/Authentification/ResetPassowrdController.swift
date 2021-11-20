@@ -26,7 +26,6 @@ class ResetPasswordController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 38, weight: UIFont.Weight.semibold)
         return label
     }()
-
     
     private let resetPasswordButton: UIButton = {
         let button = UIButton(type: .system)
