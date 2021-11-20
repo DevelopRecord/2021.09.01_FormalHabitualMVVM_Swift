@@ -21,7 +21,7 @@
 		FB7DEF4426DF5CD30042DA0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB7DEF4226DF5CD30042DA0F /* LaunchScreen.storyboard */; };
 		FB7DEF5826DF5E9B0042DA0F /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */; };
 		FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */; };
-		FB7DEF5C26DF5ED10042DA0F /* ChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */; };
+		FB7DEF5C26DF5ED10042DA0F /* TipController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5B26DF5ED10042DA0F /* TipController.swift */; };
 		FB7DEF5E26DF5EDC0042DA0F /* SettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */; };
 		FB7DEF6126DF69FB0042DA0F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6026DF69FB0042DA0F /* LoginController.swift */; };
 		FB7DEF6326DF6A050042DA0F /* RegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DEF6226DF6A050042DA0F /* RegistrationController.swift */; };
@@ -70,7 +70,7 @@
 		FB7DEF4526DF5CD30042DA0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
-		FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartController.swift; sourceTree = "<group>"; };
+		FB7DEF5B26DF5ED10042DA0F /* TipController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TipController.swift; sourceTree = "<group>"; };
 		FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingController.swift; sourceTree = "<group>"; };
 		FB7DEF6026DF69FB0042DA0F /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		FB7DEF6226DF6A050042DA0F /* RegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationController.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 				FB7DEF5F26DF69F00042DA0F /* Authentification */,
 				FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */,
 				FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */,
-				FB7DEF5B26DF5ED10042DA0F /* ChartController.swift */,
+				FB7DEF5B26DF5ED10042DA0F /* TipController.swift */,
 				FB7DEF5D26DF5EDC0042DA0F /* SettingController.swift */,
 				FB7DEF6A26DF8DFE0042DA0F /* AddHabitualController.swift */,
 			);
@@ -393,7 +393,7 @@
 			files = (
 				FB7DEF7F26E78B320042DA0F /* ProfileController.swift in Sources */,
 				FB819ACB26ECA7BE002CFFB4 /* UserService.swift in Sources */,
-				FB7DEF5C26DF5ED10042DA0F /* ChartController.swift in Sources */,
+				FB7DEF5C26DF5ED10042DA0F /* TipController.swift in Sources */,
 				FB7DEF6326DF6A050042DA0F /* RegistrationController.swift in Sources */,
 				FB819AC326EB4B13002CFFB4 /* SettingFooter.swift in Sources */,
 				FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */,

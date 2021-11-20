@@ -25,7 +25,7 @@ class HomeCell: UICollectionViewCell {
     
     lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .systemGray3
+        button.backgroundColor = .systemGray4
         button.setTitleColor(.white, for: .normal)
         button.tintColor = .white
         button.layer.borderWidth = 1
