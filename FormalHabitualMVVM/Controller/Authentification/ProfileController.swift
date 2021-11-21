@@ -21,6 +21,17 @@ class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
     
+    private let saveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("저장하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        return button
+    }()
+
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -29,10 +40,8 @@ class ProfileController: UICollectionViewController {
         fetchUser()
         fetchHabituals()
         
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
-                                                           target: self,
-                                                           action: #selector(handleDoneButton))
+        tabBarController?.tabBar.isHidden = false
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
                                                             target: self,
                                                             action: #selector(handleEditButton))
@@ -62,9 +71,14 @@ class ProfileController: UICollectionViewController {
     
     func configureCollectionView() {
         collectionView.backgroundColor = .white
+        hidesBottomBarWhenPushed = true
+        
         collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+        
+        view.addSubview(saveButton)
+        saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, width: view.frame.width, height: 55)
     }
     
     
@@ -77,7 +91,7 @@ class ProfileController: UICollectionViewController {
     @objc func handleEditButton() {
         let controller = ProfileSettingController()
         let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
+        nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
         
         /*
@@ -92,6 +106,10 @@ class ProfileController: UICollectionViewController {
             print("DEBUG: Failed to sign out")
         }
         */
+    }
+    
+    @objc func handleSaveButton() {
+        navigationController?.popViewController(animated: true)
     }
 }
 

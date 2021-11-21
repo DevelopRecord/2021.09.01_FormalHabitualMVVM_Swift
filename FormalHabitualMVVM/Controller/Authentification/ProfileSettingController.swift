@@ -33,6 +33,7 @@ class ProfileSettingController: UIViewController {
         button.setTitle("저장하기", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()
@@ -44,21 +45,17 @@ class ProfileSettingController: UIViewController {
         configureUI()
         
         navigationItem.title = "계정설정"
-        
-        let backButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleBackButton))
-        
-        navigationItem.leftBarButtonItem = backButton
+        navigationController?.navigationBar.tintColor = .black
+//        let backButton = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(handleBackButton))
+//
+//        navigationItem.leftBarButtonItem = backButton
         
     }
     
     // MARK: Actions
     
-    @objc func handleBackButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
     @objc func handleSaveButton() {
-        
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: helpers
@@ -76,7 +73,7 @@ class ProfileSettingController: UIViewController {
         
         view.addSubview(saveButton)
         saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor)
-        saveButton.setDimensions(height: 65, width: view.frame.width)
+        saveButton.setDimensions(height: 55, width: view.frame.width)
     }
     
     func configure() {

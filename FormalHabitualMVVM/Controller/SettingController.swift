@@ -93,6 +93,7 @@ class SettingController: UITableViewController {
     func configureTableView() {
         view.backgroundColor = .white
         self.navigationItem.title = "환경설정"
+        tabBarItem.isEnabled = true
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.register(SettingHeader.self, forHeaderFooterViewReuseIdentifier: settingHeader)
@@ -162,9 +163,8 @@ class SettingController: UITableViewController {
         
     @objc func handleProfile() {
         let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        self.present(nav, animated: true, completion: nil)
+        controller.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(controller, animated: true)
         /*
         do {
             try Auth.auth().signOut()
