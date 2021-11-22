@@ -113,7 +113,6 @@ class LoginController: UIViewController {
                 return
             }
             self.delegate?.authentificationDidComplete()
-            
         }
     }
     

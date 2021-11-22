@@ -127,7 +127,7 @@ class HomeController: UICollectionViewController {
     
     func configureUI() {
         collectionView.backgroundColor = .white
-        navigationItem.title = "Home"
+        navigationItem.title = "홈"
         
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: reusableIdentifier)
         

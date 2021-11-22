@@ -115,7 +115,7 @@ class TipController: UIViewController {
     
     func configureUI() {
         view.backgroundColor = .white
-        navigationItem.title = "Tips"
+        navigationItem.title = "팁"
         
         // MARK: Tip_1
         

@@ -52,7 +52,7 @@ class ProfileHeader: UICollectionReusableView {
 
         addSubview(topDivider)
 
-        topDivider.anchor(top: nameLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 25, height: 15)
+        topDivider.anchor(top: nameLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 25, height: 10)
     }
     
     required init?(coder: NSCoder) {

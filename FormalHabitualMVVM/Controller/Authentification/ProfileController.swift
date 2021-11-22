@@ -21,6 +21,19 @@ class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
     
+    private let passwordLabel: UILabel = {
+        let label = UILabel()
+        label.text = "비밀번호 변경"
+        label.font = UIFont.systemFont(ofSize: 18)
+        return label
+    }()
+    
+    private let passwordTextField: UITextField = {
+        let tf = CustomTextField(placeholder: "Password")
+        tf.isSecureTextEntry = true
+        return tf
+    }()
+    
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("저장하기", for: .normal)
@@ -31,6 +44,28 @@ class ProfileController: UICollectionViewController {
         return button
     }()
 
+    private let pushButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("푸시알림", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        return button
+    }()
+    
+    private let logoutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("로그아웃", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.layer.borderColor = UIColor.systemGray4.cgColor
+        button.layer.borderWidth = 1
+        button.addTarget(self, action: #selector(handleLogoutButton), for: .touchUpInside)
+        return button
+    }()
     
     // MARK: Lifecycle
     
@@ -42,12 +77,7 @@ class ProfileController: UICollectionViewController {
         
         tabBarController?.tabBar.isHidden = false
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit,
-                                                            target: self,
-                                                            action: #selector(handleEditButton))
         navigationItem.leftBarButtonItem?.tintColor = .black
-        navigationItem.rightBarButtonItem?.tintColor = .black
-        
     }
     
     // MARK: API
@@ -77,6 +107,25 @@ class ProfileController: UICollectionViewController {
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         
+        let stack = UIStackView(arrangedSubviews: [passwordLabel, passwordTextField])
+        stack.axis = .vertical
+        stack.spacing = 10
+        
+        view.addSubview(stack)
+        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 210, paddingLeft: 15, paddingRight: 15, height: 100)
+        
+        let bottomDivider = UIView()
+        bottomDivider.backgroundColor = .systemGray5
+
+        view.addSubview(bottomDivider)
+        bottomDivider.anchor(top: passwordTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, height: 10)
+        
+        view.addSubview(pushButton)
+        pushButton.anchor(top: bottomDivider.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        
+        view.addSubview(logoutButton)
+        logoutButton.anchor(top: pushButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        
         view.addSubview(saveButton)
         saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, width: view.frame.width, height: 55)
     }
@@ -93,8 +142,9 @@ class ProfileController: UICollectionViewController {
         let nav = UINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .overFullScreen
         self.present(nav, animated: true, completion: nil)
-        
-        /*
+    }
+    
+    @objc func handleLogoutButton() {
         do {
             try Auth.auth().signOut()
             let controller = LoginController()
@@ -105,7 +155,6 @@ class ProfileController: UICollectionViewController {
         } catch {
             print("DEBUG: Failed to sign out")
         }
-        */
     }
     
     @objc func handleSaveButton() {

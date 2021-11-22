@@ -18,7 +18,7 @@ class CustomTextField: UITextField {
         leftViewMode = .always
         
         layer.borderWidth = 1
-        layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
+        layer.borderColor = UIColor.systemGray4.cgColor
         layer.cornerRadius = 10
         textColor = .black
         keyboardAppearance = .dark
