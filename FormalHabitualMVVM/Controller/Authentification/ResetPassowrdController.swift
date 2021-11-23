@@ -29,7 +29,7 @@ class ResetPasswordController: UIViewController {
     
     private let resetPasswordButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Reset Password", for: UIControl.State.normal)
+        button.setTitle("Reset Password", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
@@ -37,7 +37,7 @@ class ResetPasswordController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
         button.setHeight(50)
-        button.addTarget(self, action: #selector(handleResetPassword), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleResetPassword), for: .touchUpInside)
         return button
     }()
     

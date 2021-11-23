@@ -11,6 +11,10 @@ import Firebase
 private let cellIdentifier = "ProfileCell"
 private let headerIdentifier = "ProfileHeader"
 
+protocol ProfileControllerDelegate: AnyObject {
+    func controllerDidChangedPassword(_ controller: ProfileController)
+}
+
 class ProfileController: UICollectionViewController {
     
     // MARK: Properties
@@ -20,6 +24,8 @@ class ProfileController: UICollectionViewController {
     private var user: User? {
         didSet { collectionView.reloadData() }
     }
+    weak var delegate: ProfileControllerDelegate?
+    var password: String?
     
     private let passwordLabel: UILabel = {
         let label = UILabel()
@@ -32,16 +38,6 @@ class ProfileController: UICollectionViewController {
         let tf = CustomTextField(placeholder: "Password")
         tf.isSecureTextEntry = true
         return tf
-    }()
-    
-    private let saveButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("저장하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
-        return button
     }()
 
     private let pushButton: UIButton = {
@@ -64,6 +60,16 @@ class ProfileController: UICollectionViewController {
         button.layer.borderColor = UIColor.systemGray4.cgColor
         button.layer.borderWidth = 1
         button.addTarget(self, action: #selector(handleLogoutButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private let saveButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("저장하기", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()
     
@@ -137,13 +143,6 @@ class ProfileController: UICollectionViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func handleEditButton() {
-        let controller = ProfileSettingController()
-        let nav = UINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true, completion: nil)
-    }
-    
     @objc func handleLogoutButton() {
         do {
             try Auth.auth().signOut()
@@ -158,7 +157,18 @@ class ProfileController: UICollectionViewController {
     }
     
     @objc func handleSaveButton() {
-        navigationController?.popViewController(animated: true)
+        guard let password = passwordTextField.text else { return }
+        
+        self.showLoader(true)
+        AuthService.changePassword(password: password) { error in
+            if let error = error {
+                self.showMessage(withTitle: "Error", message: error.localizedDescription)
+                self.showLoader(false)
+                return
+            }
+            
+            self.delegate?.controllerDidChangedPassword(self)
+        }
     }
 }
 

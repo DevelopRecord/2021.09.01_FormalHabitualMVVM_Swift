@@ -48,7 +48,7 @@ class LoginController: UIViewController {
     
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("LOGIN", for: UIControl.State.normal)
+        button.setTitle("LOGIN", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
@@ -56,7 +56,7 @@ class LoginController: UIViewController {
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
         button.setHeight(50)
-        button.addTarget(self, action: #selector(handleLogin), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -69,16 +69,16 @@ class LoginController: UIViewController {
     
     private let naverLoginButton: UIButton = {
         let button = CustomLoginButton()
-        button.setTitle("NAVER로 로그인", for: UIControl.State.normal)
-        button.setTitleColor(UIColor.white, for: UIControl.State.normal)
+        button.setTitle("NAVER로 로그인", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.backgroundColor = UIColor(named: "naverColor")
         return button
     }()
     
     private let kakaoLoginButton: UIButton = {
         let button = CustomLoginButton()
-        button.setTitle("KAKAO로 로그인", for: UIControl.State.normal)
-        button.setTitleColor(UIColor.black, for: UIControl.State.normal)
+        button.setTitle("KAKAO로 로그인", for: .normal)
+        button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor(named: "kakaoColor")
         return button
     }()
@@ -86,7 +86,7 @@ class LoginController: UIViewController {
     private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
         button.attributedTitle(firstPart: "Don't have an account?", secondPart: "Sign Up.")
-        button.addTarget(self, action: #selector(handleShowSignUp), for: UIControl.Event.touchUpInside)
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
     }()
     

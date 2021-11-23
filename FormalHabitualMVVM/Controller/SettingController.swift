@@ -165,17 +165,6 @@ class SettingController: UITableViewController {
         let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
-        /*
-        do {
-            try Auth.auth().signOut()
-            let controller = LoginController()
-            let nav = UINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            self.present(nav, animated: true, completion: nil)
-        } catch {
-            print("DEBUG: Failed to sign out")
-        }
-         */
      }
     
     @objc func tistoryOnSafari() {
@@ -256,9 +245,21 @@ extension SettingController {
     }
 }
 
+// MARK: AuthentificationDelegate
+
 extension SettingController: AuthentificationDelegate {
     func authentificationDidComplete() {
         print("DEBUG: Setting controller auth did complete. Fetch user and update here..")
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: ResetPasswordControllerDelegate
+
+extension LoginController: ProfileControllerDelegate {
+    func controllerDidChangedPassword(_ controller: ProfileController) {
+        controller.hidesBottomBarWhenPushed = true
+        navigationController?.popViewController(animated: true)
+        showMessage(withTitle: "Success", message: "회원님의 비밀번호가 변경되었습니다.")
     }
 }
