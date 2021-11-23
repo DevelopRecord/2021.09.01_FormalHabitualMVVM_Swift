@@ -47,6 +47,8 @@ class ProfileController: UICollectionViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.layer.borderColor = UIColor.systemGray4.cgColor
+        button.layer.borderWidth = 1
         return button
     }()
     
@@ -57,9 +59,20 @@ class ProfileController: UICollectionViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
+        button.addTarget(self, action: #selector(handleLogoutButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private let userDeleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("회원탈퇴", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        button.contentHorizontalAlignment = .left
+        button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
         button.layer.borderColor = UIColor.systemGray4.cgColor
         button.layer.borderWidth = 1
-        button.addTarget(self, action: #selector(handleLogoutButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleUserDeleteButton), for: .touchUpInside)
         return button
     }()
     
@@ -80,8 +93,6 @@ class ProfileController: UICollectionViewController {
         configureCollectionView()
         fetchUser()
         fetchHabituals()
-        
-        tabBarController?.tabBar.isHidden = false
         
         navigationItem.leftBarButtonItem?.tintColor = .black
     }
@@ -132,16 +143,15 @@ class ProfileController: UICollectionViewController {
         view.addSubview(logoutButton)
         logoutButton.anchor(top: pushButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
         
+        view.addSubview(userDeleteButton)
+        userDeleteButton.anchor(top: logoutButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        
         view.addSubview(saveButton)
         saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, width: view.frame.width, height: 55)
     }
     
     
     // MARK: Actions
-    
-    @objc func handleDoneButton() {
-        self.dismiss(animated: true, completion: nil)
-    }
     
     @objc func handleLogoutButton() {
         do {
@@ -154,6 +164,23 @@ class ProfileController: UICollectionViewController {
         } catch {
             print("DEBUG: Failed to sign out")
         }
+    }
+    
+    @objc func handleUserDeleteButton() {
+        /*
+        let user = Auth.auth().currentUser
+        
+        self.showLoader(true)
+        user?.delete(completion: { error in
+            if let error = error {
+                self.showMessage(withTitle: "Error", message: error.localizedDescription)
+                self.showLoader(false)
+                return
+            }
+            
+            return
+        })
+         */
     }
     
     @objc func handleSaveButton() {
@@ -194,12 +221,6 @@ extension ProfileController {
         }
         return header
     }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension ProfileController {
-    
 }
 
 // MARK: UICollectionViewDelegateFlowLayout

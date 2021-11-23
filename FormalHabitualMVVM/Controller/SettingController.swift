@@ -13,11 +13,13 @@ import SDWebImage
 private let reusableIdentifier = "cell"
 private let settingHeader = "settingHeader"
 
+
 class SettingController: UITableViewController {
     
     // MARK: Properties
     
     private var users = [User]()
+    weak var delegate: AuthentificationDelegate?
     
     var viewModel: SettingViewModel? {
         didSet { configure() }
@@ -88,7 +90,7 @@ class SettingController: UITableViewController {
         }
     }
     
-    // MARK: Helper
+    // MARK: Helpers
     
     func configureTableView() {
         view.backgroundColor = .white
@@ -159,10 +161,11 @@ class SettingController: UITableViewController {
         tableView.tableFooterView = footer
     }
     
-    // MARK: Selectors
+    // MARK: Actions
         
     @objc func handleProfile() {
         let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+        
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
      }
@@ -183,6 +186,7 @@ class SettingController: UITableViewController {
 // MARK: UITableViewDataSource
 
 extension SettingController {
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
     }
@@ -195,10 +199,6 @@ extension SettingController {
         } else {
             return 0
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -222,9 +222,6 @@ extension SettingController {
         view.addSubview(lbl)
         return view
     }
-    
-    
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reusableIdentifier, for: indexPath) as! TableCell // 타입 변환을 TableCell이라고 명시해야 합니다.
