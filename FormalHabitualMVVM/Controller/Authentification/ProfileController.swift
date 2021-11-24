@@ -241,3 +241,4 @@ extension ProfileController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width, height: 250)
     }
 }
+

@@ -13,13 +13,16 @@ import SDWebImage
 private let reusableIdentifier = "cell"
 private let settingHeader = "settingHeader"
 
+protocol AuthentificationDelegates: AnyObject {
+    func authentificationDidCompletes()
+}
 
 class SettingController: UITableViewController {
     
     // MARK: Properties
     
     private var users = [User]()
-    weak var delegate: AuthentificationDelegate?
+    weak var delegate: AuthentificationDelegates?
     
     var viewModel: SettingViewModel? {
         didSet { configure() }
@@ -165,7 +168,7 @@ class SettingController: UITableViewController {
         
     @objc func handleProfile() {
         let controller = ProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-        
+        controller.delegate = self
         controller.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
      }
@@ -253,7 +256,7 @@ extension SettingController: AuthentificationDelegate {
 
 // MARK: ResetPasswordControllerDelegate
 
-extension LoginController: ProfileControllerDelegate {
+extension SettingController: ProfileControllerDelegate {
     func controllerDidChangedPassword(_ controller: ProfileController) {
         controller.hidesBottomBarWhenPushed = true
         navigationController?.popViewController(animated: true)
