@@ -15,6 +15,10 @@ protocol ProfileControllerDelegate: AnyObject {
     func controllerDidChangedPassword(_ controller: ProfileController)
 }
 
+protocol ProfileControllerDelegates: AnyObject {
+    func controllerDeletedUser()
+}
+
 class ProfileController: UICollectionViewController {
     
     // MARK: Properties
@@ -25,6 +29,7 @@ class ProfileController: UICollectionViewController {
         didSet { collectionView.reloadData() }
     }
     weak var delegate: ProfileControllerDelegate?
+    weak var delegates: UserDeleteDelegate?
     var password: String?
     
     private let passwordLabel: UILabel = {
@@ -167,20 +172,17 @@ class ProfileController: UICollectionViewController {
     }
     
     @objc func handleUserDeleteButton() {
-        /*
-        let user = Auth.auth().currentUser
         
         self.showLoader(true)
-        user?.delete(completion: { error in
+        AuthService.deleteUser { error in
             if let error = error {
                 self.showMessage(withTitle: "Error", message: error.localizedDescription)
                 self.showLoader(false)
                 return
             }
             
-            return
-        })
-         */
+            self.delegates?.userDeleteDidComplete()
+        }
     }
     
     @objc func handleSaveButton() {

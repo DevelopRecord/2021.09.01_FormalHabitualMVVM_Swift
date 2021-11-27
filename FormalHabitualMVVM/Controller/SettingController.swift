@@ -23,6 +23,7 @@ class SettingController: UITableViewController {
     
     private var users = [User]()
     weak var delegate: AuthentificationDelegates?
+    weak var delegates: ProfileControllerDelegates?
     
     var viewModel: SettingViewModel? {
         didSet { configure() }

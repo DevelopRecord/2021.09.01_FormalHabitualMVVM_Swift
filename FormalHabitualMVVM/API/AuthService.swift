@@ -44,6 +44,19 @@ struct AuthService {
         }
     }
     
+    static func deleteUser(completion: @escaping(Error?) -> Void) {
+        Auth.auth().currentUser?.delete(completion: { error in
+            if let error = error {
+                print("DEBUG: Failed to delete user.. \(error.localizedDescription)")
+                return
+            }
+            
+            guard let uid = Auth.auth().currentUser?.uid else { return }
+            
+            COLLECTION_USERS.document(uid).delete(completion: completion)
+        })
+    }
+    
     static func resetPassword(withEmail email: String, completion: SendPasswordResetCallback?) {
         Auth.auth().sendPasswordReset(withEmail: email, completion: completion)
     }

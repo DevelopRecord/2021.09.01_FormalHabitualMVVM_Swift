@@ -12,13 +12,21 @@ private let reusableIdentifier = "Cell"
 
 class HomeController: UICollectionViewController {
     
+    // MARK: Properties
+    
     let timeSelector : Selector = #selector(HomeController.updateTime)
     let interval = 1.0
     var count = 0
     
-    // MARK: Properties
-    
     var habituals = [Habitual]()
+    
+    private let notExistLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.text = "(추가한 습관이 없습니다.)"
+        label.textColor = .systemGray4
+        return label
+    }()
     
     private let currentTimeLabel: UILabel = {
         let timeLabel = UILabel()
@@ -73,9 +81,9 @@ class HomeController: UICollectionViewController {
     }
     
     @objc func addButtonTapped() {
-        let uvc = AddHabitualController()
-        uvc.modalPresentationStyle = .fullScreen
-        self.present(uvc, animated: true)
+        let controller = AddHabitualController()
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true)
     }
     
     @objc func updateTime() {
@@ -175,9 +183,17 @@ extension HomeController {
 
 extension HomeController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let controller = AddHabitualController()
+//
+//        controller.hidesBottomBarWhenPushed = true
+//        controller.habitual = habituals[indexPath.row]
+//        navigationController?.pushViewController(controller, animated: true)
+        
         let controller = AddHabitualController()
+        
         controller.habitual = habituals[indexPath.row]
-        navigationController?.pushViewController(controller, animated: true)
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller, animated: true)
     }
 }
 

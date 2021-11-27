@@ -11,12 +11,17 @@ protocol AuthentificationDelegate: AnyObject {
     func authentificationDidComplete()
 }
 
+protocol UserDeleteDelegate: AnyObject {
+    func userDeleteDidComplete()
+}
+
 class LoginController: UIViewController {
     
     //MARK: Properties
     
     private var viewModel = LoginViewModel()
     weak var delegate: AuthentificationDelegate?
+    weak var delegates: UserDeleteDelegate?
     
     private let habitualLabel: UILabel = {
         let label = UILabel()
@@ -185,5 +190,19 @@ extension LoginController: ResetPasswordControllerDelegate {
     func controllerDidSendPasswordResetLink(_ controller: ResetPasswordController) {
         navigationController?.popViewController(animated: true)
         showMessage(withTitle: "Success", message: "회원님의 이메일로 링크를 보냈습니다. 확인해 주세요.")
+    }
+}
+
+// MARK: ProfileControllerDelegates
+
+extension LoginController: ProfileControllerDelegates {
+    func controllerDeletedUser() {
+        let controller = LoginController()
+        controller.delegate = self.tabBarController as? MainTabController
+        let nav = UINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
+        self.present(nav, animated: true, completion: nil)
+        showMessage(withTitle: "Success", message: "회원탈퇴가 완료되었습니다.")
+        
     }
 }

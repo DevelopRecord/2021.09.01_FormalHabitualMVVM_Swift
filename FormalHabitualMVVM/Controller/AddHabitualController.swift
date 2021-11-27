@@ -243,6 +243,11 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         guard let title = titleTextView.text else { return }
         guard let selectedTime = timeButton.titleLabel?.text else { return }
         
+        if title.count == 0 {
+            self.showMessage(withTitle: "알림", message: "습관 이름을 입력해 주세요.")
+            return
+        }
+        
         showLoader(true)
         
         HabitualService.uploadHabitual(title: title, selectedTime: selectedTime) { error in
@@ -255,16 +260,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
             self.delegate?.controllerDidFinishUploadingHabitual(self)
             self.dismiss(animated: true, completion: nil)
         }
-        
-        /*
-        guard let title = titleTextView.text,
-            title.count > 0 else {
-            alert(message: "습관 이름을 입력해주세요.")
-            return
-        }
-        print("DEBUG: 저장 완료! (테스트)")
-        dismiss(animated: true, completion: nil)
-        */
     }
     
     @objc func cancelButtonTapped() {

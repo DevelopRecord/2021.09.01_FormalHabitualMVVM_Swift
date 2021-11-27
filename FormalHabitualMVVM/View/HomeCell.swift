@@ -16,13 +16,6 @@ class HomeCell: UICollectionViewCell {
         didSet{ configure() }
     }
     
-    private let notExistLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .lightGray
-        return label
-    }()
-    
     lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .systemGray4
