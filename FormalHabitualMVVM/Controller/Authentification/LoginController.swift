@@ -72,6 +72,12 @@ class LoginController: UIViewController {
         return button
     }()
     
+    private let kakaoLoginButtons: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "kakao_login"), for: .normal)
+        return button
+    }()
+    
     private let naverLoginButton: UIButton = {
         let button = CustomLoginButton()
         button.setTitle("NAVER로 로그인", for: .normal)

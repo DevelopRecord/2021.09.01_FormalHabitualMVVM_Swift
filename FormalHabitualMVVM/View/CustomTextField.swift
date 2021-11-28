@@ -9,6 +9,8 @@ import UIKit
 
 class CustomTextField: UITextField {
     
+    // MARK: Lifecycle
+    
     init(placeholder: String) {
         super.init(frame: .zero)
         
@@ -26,10 +28,17 @@ class CustomTextField: UITextField {
         backgroundColor = .white
         setHeight(50)
         attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: UIColor(white: 0.4, alpha: 0.7)])
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleTextDidChange),
+                                               name: UITextField.textDidChangeNotification, object: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleTextDidChange() {
+        
     }
 }
 

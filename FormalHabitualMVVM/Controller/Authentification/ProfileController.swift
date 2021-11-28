@@ -39,12 +39,19 @@ class ProfileController: UICollectionViewController {
         return label
     }()
     
-    private let passwordTextField: UITextField = {
+    private let characterCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "0/12"
+        return label
+    }()
+    
+    private lazy var passwordTextField: CustomTextField = {
         let tf = CustomTextField(placeholder: "Password")
         tf.isSecureTextEntry = true
         return tf
     }()
-
+    
     private let pushButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("푸시알림", for: .normal)
@@ -135,6 +142,9 @@ class ProfileController: UICollectionViewController {
         
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 210, paddingLeft: 15, paddingRight: 15, height: 100)
+        
+        view.addSubview(characterCountLabel)
+        characterCountLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop: 220, paddingRight: 15)
         
         let bottomDivider = UIView()
         bottomDivider.backgroundColor = .systemGray5
