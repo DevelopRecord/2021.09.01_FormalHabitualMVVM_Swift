@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import UserNotifications
 import Firebase
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,13 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+        KakaoSDKCommon.initSDK(appKey: "27c9c0693edc20913dcab943019b65bd")
+        
+        return true
+        /*
         if #available(iOS 10.0, *) {
             let notiCenter = UNUserNotificationCenter.current()
             notiCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in }
         } else {
             // 만약 실행하는 기기의 iOS 버전이 10.0 이하일 때
         }
-        return true
+        */
     }
 
     // MARK: UISceneSession Lifecycle

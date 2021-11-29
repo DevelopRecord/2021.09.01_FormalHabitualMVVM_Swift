@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import KakaoSDKAuth
+import KakaoSDKUser
 
 protocol AuthentificationDelegate: AnyObject {
     func authentificationDidComplete()
@@ -72,12 +74,6 @@ class LoginController: UIViewController {
         return button
     }()
     
-    private let kakaoLoginButtons: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "kakao_login"), for: .normal)
-        return button
-    }()
-    
     private let naverLoginButton: UIButton = {
         let button = CustomLoginButton()
         button.setTitle("NAVER로 로그인", for: .normal)
@@ -91,6 +87,7 @@ class LoginController: UIViewController {
         button.setTitle("KAKAO로 로그인", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor(named: "kakaoColor")
+        button.addTarget(self, action: #selector(handleKakaoLogin), for: .touchUpInside)
         return button
     }()
     
@@ -113,6 +110,38 @@ class LoginController: UIViewController {
     }
     
     // MARK: Actions
+    
+    @objc func handleKakaoLogin(_ sender: Any) {
+        
+        UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in // 기기에 카카오톡이 설치되어 있지 않아도 웹으로 작동
+           if let error = error {
+             print(error)
+           } else {
+            print("loginWithKakaoAccount() success.")
+            
+            //do something
+            _ = oauthToken
+           }
+        }
+        
+        /* 기기에 카카오톡이 설치되어 있을 때 작동
+        // 카카오톡 설치 여부 확인
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+
+                    // do something
+                    _ = oauthToken
+                    // 액세스 토큰
+                    let accessToken = oauthToken?.accessToken
+                }
+            }
+        }*/
+    }
     
     @objc func handleLogin() {
         guard let email = emailTextField.text else { return }
