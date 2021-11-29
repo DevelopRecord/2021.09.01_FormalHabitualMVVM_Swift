@@ -103,6 +103,7 @@ class ProfileController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        self.hideKeyboardWhenTappedAround()
         fetchUser()
         fetchHabituals()
         
