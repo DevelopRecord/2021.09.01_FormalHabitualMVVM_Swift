@@ -183,14 +183,7 @@ extension HomeController {
 
 extension HomeController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let controller = AddHabitualController()
-//
-//        controller.hidesBottomBarWhenPushed = true
-//        controller.habitual = habituals[indexPath.row]
-//        navigationController?.pushViewController(controller, animated: true)
-        
         let controller = AddHabitualController()
-        
         controller.habitual = habituals[indexPath.row]
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true)
@@ -201,7 +194,6 @@ extension HomeController {
 
 extension HomeController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: view.frame.width, height: 75)
     }
 }

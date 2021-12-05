@@ -44,8 +44,4 @@ struct HabitualService {
             completion(habitual)
         }
     }
-    
-    static func deleteHabituals(completion: @escaping([Habitual]) -> Void) {
-        
-    }
 }

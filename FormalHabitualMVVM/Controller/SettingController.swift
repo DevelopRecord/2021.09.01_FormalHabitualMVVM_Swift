@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import SafariServices
 import SDWebImage
+import KakaoSDKUser
 
 private let reusableIdentifier = "cell"
 private let settingHeader = "settingHeader"
@@ -47,7 +48,7 @@ class SettingController: UITableViewController {
         return button
     }()
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -114,8 +115,7 @@ class SettingController: UITableViewController {
         footer.backgroundColor = .white
         
         header.addSubview(profileImageView)
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.leftAnchor.constraint(equalTo: header.leftAnchor, constant: 20).isActive = true
+        profileImageView.anchor(left: header.leftAnchor, paddingLeft: 20)
         profileImageView.setDimensions(height: 60, width: 60)
         profileImageView.layer.cornerRadius = 60 / 2
         profileImageView.centerY(inView: header)

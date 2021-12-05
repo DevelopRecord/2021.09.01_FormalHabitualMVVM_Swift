@@ -45,7 +45,6 @@ class CustomActionSheetButton: UIButton {
         layer.borderWidth = 1
         layer.borderColor = UIColor.tertiarySystemGroupedBackground.cgColor
         setHeight(50)
-        
     }
     
     required init?(coder: NSCoder) {

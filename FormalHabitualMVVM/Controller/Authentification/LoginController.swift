@@ -8,6 +8,7 @@
 import UIKit
 import KakaoSDKAuth
 import KakaoSDKUser
+import SDWebImage
 
 protocol AuthentificationDelegate: AnyObject {
     func authentificationDidComplete()
@@ -60,7 +61,8 @@ class LoginController: UIViewController {
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
         button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
         button.layer.cornerRadius = 10
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).withAlphaComponent(0.5), for: .normal)
+        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0,
+                                           alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
         button.setHeight(50)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
@@ -109,23 +111,53 @@ class LoginController: UIViewController {
         configureNotificationObserver()
     }
     
+    // MARK: API
+    
+    func setUserInfo() {
+        UserApi.shared.me() { user, error in
+            if let error = error {
+                print(error)
+            } else {
+                print("me() success.")
+                
+                // 닉네임, 프로필사진
+                let nickname = user?.kakaoAccount?.profile?.nickname
+                let profileImage = user?.kakaoAccount?.profile?.profileImageUrl
+                
+                // 사용자 정보 넘기기
+                let controller = SettingController()
+                controller.profileButton.setTitle(nickname, for: .normal)
+                controller.profileImageView.sd_setImage(with: profileImage)
+                
+            }
+        }
+    }
+    
     // MARK: Actions
     
     @objc func handleKakaoLogin(_ sender: Any) {
-        
         UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in // 기기에 카카오톡이 설치되어 있지 않아도 웹으로 작동
            if let error = error {
-             print(error)
+               print(error)
            } else {
             print("loginWithKakaoAccount() success.")
+           //do something
+           _ = oauthToken
+           // 어세스토큰
+           let accessToken = oauthToken?.accessToken
+           
+           //카카오 로그인을 통해 사용자 토큰을 발급 받은 후 사용자 관리 API 호출
+               
+           self.setUserInfo()
+//           self.delegate?.authentificationDidComplete()
             
             //do something
             _ = oauthToken
            }
         }
         
-        /* 기기에 카카오톡이 설치되어 있을 때 작동
-        // 카카오톡 설치 여부 확인
+         //기기에 카카오톡이 설치되어 있을 때 작동
+        /*// 카카오톡 설치 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {

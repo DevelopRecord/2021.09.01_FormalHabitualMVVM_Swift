@@ -27,7 +27,7 @@ struct AuthService {
         ImageUploader.uploadImage(image: credentials.profileImage) { imageUrl in
             Auth.auth().createUser(withEmail: credentials.email, password: credentials.password) { (result, error) in
                 if let error = error {
-                    print("Failed to register user \(error.localizedDescription)")
+                    print("DEBUG: Failed to register user \(error.localizedDescription)")
                     return
                 }
                 
