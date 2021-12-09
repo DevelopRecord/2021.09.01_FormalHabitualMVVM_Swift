@@ -12,21 +12,21 @@ class TipController: UIViewController {
     
     // MARK: Properties
     
-    private let tipViewOne: UIView = {
+    private let tipView_1: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray4
         view.layer.cornerRadius = 10
         return view
     }()
     
-    private let titleLabel: UILabel = {
+    private let titleLabel_1: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 17)
         label.text = "1. 루틴을 지켜야 하는 이유"
         return label
     }()
     
-    private let contentLabel: UILabel = {
+    private let contentLabel_1: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .darkGray
@@ -119,50 +119,98 @@ class TipController: UIViewController {
         
         // MARK: Tip_1
         
-        view.addSubview(tipViewOne)
-        tipViewOne.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 30, paddingLeft: 20, paddingRight: 20)
-        tipViewOne.setDimensions(height: 140, width: view.frame.width - 50)
+        view.addSubview(tipView_1)
+        tipView_1.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            make.left.equalTo(view.snp.left).offset(20)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.width.equalTo(view.frame.width - 50)
+            make.height.equalTo(140)
+        }
         
-        tipViewOne.addSubview(titleLabel)
-        titleLabel.anchor(top: tipViewOne.safeAreaLayoutGuide.topAnchor, left: tipViewOne.leftAnchor,  paddingTop: 20, paddingLeft: 15)
+        tipView_1.addSubview(titleLabel_1)
+        titleLabel_1.snp.makeConstraints { make in
+            make.top.equalTo(tipView_1.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(tipView_1.snp.leading).offset(15)
+        }
         
-        tipViewOne.addSubview(contentLabel)
-        contentLabel.anchor(top: titleLabel.bottomAnchor, left: tipViewOne.leftAnchor, right: tipViewOne.rightAnchor, paddingTop: 10, paddingLeft: 15, paddingRight: 15)
+        tipView_1.addSubview(contentLabel_1)
+        contentLabel_1.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel_1.snp.bottom).offset(10)
+            make.leading.equalTo(tipView_1.snp.leading).offset(15)
+            make.trailing.equalTo(tipView_1.snp.trailing).offset(-15)
+        }
         
         // MARK: Tip_2
         
         view.addSubview(tipView_2)
-        tipView_2.anchor(top: tipViewOne.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-        tipView_2.setDimensions(height: 140, width: view.frame.width - 50)
+        tipView_2.snp.makeConstraints { make in
+            make.top.equalTo(tipView_1.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(20)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.width.equalTo(view.frame.width - 50)
+            make.height.equalTo(140)
+        }
         
         tipView_2.addSubview(titleLabel_2)
-        titleLabel_2.anchor(top: tipView_2.safeAreaLayoutGuide.topAnchor, left: tipView_2.leftAnchor, paddingTop: 20, paddingLeft: 15)
+        titleLabel_2.snp.makeConstraints { make in
+            make.top.equalTo(tipView_2.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(tipView_2.snp.leading).offset(15)
+        }
         
         tipView_2.addSubview(contentLabel_2)
-        contentLabel_2.anchor(top: titleLabel_2.bottomAnchor, left: tipView_2.leftAnchor, right: tipView_2.rightAnchor, paddingTop: 10, paddingLeft: 15, paddingRight: 15)
+        contentLabel_2.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel_2.snp.bottom).offset(10)
+            make.leading.equalTo(tipView_2.snp.leading).offset(15)
+            make.trailing.equalTo(tipView_2.snp.trailing).offset(-15)
+        }
         
         // MARK: Tip_3
         
         view.addSubview(tipView_3)
-        tipView_3.anchor(top: tipView_2.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-        tipView_3.setDimensions(height: 140, width: view.frame.width - 50)
+        tipView_3.snp.makeConstraints { make in
+            make.top.equalTo(tipView_2.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(20)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.width.equalTo(view.frame.width - 50)
+            make.height.equalTo(140)
+        }
         
         tipView_3.addSubview(titleLabel_3)
-        titleLabel_3.anchor(top: tipView_3.safeAreaLayoutGuide.topAnchor, left: tipView_3.leftAnchor, paddingTop: 20, paddingLeft: 15)
+        titleLabel_3.snp.makeConstraints { make in
+            make.top.equalTo(tipView_3.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(tipView_3.snp.leading).offset(15)
+        }
         
         tipView_3.addSubview(contentLabel_3)
-        contentLabel_3.anchor(top: titleLabel_3.bottomAnchor, left: tipView_3.leftAnchor, right: tipView_3.rightAnchor, paddingTop: 10, paddingLeft: 15, paddingRight: 15)
+        contentLabel_3.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel_3.snp.bottom).offset(10)
+            make.leading.equalTo(tipView_3.snp.leading).offset(15)
+            make.trailing.equalTo(tipView_3.snp.trailing).offset(-15)
+        }
         
         // MARK: Tip_4
         
         view.addSubview(tipView_4)
-        tipView_4.anchor(top: tipView_3.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 15, paddingLeft: 20, paddingRight: 20)
-        tipView_4.setDimensions(height: 180, width: view.frame.width - 50)
+        tipView_4.snp.makeConstraints { make in
+            make.top.equalTo(tipView_3.snp.bottom).offset(15)
+            make.left.equalTo(view.snp.left).offset(20)
+            make.trailing.equalTo(view.snp.trailing).offset(-20)
+            make.width.equalTo(view.frame.width - 50)
+            make.height.equalTo(180)
+        }
         
         tipView_4.addSubview(titleLabel_4)
-        titleLabel_4.anchor(top: tipView_4.safeAreaLayoutGuide.topAnchor, left: tipView_4.leftAnchor, paddingTop: 20, paddingLeft: 15)
+        titleLabel_4.snp.makeConstraints { make in
+            make.top.equalTo(tipView_4.safeAreaLayoutGuide.snp.top).offset(20)
+            make.leading.equalTo(tipView_4.snp.leading).offset(15)
+        }
         
         tipView_4.addSubview(contentLabel_4)
-        contentLabel_4.anchor(top: titleLabel_4.bottomAnchor, left: tipView_4.leftAnchor, right: tipView_4.rightAnchor, paddingTop: 10, paddingLeft: 15, paddingRight: 15)
+        contentLabel_4.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel_4.snp.bottom).offset(10)
+            make.leading.equalTo(tipView_4.snp.leading).offset(15)
+            make.trailing.equalTo(tipView_4.snp.trailing).offset(-15)
+        }
     }
 }

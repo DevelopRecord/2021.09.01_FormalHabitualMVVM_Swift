@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SnapKit
 
 private let reusableIdentifier = "Cell"
 
@@ -152,14 +153,17 @@ class HomeController: UICollectionViewController {
         collectionView.refreshControl = refresher
         
         collectionView.addSubview(currentTimeLabel)
-        currentTimeLabel.anchor(top: collectionView.topAnchor, left: collectionView.leftAnchor,
-                                paddingTop: 12, paddingLeft: 12)
+        currentTimeLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.leading.equalToSuperview().offset(12)
+        }
         
         collectionView.addSubview(addButton)
-        addButton.setDimensions(height: 55, width: 55)
-        addButton.anchor(bottom: collectionView.safeAreaLayoutGuide.bottomAnchor,
-                         right: collectionView.safeAreaLayoutGuide.rightAnchor,
-                         paddingBottom: 20, paddingRight: 20)
+        addButton.snp.makeConstraints { make in
+            make.bottom.equalTo(collectionView.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            make.right.equalTo(collectionView.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.width.height.equalTo(55)
+        }
         
     }
 }
