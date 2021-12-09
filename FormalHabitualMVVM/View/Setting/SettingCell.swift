@@ -29,8 +29,10 @@ class SettingCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(settingLabel)
-        settingLabel.anchor(left: leftAnchor, paddingLeft: 20)
-        settingLabel.centerY(inView: self)
+        settingLabel.snp.makeConstraints { make in
+            make.left.equalTo(self.snp.left).offset(20)
+            make.centerY.equalTo(self)
+        }
     }
     
     required init?(coder: NSCoder) {

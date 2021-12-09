@@ -7,6 +7,7 @@
 // 다양한 습관 리스트들을 만들어 놓고(테이블뷰나 컬렉션뷰) 검색하는 방향으로 가면 어떨까
 
 import UIKit
+import SnapKit
 
 class TipController: UIViewController {
     

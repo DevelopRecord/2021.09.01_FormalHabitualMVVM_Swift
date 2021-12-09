@@ -155,9 +155,9 @@ class LoginController: UIViewController {
             _ = oauthToken
            }
         }
-        
+        /*
          //기기에 카카오톡이 설치되어 있을 때 작동
-        /*// 카카오톡 설치 여부 확인
+        // 카카오톡 설치 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
@@ -217,28 +217,34 @@ class LoginController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(habitualLabel)
-        habitualLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 75)
-        habitualLabel.centerX(inView: view)
+        habitualLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(75)
+            make.centerX.equalTo(view)
+        }
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, loginButton,  forgotPasswordButton, naverLoginButton, kakaoLoginButton])
         stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
         stack.spacing = 20
         
         view.addSubview(stack)
-        stack.centerX(inView: view)
-        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(habitualLabel.snp.bottom).offset(32)
+            make.left.equalTo(view.snp.left).offset(32)
+            make.right.equalTo(view.snp.right).offset(-32)
+            make.centerX.equalTo(view)
+        }
         
         view.addSubview(dontHaveAccountButton)
-        dontHaveAccountButton.centerX(inView: view)
-        dontHaveAccountButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
+        dontHaveAccountButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.centerX.equalTo(view)
+        }
     }
     
     func configureNotificationObserver() {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
-    
-    
 }
 
 // MARK: FormViewModel

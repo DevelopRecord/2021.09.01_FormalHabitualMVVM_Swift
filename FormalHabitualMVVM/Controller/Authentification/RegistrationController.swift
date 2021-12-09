@@ -166,18 +166,24 @@ class RegistrationController: UIViewController {
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(plusPhotoButton)
-        plusPhotoButton.centerX(inView: view)
-        plusPhotoButton.setDimensions(height: 120, width: 120)
-        plusPhotoButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 32)
+        plusPhotoButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.width.height.equalTo(120)
+            make.centerX.equalTo(view)
+        }
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, confirmPasswordTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton, orLabel, naverJoinButton, kakaoJoinButton])
         stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
         stack.spacing = 16
-        stack.setHeight(660)
         
         view.addSubview(stack)
-        stack.centerX(inView: view)
-        stack.anchor(top: plusPhotoButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 6, paddingLeft: 32, paddingRight: 32)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(plusPhotoButton.snp.bottom).offset(6)
+            make.left.equalTo(view.snp.left).offset(32)
+            make.right.equalTo(view.snp.right).offset(-32)
+            make.height.equalTo(660)
+            make.centerX.equalTo(view)
+        }
     }
     
     func configureNotificationObserver() {

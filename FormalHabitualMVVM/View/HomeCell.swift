@@ -37,9 +37,12 @@ class HomeCell: UICollectionViewCell {
         super.init(frame: frame)
         
         addSubview(listBtn)
-        listBtn.anchor(top: topAnchor, paddingTop: 50, paddingLeft: 20, paddingRight: 20)
-        listBtn.centerX(inView: contentView)
-        listBtn.setDimensions(height: 75, width: frame.width - 40)
+        listBtn.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(50)
+            make.centerX.equalTo(contentView)
+            make.width.equalTo(frame.width - 40)
+            make.height.equalTo(75)
+        }
     }
     
     required init?(coder: NSCoder) {

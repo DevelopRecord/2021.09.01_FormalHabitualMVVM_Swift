@@ -39,9 +39,5 @@ class TableCell: UITableViewCell {
     func configureUI() {
         backgroundColor = .white
         
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }

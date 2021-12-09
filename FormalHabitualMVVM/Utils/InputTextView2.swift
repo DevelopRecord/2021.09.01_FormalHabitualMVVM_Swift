@@ -18,17 +18,22 @@ class InputTextView2: UITextView {
     let placeholderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightGray
-        
         return label
     }()
     
     var placeholderShouldCenter = true {
         didSet {
             if placeholderShouldCenter {
-                placeholderLabel.anchor(left: leftAnchor, right: rightAnchor, paddingLeft: 8)
-                placeholderLabel.centerY(inView: self)
+                placeholderLabel.snp.makeConstraints { make in
+                    make.leading.equalTo(self.snp.leading).offset(8)
+                    make.trailing.equalTo(self.snp.trailing)
+                    make.centerY.equalTo(self)
+                }
             } else {
-                placeholderLabel.anchor(top: topAnchor, left: leftAnchor, paddingTop: 6, paddingLeft: 8)
+                placeholderLabel.snp.makeConstraints { make in
+                    make.top.equalTo(self.snp.top).offset(6)
+                    make.left.equalTo(self.snp.left).offset(8)
+                }
             }
         }
     }

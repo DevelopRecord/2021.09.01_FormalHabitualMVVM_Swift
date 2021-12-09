@@ -142,28 +142,64 @@ class ProfileController: UICollectionViewController {
         stack.spacing = 10
         
         view.addSubview(stack)
-        stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 210, paddingLeft: 15, paddingRight: 15, height: 100)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(210)
+            make.left.equalTo(view.snp.left).offset(15)
+            make.right.equalTo(view.snp.right).offset(-15)
+            make.height.equalTo(100)
+        }
         
         view.addSubview(characterCountLabel)
-        characterCountLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, right: view.rightAnchor, paddingTop: 220, paddingRight: 15)
+        characterCountLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(220)
+            make.right.equalTo(view.snp.right).offset(-15)
+        }
         
         let bottomDivider = UIView()
         bottomDivider.backgroundColor = .systemGray5
 
         view.addSubview(bottomDivider)
-        bottomDivider.anchor(top: passwordTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, height: 10)
+        bottomDivider.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(40)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.height.equalTo(10)
+        }
         
         view.addSubview(pushButton)
-        pushButton.anchor(top: bottomDivider.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        pushButton.snp.makeConstraints { make in
+            make.top.equalTo(bottomDivider.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(50)
+        }
         
         view.addSubview(logoutButton)
-        logoutButton.anchor(top: pushButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        logoutButton.snp.makeConstraints { make in
+            make.top.equalTo(pushButton.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(50)
+        }
         
         view.addSubview(userDeleteButton)
-        userDeleteButton.anchor(top: logoutButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, width: view.frame.width, height: 50)
+        userDeleteButton.snp.makeConstraints { make in
+            make.top.equalTo(logoutButton.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(50)
+        }
         
         view.addSubview(saveButton)
-        saveButton.anchor(left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, width: view.frame.width, height: 55)
+        saveButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.right.equalTo(view.snp.right)
+            make.width.equalTo(view.frame.width)
+            make.height.equalTo(55)
+        }
     }
     
     

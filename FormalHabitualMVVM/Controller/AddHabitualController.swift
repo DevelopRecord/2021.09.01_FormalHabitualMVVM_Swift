@@ -230,12 +230,17 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         wholeStack.spacing = 20
         
         view.addSubview(wholeStack)
-        wholeStack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
-                          right: view.rightAnchor, paddingTop: 20, paddingLeft: 16, paddingRight: 16)
+        wholeStack.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            make.left.equalTo(view.snp.left).offset(16)
+            make.right.equalTo(view.snp.right).offset(-16)
+        }
         
         view.addSubview(btnStack)
-        btnStack.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor)
-        btnStack.centerX(inView: view)
+        btnStack.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+            make.centerX.equalTo(view)
+        }
     }
     
     // MARK: Actions
@@ -311,8 +316,11 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         
         let alert = UIAlertController(title: "Pick a time", message: nil, preferredStyle: .actionSheet)
         alert.view.addSubview(datePicker)
-        datePicker.anchor(top: alert.view.topAnchor, paddingTop: 40, width: alert.view.frame.width - 10)
-        datePicker.centerX(inView: alert.view)
+        datePicker.snp.makeConstraints { make in
+            make.top.equalTo(alert.view.snp.top).offset(40)
+            make.width.equalTo(alert.view.frame.width - 10)
+            make.centerX.equalTo(alert.view)
+        }
         
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { alertAction in
                                         self.timeButton.setTitle("\(dateform.string(from: datePicker.date))",

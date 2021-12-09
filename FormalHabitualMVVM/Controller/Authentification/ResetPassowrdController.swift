@@ -95,19 +95,28 @@ class ResetPasswordController: UIViewController {
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
         view.addSubview(backButton)
-        backButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 16, paddingLeft: 16)
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.left.equalTo(view.snp.left).offset(16)
+        }
         
         view.addSubview(habitualLabel)
-        habitualLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 75)
-        habitualLabel.centerX(inView: view)
+        habitualLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(75)
+            make.centerX.equalTo(view)
+        }
         
         let stack = UIStackView(arrangedSubviews: [emailTextField, resetPasswordButton])
         stack.axis = .vertical
         stack.spacing = 20
         
         view.addSubview(stack)
-        stack.centerX(inView: view)
-        stack.anchor(top: habitualLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+        stack.snp.makeConstraints { make in
+            make.top.equalTo(habitualLabel.snp.bottom).offset(32)
+            make.left.equalTo(view.snp.left).offset(32)
+            make.right.equalTo(view.snp.right).offset(-32)
+            make.centerX.equalTo(view)
+        }
     }
 }
 

@@ -38,21 +38,30 @@ class ProfileHeader: UICollectionReusableView {
         backgroundColor = .white
         
         addSubview(profileImageView)
-        profileImageView.anchor(top: topAnchor, paddingTop: 35)
-        profileImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        profileImageView.setDimensions(height: 100, width: 100)
-        profileImageView.layer.cornerRadius = 100 / 2
+        profileImageView.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(35)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.height.equalTo(100)
+            
+            profileImageView.layer.cornerRadius = 100 / 2
+        }
         
         addSubview(nameLabel)
-        nameLabel.anchor(top: profileImageView.bottomAnchor, paddingTop: 12, paddingBottom: 35)
-        nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(12)
+            make.centerX.equalTo(self.snp.centerX)
+        }
         
         let topDivider = UIView()
         topDivider.backgroundColor = .systemGray5
 
         addSubview(topDivider)
-
-        topDivider.anchor(top: nameLabel.bottomAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 25, height: 10)
+        topDivider.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(25)
+            make.left.equalTo(self.snp.left)
+            make.right.equalTo(self.snp.right)
+            make.height.equalTo(10)
+        }
     }
     
     required init?(coder: NSCoder) {

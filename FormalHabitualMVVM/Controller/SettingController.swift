@@ -10,6 +10,7 @@ import Firebase
 import SafariServices
 import SDWebImage
 import KakaoSDKUser
+import SnapKit
 
 private let reusableIdentifier = "cell"
 private let settingHeader = "settingHeader"
@@ -115,10 +116,12 @@ class SettingController: UITableViewController {
         footer.backgroundColor = .white
         
         header.addSubview(profileImageView)
-        profileImageView.anchor(left: header.leftAnchor, paddingLeft: 20)
-        profileImageView.setDimensions(height: 60, width: 60)
         profileImageView.layer.cornerRadius = 60 / 2
-        profileImageView.centerY(inView: header)
+        profileImageView.snp.makeConstraints { make in
+            make.centerY.equalTo(header)
+            make.left.equalTo(header.snp.left).offset(20)
+            make.width.height.equalTo(60)
+        }
         
         let tistoryButton = UIButton()
         tistoryButton.setTitle("티스토리", for: .normal)
@@ -127,12 +130,12 @@ class SettingController: UITableViewController {
         tistoryButton.translatesAutoresizingMaskIntoConstraints = false
         tistoryButton.addTarget(self, action: #selector(tistoryOnSafari), for: .touchUpInside)
         
-        let githubLabel = UIButton()
-        githubLabel.setTitle("깃허브", for: .normal)
-        githubLabel.setTitleColor(.black, for: .normal)
-        footer.addSubview(githubLabel)
-        githubLabel.translatesAutoresizingMaskIntoConstraints = false
-        githubLabel.addTarget(self, action: #selector(githubOnSafari), for: .touchUpInside)
+        let githubButton = UIButton()
+        githubButton.setTitle("깃허브", for: .normal)
+        githubButton.setTitleColor(.black, for: .normal)
+        footer.addSubview(githubButton)
+        githubButton.translatesAutoresizingMaskIntoConstraints = false
+        githubButton.addTarget(self, action: #selector(githubOnSafari), for: .touchUpInside)
         
         let imageView1: UIImageView = {
             let imageView = UIImageView()
@@ -140,11 +143,14 @@ class SettingController: UITableViewController {
             imageView.image = UIImage(named: "tistory")
             return imageView
         }()
-        
         imageView1.frame = CGRect(x: 20, y: 0, width: 30, height: 30)
+        
         footer.addSubview(imageView1)
-        tistoryButton.leadingAnchor.constraint(equalTo: imageView1.leadingAnchor, constant: 40).isActive = true
-        tistoryButton.centerYAnchor.constraint(equalTo: imageView1.centerYAnchor).isActive = true
+        tistoryButton.snp.makeConstraints { make in
+            make.top.equalTo(footer.snp.bottom).offset(10)
+            make.left.equalTo(imageView1.snp.left).offset(40)
+            make.centerY.equalTo(imageView1.snp.centerY)
+        }
         
         let imageView2: UIImageView = {
             let imageView = UIImageView()
@@ -153,13 +159,18 @@ class SettingController: UITableViewController {
             return imageView
         }()
         imageView2.frame = CGRect(x: 20 , y: 50, width: 30, height: 30)
+        
         footer.addSubview(imageView2)
-        githubLabel.leadingAnchor.constraint(equalTo: imageView2.leadingAnchor, constant: 40).isActive = true
-        githubLabel.centerYAnchor.constraint(equalTo: imageView2.centerYAnchor).isActive = true
+        githubButton.snp.makeConstraints { make in
+            make.left.equalTo(imageView2.snp.left).offset(40)
+            make.centerY.equalTo(imageView2.snp.centerY)
+        }
         
         header.addSubview(profileButton)
-        profileButton.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 10).isActive = true
-        profileButton.centerYAnchor.constraint(equalTo: header.centerYAnchor).isActive = true
+        profileButton.snp.makeConstraints { make in
+            make.left.equalTo(profileImageView.snp.right).offset(10)
+            make.centerY.equalTo(header.snp.centerY)
+        }
         
         tableView.tableHeaderView = header
         tableView.tableFooterView = footer
@@ -214,7 +225,7 @@ extension SettingController {
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30.0
+        return 35
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
