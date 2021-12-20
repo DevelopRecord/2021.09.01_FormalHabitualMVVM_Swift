@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BFE8594DC535CCE28348D73F /* Pods_FormalHabitualMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */; };
+		FB7243E527708AB100713166 /* CustomSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7243E427708AB100713166 /* CustomSettingController.swift */; };
 		FB7500D627537D7700B18DD2 /* InputTextView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7500D527537D7700B18DD2 /* InputTextView2.swift */; };
 		FB7779D02703007600246111 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7779CF2703007600246111 /* HomeCell.swift */; };
 		FB7DDCFB2705A47400D95AEA /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDCFA2705A47400D95AEA /* InputTextView.swift */; };
@@ -53,6 +54,7 @@
 		3EBB5D550D4AE3461EDDCF43 /* Pods-FormalHabitualMVVM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.release.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.release.xcconfig"; sourceTree = "<group>"; };
 		DAB4C1BB60A923946254BACC /* Pods-FormalHabitualMVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FormalHabitualMVVM.debug.xcconfig"; path = "Target Support Files/Pods-FormalHabitualMVVM/Pods-FormalHabitualMVVM.debug.xcconfig"; sourceTree = "<group>"; };
 		EDEAE0A3D3F5C37B5F2043D9 /* Pods_FormalHabitualMVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FormalHabitualMVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB7243E427708AB100713166 /* CustomSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingController.swift; sourceTree = "<group>"; };
 		FB7500D527537D7700B18DD2 /* InputTextView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView2.swift; sourceTree = "<group>"; };
 		FB7779CF2703007600246111 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		FB7DDCFA2705A47400D95AEA /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
@@ -125,6 +127,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FB7243E327708AA300713166 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				FB7243E427708AB100713166 /* CustomSettingController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		FB7DEF2B26DF5CD10042DA0F = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +177,7 @@
 		FB7DEF5126DF5DC20042DA0F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FB7243E327708AA300713166 /* Settings */,
 				FB7DEF5F26DF69F00042DA0F /* Authentification */,
 				FB7DEF5726DF5E9B0042DA0F /* MainTabController.swift */,
 				FB7DEF5926DF5EBC0042DA0F /* HomeController.swift */,
@@ -398,6 +409,7 @@
 				FB7DEF5826DF5E9B0042DA0F /* MainTabController.swift in Sources */,
 				FB7DEF6526DF6BDE0042DA0F /* TableCell.swift in Sources */,
 				FB819ABA26E8A26D002CFFB4 /* ProfileHeader.swift in Sources */,
+				FB7243E527708AB100713166 /* CustomSettingController.swift in Sources */,
 				FB7DEF6B26DF8DFE0042DA0F /* AddHabitualController.swift in Sources */,
 				FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */,
 				FB7DEF6126DF69FB0042DA0F /* LoginController.swift in Sources */,

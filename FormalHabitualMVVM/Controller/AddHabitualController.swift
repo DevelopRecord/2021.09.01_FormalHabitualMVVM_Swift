@@ -8,6 +8,7 @@
 // Habituals - title, timestamp, dayOfTheWeek, time, alertMusic, ownUid
 
 import UIKit
+import SnapKit
 
 protocol AddHabitualControllerDelegate: AnyObject {
     func controllerDidFinishUploadingHabitual(_ controller: AddHabitualController)

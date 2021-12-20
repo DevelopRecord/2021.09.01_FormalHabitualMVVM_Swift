@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SnapKit
 
 private let cellIdentifier = "ProfileCell"
 private let headerIdentifier = "ProfileHeader"

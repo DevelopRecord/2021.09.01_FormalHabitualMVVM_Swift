@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol ResetPasswordControllerDelegate: AnyObject {
     func controllerDidSendPasswordResetLink(_ controller: ResetPasswordController)

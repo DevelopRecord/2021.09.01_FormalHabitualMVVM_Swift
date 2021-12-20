@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class RegistrationController: UIViewController {
     
@@ -106,6 +107,7 @@ class RegistrationController: UIViewController {
     }()
     
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,6 +119,7 @@ class RegistrationController: UIViewController {
     }
     
     // MARK: Actions
+    
     @objc func handleSignUp() {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
@@ -167,21 +170,21 @@ class RegistrationController: UIViewController {
         
         view.addSubview(plusPhotoButton)
         plusPhotoButton.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(25)
             make.width.height.equalTo(120)
             make.centerX.equalTo(view)
         }
         
-        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, confirmPasswordTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton, orLabel, naverJoinButton, kakaoJoinButton])
+        let stack = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, confirmPasswordTextField, fullnameTextField, ageTextField, infoLabel, SignUpButton])
         stack.axis = .vertical // StackView를 수평 혹은 수직으로 할지 설정합니다
         stack.spacing = 16
         
         view.addSubview(stack)
         stack.snp.makeConstraints { make in
-            make.top.equalTo(plusPhotoButton.snp.bottom).offset(6)
+            make.top.equalTo(plusPhotoButton.snp.bottom).offset(16)
             make.left.equalTo(view.snp.left).offset(32)
             make.right.equalTo(view.snp.right).offset(-32)
-            make.height.equalTo(660)
+            make.height.equalTo(450)
             make.centerX.equalTo(view)
         }
     }
@@ -196,6 +199,8 @@ class RegistrationController: UIViewController {
     
 }
 
+// MARK: FormViewModel
+
 extension RegistrationController: FormViewModel {
     func updateForm() {
         SignUpButton.backgroundColor = viewModel.buttonBackgroundColor
@@ -203,6 +208,8 @@ extension RegistrationController: FormViewModel {
         SignUpButton.isEnabled = viewModel.formValid
     }
 }
+
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
 
 extension RegistrationController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

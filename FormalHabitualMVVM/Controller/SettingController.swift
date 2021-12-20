@@ -9,7 +9,6 @@ import UIKit
 import Firebase
 import SafariServices
 import SDWebImage
-import KakaoSDKUser
 import SnapKit
 
 private let reusableIdentifier = "cell"
@@ -35,9 +34,9 @@ class SettingController: UITableViewController {
         didSet { tableView.reloadData() }
     }
     
-    private let settingItems: [String] = [ "푸시 알림 설정", "계정 설정", "앱 버전"]
-    private let addItems: [String] = ["이용약관", "개인정보처리방침", "FAQ", "고객센터"]
-    private let sections: [String] = ["설정", "더보기"]
+    private let settingItems = [ "앱 버전", "커스텀 설정", "푸시 알림 설정"]
+    private let addItems = ["이용약관", "개인정보처리방침", "FAQ", "고객센터"]
+    private let sections = ["설정", "더보기"]
     
     let profileButton: UIButton = {
         let button = UIButton(type: .system)
@@ -216,18 +215,6 @@ extension SettingController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 35
-    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
         view.backgroundColor = .systemBackground
@@ -252,8 +239,35 @@ extension SettingController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 35
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension SettingController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            print("DEBUG: App version..")
+        } else if indexPath.row == 1 {
+            let controller = CustomSettingController()
+            navigationController?.pushViewController(controller, animated: true)
+        } else if indexPath.row == 2 {
+            print("DEBUG: Push notifications..")
+        }
     }
 }
 

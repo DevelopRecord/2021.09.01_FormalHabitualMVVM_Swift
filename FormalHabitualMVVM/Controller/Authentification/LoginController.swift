@@ -9,6 +9,7 @@ import UIKit
 import KakaoSDKAuth
 import KakaoSDKUser
 import SDWebImage
+import SnapKit
 
 protocol AuthentificationDelegate: AnyObject {
     func authentificationDidComplete()
@@ -16,6 +17,10 @@ protocol AuthentificationDelegate: AnyObject {
 
 protocol UserDeleteDelegate: AnyObject {
     func userDeleteDidComplete()
+}
+
+protocol userInfoDelegate: AnyObject {
+    func setUserInfo()
 }
 
 class LoginController: UIViewController {

@@ -14,17 +14,13 @@ class MainTabController: UITabBarController {
     // MARK: Lifecycle
     
     private var user: User? {
-        didSet {
-//            guard let user = user else { return }
-        }
-        
+        didSet { }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
         configureViewControllers()
-        
     }
     
     // MARK: API
@@ -71,23 +67,6 @@ class MainTabController: UITabBarController {
         nav.navigationBar.tintColor = .black
         return nav
     }
-    
-    /*
-    func didFinishPickingMedia(_ picker: YPImagePicker) {
-        picker.didFinishPicking { items, _ in
-            picker.dismiss(animated: true) {
-                guard let selectedImage = items.singlePhoto?.image else { return }
-                
-                let controller = AddHabitualController()
-                controller.delegate = self
-                controller.selectedImage = selectedImage
-                let nav = UINavigationController(rootViewController: controller)
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: false, completion: nil)
-            }
-        }
-    }
-    */
 }
 
 // MARK: AuthentificationDelegate
