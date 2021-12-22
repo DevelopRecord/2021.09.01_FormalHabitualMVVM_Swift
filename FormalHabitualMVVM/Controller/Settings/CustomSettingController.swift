@@ -29,7 +29,6 @@ class CustomSettingController: UIViewController {
     
     private let darkModeView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 20
         return view
     }()
@@ -104,8 +103,7 @@ class CustomSettingController: UIViewController {
     
     @objc func handleSwitchButton(sender: UISwitch) {
         
-        if sender.isOn {
-            
+        if sender.isOn == true {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .dark
                 
@@ -118,10 +116,7 @@ class CustomSettingController: UIViewController {
                 switchButton.onTintColor = UIColor(named: "switchOnTintColor")
                 switchButton.thumbTintColor = UIColor(named: "switchThumbTintColor")
             }
-//            overrideUserInterfaceStyle = .dark
-            
-            
-        } else {
+        } else if sender.isOn == false {
             print("DEBUG: Light mode..")
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .light

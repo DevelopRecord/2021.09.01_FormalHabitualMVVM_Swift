@@ -61,6 +61,7 @@ class SettingController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        tabBarBorderColor()
         fetchUser()
         fetchUsers()
         

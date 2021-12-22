@@ -33,6 +33,12 @@ extension UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    func tabBarBorderColor() {
+        tabBarController?.tabBar.layer.borderWidth = 0.5
+        tabBarController?.tabBar.layer.borderColor = UIColor(named: "tabBarBorderColor")?.cgColor
+        tabBarController?.tabBar.clipsToBounds = true
+    }
+    
     @objc func dismissKeyBoard() {
         view.endEditing(true)
     }

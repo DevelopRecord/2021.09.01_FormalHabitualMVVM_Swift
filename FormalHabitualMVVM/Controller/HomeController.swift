@@ -97,10 +97,6 @@ class HomeController: UICollectionViewController {
         currentTimeLabel.text = formatter.string(from: date as Date)
     }
     
-    @objc func handleEditButton() {
-        print("DEBUG: 에딧버튼 터치")
-    }
-    
     @objc func handleSelectOrCancelButton(_ sender: UIBarButtonItem) {
         if self.collectionView.allowsMultipleSelection == false {
             self.collectionView.allowsMultipleSelection = true
@@ -116,6 +112,10 @@ class HomeController: UICollectionViewController {
             let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(self.handleSelectOrCancelButton(_:)))
             self.navigationItem.rightBarButtonItems = [selectButton]
         }
+    }
+    
+    @objc func handleEditButton() {
+        print("DEBUG: 에딧버튼 터치")
     }
     
     @objc func handleTrashButton(_ sender: UIBarButtonItem) {
@@ -135,7 +135,7 @@ class HomeController: UICollectionViewController {
     // MARK: Helpers
     
     func configureUI() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(named: "backgroundColor")
         navigationItem.title = "홈"
         
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: reusableIdentifier)
@@ -144,9 +144,11 @@ class HomeController: UICollectionViewController {
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(handleLogout))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "labelColor")
         
         let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(handleSelectOrCancelButton(_:)))
         navigationItem.rightBarButtonItems = [selectButton]
+        selectButton.tintColor = UIColor(named: "labelColor")
         
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)

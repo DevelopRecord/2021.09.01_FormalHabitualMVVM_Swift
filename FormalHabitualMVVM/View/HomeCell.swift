@@ -19,15 +19,12 @@ class HomeCell: UICollectionViewCell {
     
     lazy var listBtn: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .systemGray4
-        button.setTitleColor(.white, for: .normal)
-        button.tintColor = .white
-        button.layer.borderWidth = 1
+        button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.layer.cornerRadius = 20
         button.titleLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 0)
-        button.layer.borderColor = UIColor.systemGray5.cgColor
-        button.tag = 10
         button.addTarget(self, action: #selector(didTapRoutineButton), for: .touchUpInside)
         return button
     }()
