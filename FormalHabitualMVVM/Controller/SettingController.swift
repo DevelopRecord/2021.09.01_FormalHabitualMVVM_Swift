@@ -63,6 +63,11 @@ class SettingController: UITableViewController {
         configureTableView()
         fetchUser()
         fetchUsers()
+        
+        let controller = CustomSettingController()
+        if controller.overrideUserInterfaceStyle == .dark {
+            view.backgroundColor = .red
+        }
     }
     
     // MARK: ViewWillAppear

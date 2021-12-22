@@ -85,6 +85,10 @@ extension UIButton {
         
         setAttributedTitle(attributedTitle, for: .normal)
     }
+    
+    func isDarkMode123() {
+        tintColor = UIColor(named: "buttonTintColor")
+    }
 }
 
 extension UIView {

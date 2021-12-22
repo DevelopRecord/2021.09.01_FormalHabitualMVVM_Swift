@@ -50,21 +50,22 @@ class MainTabController: UITabBarController {
         view.backgroundColor = .white
         
         let layout = UICollectionViewFlowLayout()
-        let home = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedHome"), selectedImage: #imageLiteral(resourceName: "selectedHome"), rootViewController: HomeController(collectionViewLayout: layout))
+        let home = templateNavigationController(selectedImage: #imageLiteral(resourceName: "selectedHome"),
+                                                rootViewController: HomeController(collectionViewLayout: layout))
         
-        let chart = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedChart"), selectedImage: #imageLiteral(resourceName: "selectedChart"), rootViewController: TipController())
+        let chart = templateNavigationController(selectedImage: #imageLiteral(resourceName: "selectedChart"), rootViewController: TipController())
         
-        let setting = templateNavigationController(unselectedImage: #imageLiteral(resourceName: "unselectedUser"), selectedImage: #imageLiteral(resourceName: "selectedUser"), rootViewController: SettingController())
+        let setting = templateNavigationController(selectedImage: #imageLiteral(resourceName: "selectedUser"),
+                                                   rootViewController: SettingController())
         
         viewControllers = [home, chart, setting]
-        tabBar.tintColor = .black
+        tabBar.tintColor = UIColor(named: "kakaoColor")
+        tabBar.unselectedItemTintColor = .systemGray3
     }
     
-    func templateNavigationController(unselectedImage: UIImage, selectedImage: UIImage, rootViewController: UIViewController) -> UINavigationController {
+    func templateNavigationController(selectedImage: UIImage, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
-        nav.tabBarItem.image = unselectedImage
         nav.tabBarItem.image = selectedImage
-        nav.navigationBar.tintColor = .black
         return nav
     }
 }
