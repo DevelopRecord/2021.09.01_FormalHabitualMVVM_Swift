@@ -41,8 +41,8 @@ class SettingController: UITableViewController {
     let profileButton: UIButton = {
         let button = UIButton(type: .system)
         button.titleLabel?.font = .systemFont(ofSize: 22)
-        button.backgroundColor = .systemBackground
-        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = UIColor(named: "backgroundColor")
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleProfile), for: .touchUpInside)
         return button
@@ -61,14 +61,8 @@ class SettingController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        tabBarBorderColor()
         fetchUser()
         fetchUsers()
-        
-        let controller = CustomSettingController()
-        if controller.overrideUserInterfaceStyle == .dark {
-            view.backgroundColor = .red
-        }
     }
     
     // MARK: ViewWillAppear
@@ -104,12 +98,14 @@ class SettingController: UITableViewController {
     // MARK: Helpers
     
     func configureTableView() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(named: "backgroundColor")
         self.navigationItem.title = "환경설정"
         tabBarItem.isEnabled = true
+        tableView.separatorColor = UIColor(named: "tabBarBorderColor")
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.register(SettingHeader.self, forHeaderFooterViewReuseIdentifier: settingHeader)
+        
         
         tableView.separatorInset.right = 16
         tableView.delegate = self
@@ -117,8 +113,8 @@ class SettingController: UITableViewController {
         
         let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 110))
-        header.backgroundColor = .white
-        footer.backgroundColor = .white
+        header.backgroundColor = UIColor(named: "backgroundColor")
+        footer.backgroundColor = UIColor(named: "backgroundColor")
         
         header.addSubview(profileImageView)
         profileImageView.layer.cornerRadius = 60 / 2
@@ -130,14 +126,14 @@ class SettingController: UITableViewController {
         
         let tistoryButton = UIButton()
         tistoryButton.setTitle("티스토리", for: .normal)
-        tistoryButton.setTitleColor(.black, for: .normal)
+        tistoryButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         footer.addSubview(tistoryButton)
         tistoryButton.translatesAutoresizingMaskIntoConstraints = false
         tistoryButton.addTarget(self, action: #selector(tistoryOnSafari), for: .touchUpInside)
         
         let githubButton = UIButton()
         githubButton.setTitle("깃허브", for: .normal)
-        githubButton.setTitleColor(.black, for: .normal)
+        githubButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         footer.addSubview(githubButton)
         githubButton.translatesAutoresizingMaskIntoConstraints = false
         githubButton.addTarget(self, action: #selector(githubOnSafari), for: .touchUpInside)
@@ -223,7 +219,7 @@ extension SettingController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         let lbl = UILabel(frame: CGRect(x: 15, y: 0, width: view.frame.width - 100, height: 40))
         lbl.text = sections[section]
         lbl.font = UIFont.boldSystemFont(ofSize: 17)
@@ -234,7 +230,7 @@ extension SettingController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reusableIdentifier, for: indexPath) as! TableCell // 타입 변환을 TableCell이라고 명시해야 합니다.
         cell.accessoryType = .disclosureIndicator
-
+        cell.backgroundColor = UIColor(named: "backgroundColor")
         if indexPath.section == 0 {
             cell.textLabel?.text = "\(settingItems[indexPath.row])"
         } else if indexPath.section == 1 {

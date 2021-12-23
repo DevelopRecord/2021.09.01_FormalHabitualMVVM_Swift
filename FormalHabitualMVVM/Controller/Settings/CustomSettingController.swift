@@ -59,8 +59,6 @@ class CustomSettingController: UIViewController {
     // MARK: Helpers
     
     func configureUI() {
-        view.backgroundColor = .white
-        
         view.addSubview(previousButton)
         previousButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
