@@ -100,7 +100,6 @@ class CustomSettingController: UIViewController {
     }
     
     @objc func handleSwitchButton(sender: UISwitch) {
-        
         if sender.isOn == true {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .dark
@@ -115,7 +114,6 @@ class CustomSettingController: UIViewController {
                 switchButton.thumbTintColor = UIColor(named: "switchThumbTintColor")
             }
         } else if sender.isOn == false {
-            print("DEBUG: Light mode..")
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .light
                 

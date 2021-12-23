@@ -49,6 +49,7 @@ class ProfileController: UICollectionViewController {
     
     private lazy var passwordTextField: CustomTextField = {
         let tf = CustomTextField(placeholder: "Password")
+        tf.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         tf.isSecureTextEntry = true
         return tf
     }()
@@ -56,7 +57,7 @@ class ProfileController: UICollectionViewController {
     private let pushButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("푸시알림", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -68,7 +69,7 @@ class ProfileController: UICollectionViewController {
     private let logoutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("로그아웃", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -79,7 +80,7 @@ class ProfileController: UICollectionViewController {
     private let userDeleteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("회원탈퇴", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
         button.contentHorizontalAlignment = .left
         button.contentEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 0)
@@ -92,9 +93,9 @@ class ProfileController: UICollectionViewController {
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("저장하기", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
+        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()
@@ -108,7 +109,7 @@ class ProfileController: UICollectionViewController {
         fetchUser()
         fetchHabituals()
         
-        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "labelColor")
     }
     
     // MARK: API
@@ -131,10 +132,9 @@ class ProfileController: UICollectionViewController {
     // MARK: Helpers
     
     func configureCollectionView() {
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = UIColor(named: "backgroundColor")
         hidesBottomBarWhenPushed = true
         
-        collectionView.register(ProfileCell.self, forCellWithReuseIdentifier: cellIdentifier)
         collectionView.register(ProfileHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         
@@ -157,7 +157,7 @@ class ProfileController: UICollectionViewController {
         }
         
         let bottomDivider = UIView()
-        bottomDivider.backgroundColor = .systemGray5
+        bottomDivider.backgroundColor = UIColor(named: "dividerBackgroundColor")
 
         view.addSubview(bottomDivider)
         bottomDivider.snp.makeConstraints { make in

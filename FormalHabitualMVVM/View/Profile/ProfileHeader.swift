@@ -36,7 +36,7 @@ class ProfileHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .white
+        backgroundColor = UIColor(named: "backgroundColor")
         
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { make in
@@ -54,7 +54,7 @@ class ProfileHeader: UICollectionReusableView {
         }
         
         let topDivider = UIView()
-        topDivider.backgroundColor = .systemGray5
+        topDivider.backgroundColor = UIColor(named: "dividerBackgroundColor")
 
         addSubview(topDivider)
         topDivider.snp.makeConstraints { make in
