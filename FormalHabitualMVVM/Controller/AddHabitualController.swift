@@ -79,6 +79,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.isSelected = true
         button.setTitle("MON", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 10)
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(named: "tabBarBorderColor")?.cgColor
         button.backgroundColor = UIColor(named: "backgroundColor")
@@ -375,21 +376,23 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     @objc func sunBtnTapped(_ sender: UIButton, date: NSDate, id: Int) {
         if sender.isSelected {
             sender.isSelected = false
-            sundayButton.setTitleColor(.white, for: .normal)
-            sundayButton.backgroundColor = .black
-            self.sundayButton.alpha = 1
+            sundayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            sundayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            
+            sundayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            sundayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
     
     @objc func monBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
+            // ON
             sender.isSelected = false
-            mondayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
-            mondayButton.backgroundColor = UIColor(named: "backgroundColor")
+            mondayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            mondayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
+            // OFF
             sender.isSelected = true
             mondayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
             mondayButton.backgroundColor = UIColor(named: "backgroundColor")
@@ -399,60 +402,60 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     @objc func tueBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            thuesdayButton.setTitleColor(.white, for: .normal)
-            thuesdayButton.backgroundColor = .black
-            self.thuesdayButton.alpha = 1
+            thuesdayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            thuesdayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            self.thuesdayButton.alpha = 0.3
+            thuesdayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            thuesdayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
     
     @objc func wedBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            wednesdayButton.setTitleColor(.white, for: .normal)
-            wednesdayButton.backgroundColor = .black
-            self.wednesdayButton.alpha = 1
+            wednesdayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            wednesdayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            self.wednesdayButton.alpha = 0.3
+            wednesdayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            wednesdayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
     
     @objc func thrBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            thursdayButton.setTitleColor(.white, for: .normal)
-            thursdayButton.backgroundColor = .black
-            self.thursdayButton.alpha = 1
+            thursdayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            thursdayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            self.thursdayButton.alpha = 0.3
+            thursdayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            thursdayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
     
     @objc func friBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            fridayButton.setTitleColor(.white, for: .normal)
-            fridayButton.backgroundColor = .black
-            self.fridayButton.alpha = 1
+            fridayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            fridayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            fridayButton.alpha = 0.3
+            fridayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            fridayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
     
     @objc func satBtnTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            saturdayButton.setTitleColor(.white, for: .normal)
-            saturdayButton.backgroundColor = .black
-            self.saturdayButton.alpha = 1
+            saturdayButton.setTitleColor(UIColor(named: "dayButtonIsSelectedLabelColor"), for: .normal)
+            saturdayButton.backgroundColor = UIColor(named: "dayButtonIsSelectedBackgroundColor")
         } else {
             sender.isSelected = true
-            self.saturdayButton.alpha = 0.3
+            saturdayButton.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+            saturdayButton.backgroundColor = UIColor(named: "backgroundColor")
         }
     }
 }
