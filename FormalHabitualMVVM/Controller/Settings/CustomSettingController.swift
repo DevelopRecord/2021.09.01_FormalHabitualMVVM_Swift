@@ -14,7 +14,7 @@ class CustomSettingController: UIViewController {
     
     private let previousButton: UIButton = {
         let button = UIButton(type: .system)
-        button.tintColor = .black
+        button.tintColor = UIColor(named: "buttonTintColor")
         button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         button.addTarget(self, action: #selector(handleDismissal), for: .touchUpInside)
         return button
@@ -23,12 +23,14 @@ class CustomSettingController: UIViewController {
     private let customSettingsLabel: UILabel = {
         let label = UILabel()
         label.text = "Custom settings"
+        label.textColor = UIColor(named: "labelColor")
         label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
     }()
     
     private let darkModeView: UIView = {
         let view = UIView()
+        view.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         view.layer.cornerRadius = 20
         return view
     }()
@@ -40,10 +42,11 @@ class CustomSettingController: UIViewController {
         return label
     }()
     
-    let switchButton: UISwitch = {
+    let darkModeSwitch: UISwitch = {
         let sw = UISwitch()
+        sw.onTintColor = UIColor(named: "switchOnTintColor")
+        sw.thumbTintColor = UIColor(named: "switchThumbTintColor")
         sw.addTarget(self, action: #selector(handleSwitchButton(sender:)), for: .touchUpInside)
-        
         return sw
     }()
     
@@ -55,10 +58,11 @@ class CustomSettingController: UIViewController {
         
         self.navigationController?.isNavigationBarHidden = true
     }
-    
     // MARK: Helpers
     
     func configureUI() {
+        view.backgroundColor = UIColor(named: "backgroundColor")
+        
         view.addSubview(previousButton)
         previousButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
@@ -85,8 +89,8 @@ class CustomSettingController: UIViewController {
             make.leading.equalTo(darkModeView.snp.leading).offset(20)
         }
         
-        view.addSubview(switchButton)
-        switchButton.snp.makeConstraints { make in
+        view.addSubview(darkModeSwitch)
+        darkModeSwitch.snp.makeConstraints { make in
             make.centerY.equalTo(darkModeView.snp.centerY)
             make.right.equalTo(darkModeView.snp.right).offset(-20)
         }
@@ -103,30 +107,10 @@ class CustomSettingController: UIViewController {
         if sender.isOn == true {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .dark
-                
-                view.backgroundColor = UIColor(named: "backgroundColor")
-                previousButton.tintColor = UIColor(named: "buttonTintColor")
-                
-                customSettingsLabel.textColor = UIColor(named: "labelColor")
-                darkModeView.backgroundColor = UIColor(named: "UIViewBackgroundColor")
-                
-                switchButton.onTintColor = UIColor(named: "switchOnTintColor")
-                switchButton.thumbTintColor = UIColor(named: "switchThumbTintColor")
             }
         } else if sender.isOn == false {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .light
-                
-                view.backgroundColor = UIColor(named: "backgroundColor")
-                previousButton.tintColor = UIColor(named: "buttonTintColor")
-                
-                customSettingsLabel.textColor = UIColor(named: "labelColor")
-                darkModeView.backgroundColor = UIColor(named: "UIViewBackgroundColor")
-                
-                switchButton.onTintColor = UIColor(named: "switchOnTintColor")
-                switchButton.thumbTintColor = UIColor(named: "switchThumbTintColor")
-                
-                
             }
         }
     }
