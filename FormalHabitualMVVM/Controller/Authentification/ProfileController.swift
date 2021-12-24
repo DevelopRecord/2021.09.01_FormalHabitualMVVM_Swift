@@ -93,9 +93,9 @@ class ProfileController: UICollectionViewController {
     private let saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("저장하기", for: .normal)
-        button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
+        button.setTitleColor(UIColor(named: "profileSaveButtonTitleColor"), for: .normal)
+        button.backgroundColor = UIColor(named: "profileSaveButtonBackgroundColor")
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()

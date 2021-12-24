@@ -34,19 +34,14 @@ class LoginController: UIViewController {
     private let habitualLabel: UILabel = {
         let label = UILabel()
         label.text = "Habitual"
+        label.textColor = UIColor(named: "labelColor")
         label.font = UIFont.systemFont(ofSize: 38, weight: UIFont.Weight.semibold)
-        return label
-    }()
-    
-    private let loginLabel: UILabel = {
-        let label = UILabel()
-        label.text = "로그인"
-        label.setHeight(50)
         return label
     }()
     
     private let emailTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Email")
+        tf.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         tf.keyboardType = .emailAddress
         tf.setHeight(50)
         return tf
@@ -54,20 +49,22 @@ class LoginController: UIViewController {
     
     private let passwordTextField: UITextField = {
         let tf = CustomTextField(placeholder: "Password")
-        tf.setHeight(50)
+        tf.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         tf.isSecureTextEntry = true
+        tf.setHeight(50)
         return tf
     }()
     
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("LOGIN", for: .normal)
-        button.setTitleColor(.white, for: .normal)
+        button.setTitleColor(UIColor(named: "ButtonTitleColor")?.withAlphaComponent(0.4), for: .normal)
         button.titleLabel?.font = .boldSystemFont(ofSize: 15)
-        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
+//        button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1).withAlphaComponent(0.5)
+        button.backgroundColor = UIColor(named: "ButtonBackgroundColor")?.withAlphaComponent(0.4)
         button.layer.cornerRadius = 10
-        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0,
-                                           alpha: 1.0).withAlphaComponent(0.5), for: .normal)
+//        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0,
+//                                           alpha: 1.0).withAlphaComponent(0.5), for: .normal)
         button.isEnabled = false
         button.setHeight(50)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
@@ -76,6 +73,7 @@ class LoginController: UIViewController {
     
     private let forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
+        button.titleLabel?.textColor = UIColor(named: "labelColor")
         button.attributedTitle(firstPart: "Forgot your password?", secondPart: "Get help signing in.")
         button.addTarget(self, action: #selector(handleShowResetPassword), for: .touchUpInside)
         return button
@@ -84,7 +82,8 @@ class LoginController: UIViewController {
     private let naverLoginButton: UIButton = {
         let button = CustomLoginButton()
         button.setTitle("NAVER로 로그인", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        button.setTitleColor(UIColor(named: "ButtonTitleColor"), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.backgroundColor = UIColor(named: "naverColor")
         return button
     }()
@@ -92,7 +91,8 @@ class LoginController: UIViewController {
     private let kakaoLoginButton: UIButton = {
         let button = CustomLoginButton()
         button.setTitle("KAKAO로 로그인", for: .normal)
-        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor(named: "ButtonTitleColor"), for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.backgroundColor = UIColor(named: "kakaoColor")
         button.addTarget(self, action: #selector(handleKakaoLogin), for: .touchUpInside)
         return button
@@ -100,6 +100,7 @@ class LoginController: UIViewController {
     
     private let dontHaveAccountButton: UIButton = {
         let button = UIButton(type: .system)
+        button.titleLabel?.textColor = UIColor(named: "labelColor")
         button.attributedTitle(firstPart: "Don't have an account?", secondPart: "Sign Up.")
         button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
         return button
@@ -218,7 +219,7 @@ class LoginController: UIViewController {
     // MARK: Helpers
     
     func configureUI() {
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(named: "backgroundColor")
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(habitualLabel)
