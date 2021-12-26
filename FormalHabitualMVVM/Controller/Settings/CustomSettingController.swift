@@ -55,9 +55,9 @@ class CustomSettingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
         self.navigationController?.isNavigationBarHidden = true
     }
+    
     // MARK: Helpers
     
     func configureUI() {
@@ -98,17 +98,17 @@ class CustomSettingController: UIViewController {
     
     // MARK: Actions
     
-    @objc func handleDismissal() {
+    @objc func handleDismissal(_ sender: Any) {
         self.navigationController?.isNavigationBarHidden = false
         navigationController?.popViewController(animated: true)
     }
     
     @objc func handleSwitchButton(sender: UISwitch) {
-        if sender.isOn == true {
+        if sender.isOn {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .dark
             }
-        } else if sender.isOn == false {
+        } else {
             if let window = UIApplication.shared.windows.first {
                 window.overrideUserInterfaceStyle = .light
             }

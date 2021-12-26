@@ -69,6 +69,7 @@ class SettingController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         fetchUser()
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     // MARK: API
