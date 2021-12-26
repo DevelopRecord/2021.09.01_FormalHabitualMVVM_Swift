@@ -35,20 +35,18 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
     
     private let newHabitual: UILabel = {
         let label = UILabel()
-        label.text = "New Habitual"
+        label.text = "+ New Habitual"
         label.font = UIFont.boldSystemFont(ofSize: 28)
         return label
     }()
     
     private lazy var titleTextView: InputTextView = {
         let tv = InputTextView()
-        tv.placeholderText = "새로운 습관의 이름을 작성해 보세요\n ex) 운동, 공부, 물 마시기"
+        tv.placeholderText = "새로운 습관의 이름을 작성해 보세요" //\n ex) 운동, 공부, 물 마시기
         tv.backgroundColor = UIColor(named: "UIViewBackgroundColor")
         tv.font = UIFont.systemFont(ofSize: 16)
-        tv.textAlignment = .center
+        tv.textAlignment = .left
         tv.layer.cornerRadius = 20
-        tv.setDimensions(height: 90, width: view.frame.width - 50)
-        
         tv.delegate = self
         return tv
     }()
@@ -165,7 +163,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.setTitle("ON", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
-        button.setWidth(view.frame.width - 50)
         button.addTarget(self, action: #selector(onOffButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -175,7 +172,6 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.setTitle("시간", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
-        button.setWidth(view.frame.width - 50)
         button.addTarget(self, action: #selector(timeButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -192,8 +188,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         button.setTitle("알림음", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
         button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
-        button.setWidth(view.frame.width - 50)
-        button.addTarget(self, action: #selector(frequencyButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleNotiSoundButton), for: .touchUpInside)
         return button
     }()
     
@@ -201,9 +196,11 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let button = UIButton(type: .system)
         button.setTitle("CANCEL", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
-        button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
+        button.backgroundColor = UIColor(named: "cancelComfirmBackgroundColor")
+        button.layer.borderColor = UIColor(named: "cancelConfirmBorderColor")?.cgColor
+        button.layer.borderWidth = 1
         button.layer.cornerRadius = 20
-        button.setDimensions(height: 50, width: 180)
+//        button.setDimensions(height: 50, width: 180)
         button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -212,10 +209,12 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         let button = UIButton(type: .system)
         button.setTitle("CONFIRM", for: .normal)
         button.setTitleColor(UIColor(named: "labelColor"), for: .normal)
-        button.backgroundColor = UIColor(named: "UIViewBackgroundColor")
+        button.backgroundColor = UIColor(named: "cancelComfirmBackgroundColor")
+        button.layer.borderColor = UIColor(named: "cancelConfirmBorderColor")?.cgColor
+        button.layer.borderWidth = 1
         button.layer.cornerRadius = 20
-        button.setHeight(50)
-        button.setWidth(180)
+//        button.setHeight(50)
+//        button.setWidth(180)
         button.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -263,7 +262,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         
         let btnStack = UIStackView(arrangedSubviews: [cancelButton, confirmButton])
         btnStack.axis = .horizontal
-        btnStack.spacing = 7
+        btnStack.spacing = 10
         
         let wholeStack = UIStackView(arrangedSubviews: [topStack, countStack, dayStack, notificationStack, notiSoundStack])
         wholeStack.axis = .vertical
@@ -280,6 +279,35 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         btnStack.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.centerX.equalTo(view)
+        }
+        
+        // MARK: SizeConstraint
+        
+        titleTextView.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width - 50)
+            make.height.equalTo(65)
+        }
+        
+        onOffButton.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width - 50)
+        }
+        
+        timeButton.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width - 50)
+        }
+        
+        notiSoundButton.snp.makeConstraints { make in
+            make.width.equalTo(view.frame.width - 50)
+        }
+        
+        cancelButton.snp.makeConstraints { make in
+            make.width.equalTo(180)
+            make.height.equalTo(50)
+        }
+        
+        confirmButton.snp.makeConstraints { make in
+            make.width.equalTo(180)
+            make.height.equalTo(50)
         }
     }
     
@@ -312,7 +340,7 @@ class AddHabitualController: UIViewController, UIActionSheetDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func frequencyButtonTapped() {
+    @objc func handleNotiSoundButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let basicMusic = UIAlertAction(title: "기본", style: .default, handler: nil)
         let etc1Music = UIAlertAction(title: "뮤직1", style: .default, handler: nil)
