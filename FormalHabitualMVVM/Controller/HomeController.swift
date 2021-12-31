@@ -15,6 +15,8 @@ class HomeController: UICollectionViewController {
     
     // MARK: Properties
     
+    let userNotificationCenter = UNUserNotificationCenter.current()
+    
     let timeSelector : Selector = #selector(HomeController.updateTime)
     let interval = 1.0
     var count = 0
@@ -50,8 +52,54 @@ class HomeController: UICollectionViewController {
         configureUI()
         fetchHabituals()
         
+        requestNotificationAuthorization()
+        sendNotification(seconds: 60)
+        
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector,
                              userInfo: nil, repeats: true)
+    }
+    
+    // MARK: Local Notification
+    
+    func requestNotificationAuthorization() { // 알림권한 요청 함수(권한 허용여부 팝업)
+        let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
+        userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
+            if let error = error {
+                print("DEBUG: Occured error in requestNotificationAuthorization.. \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func sendNotification(seconds: Double) { // 알림을 보내는 함수
+        let notificationContent = UNMutableNotificationContent()
+        let date = Date()
+        let components = DateComponents()
+        
+        
+        notificationContent.title = "오늘의 명언"
+        notificationContent.body = "알림 테스트입니다!!!"
+        
+        
+        
+        var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+        
+        dateComponents.year = components.year
+        dateComponents.month = components.month
+        dateComponents.day = components.day
+        dateComponents.hour = 09
+        dateComponents.minute = 00
+        
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: true)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+        
+        userNotificationCenter.add(request) { error in
+            if let error = error {
+                print("DEBUG: Occured error in sendNotification.. \(error.localizedDescription)")
+            }
+        }
     }
     
     // MARK: ViewWillAppear
@@ -201,5 +249,21 @@ extension HomeController {
 extension HomeController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width, height: 75)
+    }
+}
+
+// MARK: UNUserNotificationCenterDelegate
+
+extension HomeController: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping                                (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .badge, .sound])
     }
 }

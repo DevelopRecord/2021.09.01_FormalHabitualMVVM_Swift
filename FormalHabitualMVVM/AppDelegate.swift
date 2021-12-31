@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         KakaoSDKCommon.initSDK(appKey: "27c9c0693edc20913dcab943019b65bd")
         
+        UNUserNotificationCenter.current().delegate = self
+        
         return true
         /*
         if #available(iOS 10.0, *) {
@@ -27,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         */
     }
+    
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -42,3 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+// MARK: UNUserNotificationCenterDelegate
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .badge, .sound])
+    }
+}

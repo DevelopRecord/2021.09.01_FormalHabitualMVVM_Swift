@@ -102,13 +102,13 @@ class SettingController: UITableViewController {
         view.backgroundColor = UIColor(named: "backgroundColor")
         self.navigationItem.title = "환경설정"
         tabBarItem.isEnabled = true
-        tableView.separatorColor = UIColor(named: "tabBarBorderColor")
+        tableView.separatorColor = UIColor(named: "separatorColor")
         
         tableView.register(TableCell.self, forCellReuseIdentifier: reusableIdentifier)
         tableView.register(SettingHeader.self, forHeaderFooterViewReuseIdentifier: settingHeader)
         
         
-        tableView.separatorInset.right = 16
+//        tableView.separatorInset.right = 16
         tableView.delegate = self
         tableView.dataSource = self
         
