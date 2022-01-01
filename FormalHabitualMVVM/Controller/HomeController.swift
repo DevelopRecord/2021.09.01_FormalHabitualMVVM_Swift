@@ -32,8 +32,8 @@ class HomeController: UICollectionViewController {
     }()
     
     private let currentTimeLabel: UILabel = {
-        let timeLabel = UILabel()
-        return timeLabel
+        let label = UILabel()
+        return label
     }()
     
     private let addButton: UIButton = {
@@ -51,12 +51,12 @@ class HomeController: UICollectionViewController {
         super.viewDidLoad()
         configureUI()
         fetchHabituals()
-        
         requestNotificationAuthorization()
-        sendNotification(seconds: 60)
+        sendNotification()
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector,
                              userInfo: nil, repeats: true)
+        
     }
     
     // MARK: Local Notification
@@ -70,26 +70,25 @@ class HomeController: UICollectionViewController {
         }
     }
     
-    func sendNotification(seconds: Double) { // 알림을 보내는 함수
+    func sendNotification() { // 알림을 보내는 함수
         let notificationContent = UNMutableNotificationContent()
         let date = Date()
         let components = DateComponents()
         
+//        let wiseSaying: WiseSaying = self.wiseSayings[Int(IndexPath)]
         
         notificationContent.title = "오늘의 명언"
-        notificationContent.body = "알림 테스트입니다!!!"
-        
-        
+        notificationContent.subtitle = "1"
+        notificationContent.body = "2"
         
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
         
         dateComponents.year = components.year
         dateComponents.month = components.month
         dateComponents.day = components.day
-        dateComponents.hour = 09
-        dateComponents.minute = 00
+        dateComponents.hour = 18
+        dateComponents.minute = 17
         
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: true)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: "testNotification",
                                             content: notificationContent,
@@ -180,6 +179,26 @@ class HomeController: UICollectionViewController {
         }
     }
     
+    /*
+    func fetchJson() -> Data? {
+        let fileName: String = "WiseSaying" // 불러올 파일 이름
+        let extensionType = "json" // 불러올 파일의 확장자명
+        
+        // 파일 위치
+        guard let filePath = Bundle.main.url(forResource: fileName, withExtension: extensionType) else  { return nil }
+        
+        do {
+            // 해당 위치의 파일을 Data로 초기화한다.
+            let data = try Data(contentsOf: filePath)
+            return data
+        } catch {
+            // 올바르지 않은 파일 경로나 불가능한 파일 처리
+            print("DEBUG: 파일 경로가 올바르지 않거나 불가능한 파일입니다.")
+            return nil
+        }
+    }
+    */
+    
     // MARK: Helpers
     
     func configureUI() {
@@ -204,8 +223,8 @@ class HomeController: UICollectionViewController {
         
         collectionView.addSubview(currentTimeLabel)
         currentTimeLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.leading.equalToSuperview().offset(12)
+            make.top.equalTo(collectionView.snp.top).offset(12)
+            make.left.equalTo(collectionView.snp.left).offset(20)
         }
         
         collectionView.addSubview(addButton)
@@ -214,7 +233,6 @@ class HomeController: UICollectionViewController {
             make.right.equalTo(collectionView.safeAreaLayoutGuide.snp.right).offset(-20)
             make.width.height.equalTo(55)
         }
-        
     }
 }
 

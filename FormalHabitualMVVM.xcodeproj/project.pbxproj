@@ -11,6 +11,8 @@
 		FB7243E527708AB100713166 /* CustomSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7243E427708AB100713166 /* CustomSettingController.swift */; };
 		FB7500D627537D7700B18DD2 /* InputTextView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7500D527537D7700B18DD2 /* InputTextView2.swift */; };
 		FB7779D02703007600246111 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7779CF2703007600246111 /* HomeCell.swift */; };
+		FB779886277F0302009061D6 /* WiseSaying.json in Resources */ = {isa = PBXBuildFile; fileRef = FB779885277F0302009061D6 /* WiseSaying.json */; };
+		FB779888277F07CC009061D6 /* WiseSaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB779887277F07CC009061D6 /* WiseSaying.swift */; };
 		FB7DDCFB2705A47400D95AEA /* InputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDCFA2705A47400D95AEA /* InputTextView.swift */; };
 		FB7DDCFF2706F4D400D95AEA /* HabitualService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */; };
 		FB7DDD01270ED57000D95AEA /* Habitual.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7DDD00270ED57000D95AEA /* Habitual.swift */; };
@@ -57,6 +59,8 @@
 		FB7243E427708AB100713166 /* CustomSettingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSettingController.swift; sourceTree = "<group>"; };
 		FB7500D527537D7700B18DD2 /* InputTextView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView2.swift; sourceTree = "<group>"; };
 		FB7779CF2703007600246111 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
+		FB779885277F0302009061D6 /* WiseSaying.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WiseSaying.json; sourceTree = "<group>"; };
+		FB779887277F07CC009061D6 /* WiseSaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiseSaying.swift; sourceTree = "<group>"; };
 		FB7DDCFA2705A47400D95AEA /* InputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputTextView.swift; sourceTree = "<group>"; };
 		FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitualService.swift; sourceTree = "<group>"; };
 		FB7DDD00270ED57000D95AEA /* Habitual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habitual.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				FB819ACC26ECA806002CFFB4 /* Constants.swift */,
 				FB7DDCFA2705A47400D95AEA /* InputTextView.swift */,
 				FB7500D527537D7700B18DD2 /* InputTextView2.swift */,
+				FB779885277F0302009061D6 /* WiseSaying.json */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -215,6 +220,7 @@
 			children = (
 				FB819ACE26ECA856002CFFB4 /* User.swift */,
 				FB7DDD00270ED57000D95AEA /* Habitual.swift */,
+				FB779887277F07CC009061D6 /* WiseSaying.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -333,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB7DEF4426DF5CD30042DA0F /* LaunchScreen.storyboard in Resources */,
+				FB779886277F0302009061D6 /* WiseSaying.json in Resources */,
 				FB7DEF7926E4CEF00042DA0F /* GoogleService-Info.plist in Resources */,
 				FB7DEF4126DF5CD30042DA0F /* Assets.xcassets in Resources */,
 				FB7DEF3F26DF5CD20042DA0F /* Main.storyboard in Resources */,
@@ -418,6 +425,7 @@
 				FB82D19B273E6CF0004AA1BD /* ResetPassowrdController.swift in Sources */,
 				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,
 				FB7779D02703007600246111 /* HomeCell.swift in Sources */,
+				FB779888277F07CC009061D6 /* WiseSaying.swift in Sources */,
 				FB7DEF6726DF6E410042DA0F /* Extensions.swift in Sources */,
 				FB7DEF7B26E633710042DA0F /* ImageUploader.swift in Sources */,
 				FB819AB826E8A264002CFFB4 /* ProfileCell.swift in Sources */,
