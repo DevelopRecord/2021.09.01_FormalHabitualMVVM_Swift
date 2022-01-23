@@ -7,30 +7,34 @@
 
 import Foundation
 
+struct WiseSayingResponse: Codable {
+    let quotes: [WiseSaying]
+}
+
 struct WiseSaying: Codable {
-    let name: String
-    let phrase: String
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case phrase
-    }
+    let quote: String?
+    let author: String?
 }
 
-/*
-struct Friend: Codable {
-    let name: String
-    let age: Int
-    let addressInfo: Address
-    
-    struct Address: Codable {
-        let country: String
-        let city: String
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case addressInfo = "address_info"
-        case name, age
-    }
-}
-*/
+/**
+ 
+ {
+     "quotes": [
+
+ {
+        "quote":"Life isn’t about getting and having, it’s about giving and being.",
+        "author":"Kevin Kruse"
+ 
+ },
+ {
+        "quote":"Whatever the mind of man can conceive and believe, it can achieve.",
+        "author":"Napoleon Hill"
+ 
+ },
+ {
+        "quote":"Strive not to be a success, but rather to be of value.","author":"Albert Einstein"},
+ {
+        "quote":"Two roads diverged in a wood, and I—I took the one less traveled by, And that has made all the difference.","author":"Robert Frost"},
+ {
+        "quote":"I attribute my success to this: I never gave or took any excuse.","author":"Florence Nightingale"},
+ */

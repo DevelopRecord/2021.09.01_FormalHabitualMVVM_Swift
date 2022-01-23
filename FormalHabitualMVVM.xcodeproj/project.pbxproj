@@ -50,6 +50,7 @@
 		FB819AD826EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */; };
 		FB819ADC26F5D587002CFFB4 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */; };
 		FB82D19B273E6CF0004AA1BD /* ResetPassowrdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB82D19A273E6CF0004AA1BD /* ResetPassowrdController.swift */; };
+		FBB8CC96279D6C770009330E /* WiseSayingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB8CC95279D6C770009330E /* WiseSayingService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,6 +101,7 @@
 		FB819AD726EDF4F4002CFFB4 /* ProfileHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderViewModel.swift; sourceTree = "<group>"; };
 		FB819ADB26F5D587002CFFB4 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		FB82D19A273E6CF0004AA1BD /* ResetPassowrdController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassowrdController.swift; sourceTree = "<group>"; };
+		FBB8CC95279D6C770009330E /* WiseSayingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiseSayingService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 				FB7DEF7C26E6337A0042DA0F /* AuthService.swift */,
 				FB819ACA26ECA7BE002CFFB4 /* UserService.swift */,
 				FB7DDCFE2706F4D400D95AEA /* HabitualService.swift */,
+				FBB8CC95279D6C770009330E /* WiseSayingService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				FB7DEF3A26DF5CD20042DA0F /* SceneDelegate.swift in Sources */,
 				FB7DEF6126DF69FB0042DA0F /* LoginController.swift in Sources */,
 				FB7DEF6926DF7AC90042DA0F /* CustomTextField.swift in Sources */,
+				FBB8CC96279D6C770009330E /* WiseSayingService.swift in Sources */,
 				FB819AC126EB4B0E002CFFB4 /* SettingHeader.swift in Sources */,
 				FB82D19B273E6CF0004AA1BD /* ResetPassowrdController.swift in Sources */,
 				FB7DEF5A26DF5EBC0042DA0F /* HomeController.swift in Sources */,

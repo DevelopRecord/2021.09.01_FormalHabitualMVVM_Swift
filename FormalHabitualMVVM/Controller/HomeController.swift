@@ -12,17 +12,20 @@ import SnapKit
 private let reusableIdentifier = "Cell"
 
 class HomeController: UICollectionViewController {
-    
+
     // MARK: Properties
-    
+
     let userNotificationCenter = UNUserNotificationCenter.current()
-    
-    let timeSelector : Selector = #selector(HomeController.updateTime)
+
+    var wiseSaying: WiseSaying?
+    private var wiseSayings = [WiseSaying]()
+
+    let timeSelector: Selector = #selector(HomeController.updateTime)
     let interval = 1.0
     var count = 0
-    
+
     var habituals = [Habitual]()
-    
+
     private let notExistLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -30,12 +33,12 @@ class HomeController: UICollectionViewController {
         label.textColor = .systemGray4
         return label
     }()
-    
+
     private let currentTimeLabel: UILabel = {
         let label = UILabel()
         return label
     }()
-    
+
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_routine"), for: .normal)
@@ -44,23 +47,25 @@ class HomeController: UICollectionViewController {
         button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         return button
     }()
-    
+
     // MARK: Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         fetchHabituals()
         requestNotificationAuthorization()
+        fetchWiseSaying()
         sendNotification()
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector,
-                             userInfo: nil, repeats: true)
-        
+            userInfo: nil, repeats: true)
+        print("quote: aaaaa \(wiseSaying?.quote)")
+        print("author: aaaaa \(wiseSaying?.author)")
     }
-    
+
     // MARK: Local Notification
-    
+
     func requestNotificationAuthorization() { // 알림권한 요청 함수(권한 허용여부 팝업)
         let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
         userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
@@ -69,52 +74,71 @@ class HomeController: UICollectionViewController {
             }
         }
     }
-    
+
+    func fetchWiseSaying() {
+        WiseSayingService().getWiseSayingInfo { result in
+            switch result {
+
+            case .success(let wiseSayingResponse):
+                DispatchQueue.main.async {
+                    self.wiseSaying = wiseSayingResponse.quotes.first
+                    self.wiseSayings = wiseSayingResponse.quotes
+                    self.sendNotification()
+                }
+            case .failure(_):
+                print("명언 불러오기 실패")
+            }
+        }
+    }
+
     func sendNotification() { // 알림을 보내는 함수
         let notificationContent = UNMutableNotificationContent()
         let date = Date()
         let components = DateComponents()
-        
-//        let wiseSaying: WiseSaying = self.wiseSayings[Int(IndexPath)]
-        
+//        let indexPath = IndexPath()
+//        let wiseSaying = wiseSayings[indexPath.row]
+
         notificationContent.title = "오늘의 명언"
-        notificationContent.subtitle = "1"
-        notificationContent.body = "2"
         
+        if let quote = wiseSaying?.quote, let author = wiseSaying?.author {
+            notificationContent.subtitle = quote
+            notificationContent.body = author
+        }
+
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-        
+
         dateComponents.year = components.year
         dateComponents.month = components.month
         dateComponents.day = components.day
-        dateComponents.hour = 18
-        dateComponents.minute = 17
-        
+        dateComponents.hour = 09
+        dateComponents.minute = 00
+
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
         let request = UNNotificationRequest(identifier: "testNotification",
-                                            content: notificationContent,
-                                            trigger: trigger)
-        
+            content: notificationContent,
+            trigger: trigger)
+
         userNotificationCenter.add(request) { error in
             if let error = error {
                 print("DEBUG: Occured error in sendNotification.. \(error.localizedDescription)")
             }
         }
     }
-    
+
     // MARK: ViewWillAppear
-    
+
     override func viewWillAppear(_ animated: Bool) {
         self.collectionView.reloadData()
         fetchHabituals()
     }
-    
+
     // MARK: Actions
-    
+
     @objc func handleRefresh() {
         habituals.removeAll()
         fetchHabituals()
     }
-    
+
     @objc func handleLogout() {
         do {
             try Auth.auth().signOut()
@@ -127,13 +151,13 @@ class HomeController: UICollectionViewController {
             print("DEBUG: Failed to sign out")
         }
     }
-    
+
     @objc func addButtonTapped() {
         let controller = AddHabitualController()
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: true)
     }
-    
+
     @objc func updateTime() {
         let date = NSDate()
         let formatter = DateFormatter()
@@ -143,34 +167,34 @@ class HomeController: UICollectionViewController {
         formatter.locale = Locale(identifier: "ko_kr")
         currentTimeLabel.text = formatter.string(from: date as Date)
     }
-    
+
     @objc func handleSelectOrCancelButton(_ sender: UIBarButtonItem) {
         if self.collectionView.allowsMultipleSelection == false {
             self.collectionView.allowsMultipleSelection = true
             let cancelButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(self.handleSelectOrCancelButton(_:)))
-            
+
             let trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(handleTrashButton(_:)))
             trashButton.tintColor = .red
-            
+
             self.navigationItem.rightBarButtonItems = [cancelButton, trashButton]
         } else {
             self.collectionView.allowsMultipleSelection = false
-            
+
             let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(self.handleSelectOrCancelButton(_:)))
             self.navigationItem.rightBarButtonItems = [selectButton]
         }
     }
-    
+
     @objc func handleEditButton() {
         print("DEBUG: 에딧버튼 터치")
     }
-    
+
     @objc func handleTrashButton(_ sender: UIBarButtonItem) {
-        
+
     }
-    
+
     // MARK: API
-    
+
     func fetchHabituals() {
         HabitualService.fetchHabituals { habituals in
             self.habituals = habituals
@@ -178,55 +202,35 @@ class HomeController: UICollectionViewController {
             self.collectionView.reloadData()
         }
     }
-    
-    /*
-    func fetchJson() -> Data? {
-        let fileName: String = "WiseSaying" // 불러올 파일 이름
-        let extensionType = "json" // 불러올 파일의 확장자명
-        
-        // 파일 위치
-        guard let filePath = Bundle.main.url(forResource: fileName, withExtension: extensionType) else  { return nil }
-        
-        do {
-            // 해당 위치의 파일을 Data로 초기화한다.
-            let data = try Data(contentsOf: filePath)
-            return data
-        } catch {
-            // 올바르지 않은 파일 경로나 불가능한 파일 처리
-            print("DEBUG: 파일 경로가 올바르지 않거나 불가능한 파일입니다.")
-            return nil
-        }
-    }
-    */
-    
+
     // MARK: Helpers
-    
+
     func configureUI() {
         collectionView.backgroundColor = UIColor(named: "backgroundColor")
         navigationItem.title = "홈"
-        
+
         collectionView.register(HomeCell.self, forCellWithReuseIdentifier: reusableIdentifier)
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "로그아웃",
-                                                            style: .plain,
-                                                            target: self,
-                                                            action: #selector(handleLogout))
+            style: .plain,
+            target: self,
+            action: #selector(handleLogout))
         navigationItem.leftBarButtonItem?.tintColor = UIColor(named: "labelColor")
-        
+
         let selectButton = UIBarButtonItem(title: "선택", style: .plain, target: self, action: #selector(handleSelectOrCancelButton(_:)))
         navigationItem.rightBarButtonItems = [selectButton]
         selectButton.tintColor = UIColor(named: "labelColor")
-        
+
         let refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refresher
-        
+
         collectionView.addSubview(currentTimeLabel)
         currentTimeLabel.snp.makeConstraints { make in
             make.top.equalTo(collectionView.snp.top).offset(12)
             make.left.equalTo(collectionView.snp.left).offset(20)
         }
-        
+
         collectionView.addSubview(addButton)
         addButton.snp.makeConstraints { make in
             make.bottom.equalTo(collectionView.safeAreaLayoutGuide.snp.bottom).offset(-20)
@@ -242,13 +246,13 @@ extension HomeController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return habituals.count
     }
-    
+
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reusableIdentifier, for: indexPath) as! HomeCell
         cell.viewModel = HabitualViewModel(habitual: habituals[indexPath.row])
         return cell
     }
-    
+
 }
 
 // MARK: UICollectionViewDelegate
@@ -274,14 +278,14 @@ extension HomeController: UICollectionViewDelegateFlowLayout {
 
 extension HomeController: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping                                (UNNotificationPresentationOptions) -> Void) {
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .badge, .sound])
     }
 }
