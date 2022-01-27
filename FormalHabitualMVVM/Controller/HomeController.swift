@@ -60,8 +60,6 @@ class HomeController: UICollectionViewController {
         
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector,
             userInfo: nil, repeats: true)
-        print("quote: aaaaa \(wiseSaying?.quote)")
-        print("author: aaaaa \(wiseSaying?.author)")
     }
 
     // MARK: Local Notification

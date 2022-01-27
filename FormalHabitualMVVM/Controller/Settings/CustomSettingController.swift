@@ -55,13 +55,17 @@ class CustomSettingController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        self.navigationController?.isNavigationBarHidden = true
+        
     }
     
     // MARK: Helpers
     
     func configureUI() {
         view.backgroundColor = UIColor(named: "backgroundColor")
+        
+        UserDefaults.standard.bool(forKey: "darkModeSwitchStats")
+        
+        self.navigationController?.isNavigationBarHidden = true
         
         view.addSubview(previousButton)
         previousButton.snp.makeConstraints { make in
@@ -104,12 +108,18 @@ class CustomSettingController: UIViewController {
     }
     
     @objc func handleSwitchButton(sender: UISwitch) {
+        UserDefaults.standard.set(darkModeSwitch.isOn, forKey: "darkModeSwitchStats")
+        
         if sender.isOn {
+//            let bool: () = darkModeSwitch.isOn = true
             if let window = UIApplication.shared.windows.first {
+//                UserDefaults.standard.set(bool, forKey: "isOnSwitch")
                 window.overrideUserInterfaceStyle = .dark
             }
         } else {
+//            let bool: () = darkModeSwitch.isOn = false
             if let window = UIApplication.shared.windows.first {
+//                UserDefaults.standard.set(bool, forKey: "isOffSwitch")
                 window.overrideUserInterfaceStyle = .light
             }
         }
